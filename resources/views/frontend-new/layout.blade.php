@@ -540,7 +540,93 @@
         }
 
         /* ============================================
-           MODAL STYLES — SMOOTH ANIMATIONS
+           GLOBAL MODAL FIX - Override all modal positioning issues
+           ============================================ */
+        .modal {
+            padding-right: 0 !important;
+        }
+
+        .modal-dialog {
+            margin: 1.75rem auto !important;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .modal-dialog-centered {
+            display: flex !important;
+            align-items: center !important;
+            min-height: calc(100% - 3.5rem) !important;
+        }
+
+        .modal-content {
+            border-radius: var(--radius-lg);
+            border: none;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            width: 100% !important;
+            margin: 0 auto !important;
+        }
+
+        /* Remove all conflicting margin-left overrides */
+        .modal-dialog {
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Fix for the main content page modal */
+        #checkOnlineAdmissionStatus .modal-dialog {
+            margin: 1.75rem auto !important;
+            max-width: 800px !important;
+        }
+
+        #checkOnlineAdmissionStatus .modal-content {
+            width: 100% !important;
+        }
+
+        /* Fix for login block modal */
+        #loginBlockModal .modal-dialog {
+            margin: 1.75rem auto !important;
+            max-width: 500px !important;
+        }
+
+        /* Remove any legacy margin overrides */
+        .notice .modal-dialog {
+            margin: 1.75rem auto !important;
+        }
+
+        /* Fix for mobile */
+        @media (max-width: 767px) {
+            .modal-dialog {
+                margin: 0.5rem auto !important;
+                max-width: 94% !important;
+            }
+
+            #checkOnlineAdmissionStatus .modal-dialog {
+                margin: 0.5rem auto !important;
+                max-width: 94% !important;
+            }
+
+            #loginBlockModal .modal-dialog {
+                margin: 0.5rem auto !important;
+                max-width: 94% !important;
+            }
+        }
+
+        /* Fix for desktop large screens */
+        @media (min-width: 768px) {
+            #checkOnlineAdmissionStatus .modal-dialog {
+                max-width: 800px !important;
+                margin: 1.75rem auto !important;
+            }
+
+            #loginBlockModal .modal-dialog {
+                max-width: 500px !important;
+                margin: 1.75rem auto !important;
+            }
+        }
+
+        /* ============================================
+           MODAL LOGIN CUSTOM STYLES
            ============================================ */
         .modal-login-custom .modal-content {
             border-radius: var(--radius-lg);
@@ -836,7 +922,8 @@
             color: var(--dark);
         }
 
-        .modal.show .modal-dialog.modal-sm {
+        /* Remove any transform conflicts */
+        .modal.show .modal-dialog {
             transform: none !important;
         }
     </style>
@@ -1069,6 +1156,8 @@
                         <h4>Welcome Back</h4>
                         <p>Login to your admission account</p>
                     </div>
+                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body-custom">

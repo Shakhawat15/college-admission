@@ -2,22 +2,18 @@
 <html lang="en">
 
 <head>
-
-    <!-- Site Tittle -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BAF Shaheen College Dhaka</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=yes">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>SEMS DEMO SCHOOL</title>
 
     <!-- Plugins css Style -->
     <link href='{{ asset('public/') }}/assets/plugins/fontawesome-5.15.2/css/all.min.css' rel='stylesheet'>
     <link href='{{ asset('public/') }}/assets/plugins/fontawesome-5.15.2/css/fontawesome.min.css' rel='stylesheet'>
     <link href='{{ asset('public/') }}/assets/plugins/animate/animate.css' rel='stylesheet'>
-
     <link href='{{ asset('public/') }}/assets/plugins/fancybox/jquery.fancybox.min.css' rel='stylesheet'>
     <link href='{{ asset('public/') }}/assets/plugins/isotope/isotope.min.css' rel='stylesheet'>
-
-
     <link href='{{ asset('public/') }}/assets/plugins/owl-carousel/owl.carousel.min.css' rel='stylesheet'
         media='screen'>
     <link href='{{ asset('public/') }}/assets/plugins/owl-carousel/owl.theme.default.min.css' rel='stylesheet'
@@ -27,7 +23,8 @@
     <link href='{{ asset('public/') }}/assets/plugins/revolution/css/navigation.css' rel='stylesheet'>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,600,700|Open+Sans:300,400,600,700"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
     <!-- Custom css -->
@@ -35,36 +32,20 @@
     <link href="{{ asset('public/') }}/assets/css/custom.css" id="option_style" rel="stylesheet">
 
     <!-- Favicon -->
-    <link
-        href="{{ asset('/') }}public/frontend/uploads/school_content/logo/front_fav_icon-608ff44a5fdb33.94953981.png"
-        rel="shortcut icon">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+    <link href="https://kgadmission.sems.ac/public/frontend/uploads/school_content/logo/sems.png" rel="shortcut icon">
 
     <!-- Javascript -->
     <script src='{{ asset('public/') }}/assets/plugins/jquery/jquery.min.js'></script>
     <script src='{{ asset('public/') }}/assets/plugins/bootstrap/js/bootstrap.bundle.min.js'></script>
-
     <script src='{{ asset('public/') }}/assets/plugins/fancybox/jquery.fancybox.min.js'></script>
     <script src='{{ asset('public/') }}/assets/plugins/isotope/isotope.min.js'></script>
     <script src='{{ asset('public/') }}/assets/plugins/images-loaded/js/imagesloaded.pkgd.min.js'></script>
-
     <script src='{{ asset('public/') }}/assets/plugins/lazyestload/lazyestload.js'></script>
     <script src='{{ asset('public/') }}/assets/plugins/velocity/velocity.min.js'></script>
     <script src='{{ asset('public/') }}/assets/plugins/smoothscroll/SmoothScroll.js'></script>
-
-
     <script src='{{ asset('public/') }}/assets/plugins/owl-carousel/owl.carousel.min.js'></script>
     <script src='{{ asset('public/') }}/assets/plugins/revolution/js/jquery.themepunch.tools.min.js'></script>
     <script src='{{ asset('public/') }}/assets/plugins/revolution/js/jquery.themepunch.revolution.min.js'></script>
-
-    <!-- Load revolution slider only on Local File Systems. The following part can be removed on Server -->
-
     <script src='{{ asset('public/') }}/assets/plugins/revolution/js/extensions/revolution.extension.slideanims.min.js'>
     </script>
     <script
@@ -72,581 +53,925 @@
     </script>
     <script src='{{ asset('public/') }}/assets/plugins/revolution/js/extensions/revolution.extension.navigation.min.js'>
     </script>
-
-
     <script src='{{ asset('public/') }}/assets/plugins/wow/wow.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="text/javascript"
         src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 
-</head>
-<style>
-    .top-bar a,
-    .top-bar .btn {
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    .tp-bullet {
-        width: 10px !important;
-        height: 10px !important;
-        border-radius: 50px;
-    }
-
-    .top-bar {
-        padding: 0.1125rem 0;
-    }
-
-    .mobile {
-        display: none;
-    }
-
-    /* .navbar > .container, .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl{
-        display: block;
-      } */
-    .short-text {
-        font-family: Ravie !important;
-        font-size: 1.2rem;
-        color: white !important;
-    }
-
-    .full-text {
-        font-size: 1.3rem;
-        font-weight: bold;
-        margin-bottom: 0.0rem;
-    }
-
-    .logoicon {
-        width: 90px !important;
-    }
-
-    .navbar-expand-md .navbar-nav .nav-link {
-        padding-top: 0.55rem;
-        padding-bottom: 0.55rem;
-    }
-
-    @media (min-width: 992px) {
-        .col-lg-5 {
-            flex: 0 0 auto;
-            width: 39%;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .bafsd {
-            font-size: 35px !important;
+    <style>
+        /* ============================================
+           ROOT VARIABLES
+           ============================================ */
+        :root {
+            --primary: #A51C30;
+            --primary-dark: #7A1524;
+            --primary-light: #C4283F;
+            --primary-rgb: 165, 28, 48;
+            --secondary: #00ADEF;
+            --gold: #F0C24B;
+            --gold-dark: #D9A52E;
+            --gold-light: #FCE8A0;
+            --gold-rgb: 240, 194, 75;
+            --dark: #1a1a2e;
+            --gray: #6c7a8d;
+            --gray-light: #9aa6b5;
+            --light-gray: #f0f2f5;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 12px rgba(20, 20, 40, 0.06);
+            --shadow-md: 0 10px 32px rgba(20, 20, 40, 0.10);
+            --shadow-lg: 0 22px 64px rgba(20, 20, 40, 0.14);
+            --shadow-gold: 0 8px 24px rgba(var(--gold-rgb), 0.35);
+            --shadow-primary: 0 8px 24px rgba(var(--primary-rgb), 0.30);
+            --radius-sm: 10px;
+            --radius-md: 18px;
+            --radius-lg: 26px;
+            --radius-pill: 999px;
+            --ease: cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: all 0.3s var(--ease);
+            --font-display: 'Inter', 'Plus Jakarta Sans', sans-serif;
+            --font-body: 'Plus Jakarta Sans', 'Inter', sans-serif;
         }
 
-        .mobile {
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: #f8f9fc;
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        ::selection {
+            background: rgba(var(--primary-rgb), 0.18);
+            color: var(--primary-dark);
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        select:focus-visible {
+            outline: 2px solid var(--secondary);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* ============================================
+           TOP BAR
+           ============================================ */
+        .top-bar {
+            background: linear-gradient(120deg, var(--primary-dark) 0%, var(--primary) 55%, var(--primary-light) 100%) !important;
+            padding: 0.5rem 0;
+            position: relative;
+            z-index: 1000;
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 2px 18px rgba(var(--primary-rgb), 0.25);
+        }
+
+        .top-bar .logoicon {
+            width: 55px;
+            height: auto;
+            border-radius: 12px;
+            background: #fff;
+            padding: 3px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+            transition: var(--transition);
+        }
+
+        .top-bar .logoicon:hover {
+            transform: scale(1.06) rotate(-2deg);
+        }
+
+        .school-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .school-brand .brand-name {
+            font-family: var(--font-display);
+            font-weight: 800;
+            font-size: 26px;
+            color: #fff;
+            line-height: 1;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .school-brand .brand-name span {
+            color: var(--gold);
+        }
+
+        .school-brand .brand-sub {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.78);
+            font-weight: 500;
+            letter-spacing: 0.6px;
+            margin-top: 3px;
             display: block;
         }
 
-        .logoicon {
-            width: 70px !important;
+        .school-brand .divider {
+            width: 2px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 8px;
         }
 
-        hr {
-            width: 170px;
+        .top-bar .top-menu .btn-login {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--dark) !important;
+            padding: 0.45rem 1.6rem;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: var(--transition);
+            border: none;
+            box-shadow: var(--shadow-gold);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
-        .top-bar {
-            padding: 0.125rem 0 0.5125rem 0;
+        .top-bar .top-menu .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(var(--gold-rgb), 0.5);
+            color: var(--dark) !important;
         }
 
-        .mobile-9 {
-            width: 80% !important;
-            display: inline !important;
-            margin-left: 1% !important;
+        .top-bar .top-menu .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .mobile-3 {
-            width: 11% !important;
-            display: inline !important;
+        .top-bar .top-menu .social-icon:hover {
+            background: var(--gold);
+            color: var(--dark);
+            transform: translateY(-2px);
+            border-color: var(--gold);
         }
 
-        /* .mobile-menu{
-        margin-top: -10px!important;
-      } */
-        .short-text {
-            font-family: Ravie !important;
+        /* ============================================
+           NAVBAR
+           ============================================ */
+        .navbar-custom {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 4px 24px rgba(20, 20, 40, 0.06);
+            padding: 0.3rem 0;
+            border-bottom: 1px solid rgba(var(--primary-rgb), 0.12);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .navbar-custom .navbar-brand-mobile {
+            display: none;
+            font-weight: 800;
+            font-size: 1.15rem;
+            color: var(--primary);
+        }
+
+        .navbar-custom .navbar-brand-mobile i {
+            color: var(--gold);
+        }
+
+        .navbar-custom .nav-item {
+            position: relative;
+        }
+
+        .navbar-custom .nav-link {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--dark) !important;
+            padding: 0.55rem 1.2rem !important;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+        }
+
+        .navbar-custom .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 1.2rem;
+            right: 1.2rem;
+            bottom: 4px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 2px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s var(--ease);
+        }
+
+        .navbar-custom .nav-link .nav-icon {
+            color: var(--primary);
+            font-size: 0.8rem;
+            opacity: 0.6;
+            transition: var(--transition);
+            width: 18px;
+            text-align: center;
+        }
+
+        .navbar-custom .nav-link:hover,
+        .navbar-custom .nav-link.active {
+            background: rgba(var(--primary-rgb), 0.08);
+            color: var(--primary) !important;
+        }
+
+        .navbar-custom .nav-link:hover::after,
+        .navbar-custom .nav-link.active::after {
+            transform: scaleX(1);
+        }
+
+        .navbar-custom .nav-link:hover .nav-icon,
+        .navbar-custom .nav-link.active .nav-icon {
+            opacity: 1;
+        }
+
+        .navbar-custom .nav-item.active .nav-link {
+            background: rgba(var(--primary-rgb), 0.1);
+            color: var(--primary) !important;
+        }
+
+        .navbar-custom .dropdown-menu {
+            border: none;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: 0.6rem;
+            min-width: 230px;
+            border-top: 4px solid var(--primary);
+            margin-top: 8px;
+            animation: dropFade 0.18s var(--ease);
+        }
+
+        @keyframes dropFade {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .navbar-custom .dropdown-item {
+            font-weight: 500;
+            font-size: 0.85rem;
+            padding: 0.55rem 1rem;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            color: var(--dark);
+        }
+
+        .navbar-custom .dropdown-item:hover {
+            background: rgba(var(--primary-rgb), 0.06);
+            color: var(--primary);
+            padding-left: 1.2rem;
+        }
+
+        .navbar-custom .dropdown-item i {
+            margin-right: 8px;
+            color: var(--gray);
+            font-size: 0.75rem;
+        }
+
+        .navbar-custom .sub-menu {
+            list-style: none;
+            padding-left: 1.2rem;
+        }
+
+        .navbar-custom .sub-menu li a {
+            color: var(--gray);
+            font-size: 0.82rem;
+            padding: 0.22rem 0;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .navbar-custom .sub-menu li a:hover {
+            color: var(--primary);
+            padding-left: 4px;
+        }
+
+        .navbar-custom .navbar-toggler {
+            border: none;
+            padding: 0.4rem 0.6rem;
+            border-radius: var(--radius-sm);
+            color: var(--dark);
             font-size: 1.2rem;
-            color: white !important;
-            margin-top: 20px !important;
         }
 
-        .full-text {
+        .navbar-custom .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-custom .dropdown-toggle::after {
+            margin-left: 6px;
+            font-size: 0.6rem;
+            vertical-align: middle;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer-bg-img {
+            background: linear-gradient(180deg, var(--dark) 0%, #14142a 100%);
+            color: rgba(255, 255, 255, 0.7);
+            position: relative;
+        }
+
+        .footer-bg-img .footer-content {
+            padding: 3.2rem 0 2.4rem;
+            position: relative;
+        }
+
+        .footer-bg-img .footer-heading {
+            color: #fff;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.2px;
+        }
+
+        .footer-bg-img .footer-link {
+            color: rgba(255, 255, 255, 0.6);
+            transition: var(--transition);
+            display: inline-block;
+            margin-bottom: 0.4rem;
+            font-size: 0.9rem;
+        }
+
+        .footer-bg-img .footer-link:hover {
+            color: var(--gold);
+            transform: translateX(4px);
+        }
+
+        .footer-bg-img .copyright {
+            background: rgba(0, 0, 0, 0.35) !important;
+            padding: 1.2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .footer-bg-img .copyright .copyright-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+            margin: 0;
+        }
+
+        .footer-bg-img .copyright .copyright-text strong {
+            color: var(--gold);
+        }
+
+        .footer-bg-img .social-footer-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .footer-bg-img .social-footer-icon:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            color: #fff;
+        }
+
+        .color-bar .col {
+            height: 4px;
+            padding: 0;
+        }
+
+        /* ============================================
+           BACK TO TOP
+           ============================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            box-shadow: var(--shadow-primary);
+            transition: var(--transition);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(var(--primary-rgb), 0.45);
+            color: #fff;
+        }
+
+        /* ============================================
+           MODAL STYLES — SMOOTH ANIMATIONS
+           ============================================ */
+        .modal-login-custom .modal-content {
+            border-radius: var(--radius-lg);
+            border: none;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            transform: scale(0.92) translateY(12px);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .modal-login-custom.show .modal-content {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .modal-login-custom .modal-backdrop.show {
+            opacity: 0.6;
+            transition: opacity 0.35s ease;
+        }
+
+        .modal-login-custom .modal-header-grad {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 1.8rem 2rem 1.6rem;
+            text-align: center;
+            border-bottom: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .modal-login-custom .modal-header-grad::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -10%;
+            width: 160px;
+            height: 160px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50%;
+        }
+
+        .modal-login-custom .modal-header-grad .icon-badge {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.7rem;
             font-size: 1.3rem;
-            font-weight: bold;
-            margin-bottom: 0.0rem;
+            color: var(--gold);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .section-top {
-            margin-top: 50px;
+        .modal-login-custom .modal-header-grad h4 {
+            color: #fff;
+            font-weight: 700;
+            margin: 0;
+            position: relative;
+            z-index: 1;
         }
 
-    }
+        .modal-login-custom .modal-header-grad p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.85rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
 
-    .scroll-none {
-        display: none;
-        /* Hide the scroll-up div initially */
-    }
+        .modal-login-custom .modal-body-custom {
+            padding: 2rem;
+        }
 
-    .d-hide {
-        display: none;
-        /* Hide the scroll-up div initially */
-    }
+        .modal-login-custom .form-control {
+            border-radius: var(--radius-sm);
+            border: 2px solid #e8ecf1;
+            padding: 0.7rem 1rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
 
-    .icon-header {
-        width: 30px;
-        height: 30px;
-        line-height: 27px;
-    }
+        .modal-login-custom .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(var(--primary-rgb), 0.08);
+        }
 
-    .btn:hover {
-        background-color: white !important;
-        color: #eee !important;
-    }
+        .modal-login-custom .input-group-text {
+            background: var(--light-gray);
+            border: 2px solid #e8ecf1;
+            border-right: none;
+            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+            color: var(--gray);
+        }
 
-    .navbar-nav {
-        padding-right: 0.0rem;
-    }
+        .modal-login-custom .input-group .form-control {
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            border-left: none;
+        }
 
-    @font-face {
-        font-family: 'broadway1';
-        src: url('{{ asset('public/font/BroadwayLT.woff') }}') format('woff');
-    }
+        .modal-login-custom .btn-login-modal {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            color: #fff;
+            padding: 0.85rem;
+            border-radius: var(--radius-sm);
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            width: 100%;
+            box-shadow: var(--shadow-primary);
+        }
 
-    @font-face {
-        font-family: 'forte';
-        src: url('{{ asset('public/font/Forte.woff') }}') format('woff');
-    }
+        .modal-login-custom .btn-login-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(var(--primary-rgb), 0.4);
+            color: #fff;
+        }
 
-    @font-face {
-        font-family: 'algerian';
-        src: url('{{ asset('public/font/Algerian.woff') }}') format('woff');
-    }
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 991px) {
+            .top-bar .school-brand .brand-name {
+                font-size: 20px;
+            }
 
-    @font-face {
-        font-family: 'monotype corsiva';
-        src: url('{{ asset('public/font/Corsiva.woff') }}') format('woff');
-    }
+            .top-bar .school-brand .brand-sub {
+                font-size: 11px;
+            }
 
-    @font-face {
-        font-family: 'Viner hand ITC';
-        src: url('{{ asset('public/font/Viner Hand ITC.woff') }}') format('woff');
-    }
+            .top-bar .school-brand .divider {
+                display: none;
+            }
 
-    @font-face {
-        font-family: 'Bradley Hand ITC';
-        src: url('{{ asset('public/font/Bradley Hand ITC V2.woff') }}') format('woff');
-    }
+            .top-bar .logoicon {
+                width: 45px;
+            }
+        }
 
-    @font-face {
-        font-family: 'Book Antiqua';
-        src: url('{{ asset('public/font/Book Antiqua.woff') }}') format('woff');
-    }
-</style>
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 0.5rem 0;
+            }
+
+            .top-bar .school-brand .brand-name {
+                font-size: 16px;
+            }
+
+            .top-bar .school-brand .brand-sub {
+                font-size: 9px;
+            }
+
+            .top-bar .logoicon {
+                width: 38px;
+            }
+
+            .top-bar .top-menu .btn-login {
+                padding: 0.3rem 1rem;
+                font-size: 0.7rem;
+            }
+
+            .top-bar .top-menu .social-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 0.7rem;
+            }
+
+            .navbar-custom .navbar-brand-mobile {
+                display: block;
+            }
+
+            .navbar-custom .navbar-collapse {
+                background: #fff;
+                padding: 1rem;
+                border-radius: var(--radius-md);
+                box-shadow: var(--shadow-lg);
+                margin-top: 0.5rem;
+                border: 1px solid rgba(0, 0, 0, 0.04);
+            }
+
+            .navbar-custom .nav-link {
+                padding: 0.5rem 0.8rem !important;
+                font-size: 0.8rem;
+            }
+
+            .navbar-custom .nav-link::after {
+                display: none;
+            }
+
+            .navbar-custom .dropdown-menu {
+                border: none;
+                box-shadow: none;
+                padding: 0.3rem 0 0.3rem 1.5rem;
+                background: rgba(0, 0, 0, 0.02);
+                border-radius: var(--radius-sm);
+                border-top: none;
+                margin-top: 0;
+            }
+
+            .navbar-custom .sub-menu {
+                padding-left: 0.8rem;
+            }
+
+            .modal-login-custom .modal-header-grad {
+                padding: 1.2rem 1.2rem;
+            }
+
+            .modal-login-custom .modal-body-custom {
+                padding: 1.2rem;
+            }
+
+            .modal-login-custom .form-control {
+                font-size: 0.8rem;
+                padding: 0.5rem 0.8rem;
+            }
+
+            .back-to-top {
+                width: 38px;
+                height: 38px;
+                font-size: 0.9rem;
+                bottom: 16px;
+                right: 16px;
+            }
+
+            .modal-login-custom .modal-content {
+                transform: scale(0.94) translateY(10px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .top-bar .school-brand .brand-name {
+                font-size: 13px;
+            }
+
+            .top-bar .logoicon {
+                width: 30px;
+            }
+
+            .top-bar .top-menu .btn-login {
+                padding: 0.2rem 0.7rem;
+                font-size: 0.6rem;
+            }
+
+            .top-bar .top-menu .social-icon {
+                width: 26px;
+                height: 26px;
+                font-size: 0.6rem;
+            }
+        }
+
+        /* ============================================
+           UTILITY
+           ============================================ */
+        .bg-primary-custom {
+            background: var(--primary) !important;
+        }
+
+        .text-primary-custom {
+            color: var(--primary) !important;
+        }
+
+        .text-gold {
+            color: var(--gold) !important;
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: var(--dark);
+            border: none;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-dark);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+
+        .shadow-hover {
+            transition: var(--transition);
+        }
+
+        .shadow-hover:hover {
+            box-shadow: var(--shadow-lg) !important;
+            transform: translateY(-4px);
+        }
+
+        .navbar-toggler-icon-custom {
+            font-size: 1.2rem;
+            color: var(--dark);
+        }
+
+        .modal.show .modal-dialog.modal-sm {
+            transform: none !important;
+        }
+    </style>
+
+    @stack('styles')
+</head>
 
 <body id="body" class="boxed pattern-04">
-    <!-- ====================================
-  ——— PRELOADER
-  ===================================== -->
-    {{-- <div id="preloader" class="smooth-loader-wrapper">
-        <div class="smooth-loader">
-            <div class="loader">
-                <span class="dot dot-1"></span>
-                <span class="dot dot-2"></span>
-                <span class="dot dot-3"></span>
-                <span class="dot dot-4"></span>
-            </div>
-        </div>
-    </div> --}}
 
-    <!-- ====================================
-  ——— HEADER
-  ===================================== -->
+    <!-- ============================================
+    HEADER
+    ============================================ -->
     <header class="header" id="pageTop">
-        <!-- Top Color Bar -->
-        <!-- <div class="color-bars">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col color-bar bg-warning d-none d-md-block"></div>
-          <div class="col color-bar bg-success d-none d-md-block"></div>
-          <div class="col color-bar bg-danger d-none d-md-block"></div>
-          <div class="col color-bar bg-info d-none d-md-block"></div>
-          <div class="col color-bar bg-purple d-none d-md-block"></div>
-          <div class="col color-bar bg-pink d-none d-md-block"></div>
-          <div class="col color-bar bg-warning"></div>
-          <div class="col color-bar bg-success"></div>
-          <div class="col color-bar bg-danger"></div>
-          <div class="col color-bar bg-info"></div>
-          <div class="col color-bar bg-purple"></div>
-          <div class="col color-bar bg-pink"></div>
-        </div>
-      </div>
-    </div> -->
 
-        <!-- Top Bar-->
-        <!-- d-none d-md-block -->
-        <div class="bg-stone navbar navbar-expand-md top-bar scroll-down-div"
-            style="background-color: #A51C30 !important;">
-            <div class="container" style=" display: block!important;">
-                <div class="row">
-                    <div class="col-lg-7 mobile-9">
-                        <ul class="list-inline d-flex justify-content-xl-start align-items-center h-100 mb-0">
-                            <li>
-                                <div class="d-flex">
-                                    <span class="  me-xl-0">
-
-                                        <a href="{{ url('/') }}">
-                                            <img class="d-inline-block logoicon" style="width: 65px!important;"
-                                                src="{{ asset('/') }}public/frontend/uploads/school_content/logo/front_logo-608ff44a5f8f07.35255544.png"
-                                                alt="">
-                                        </a>
-
-                                    </span>
-                                    <a href="{{ url('/') }}"
-                                        class="me-lg-4 me-xl-6 text-white opacity-100 short-text"
-                                        style="margin-top: 19px;line-height: 0px;"><span
-                                            style=" font-family: 'broadway1'!important;font-size: 30px;"
-                                            class="bafsd">BAFSD</span>
-                                        <hr style="width: 130px" />
-                                        <span style="font-family: forte!important;font-size: 15px">DHAKA SHAHEEN</span>
-                                    </a>
-                                </div>
-
-
-                            </li>
-
-
-                        </ul>
+        <!-- ===== TOP BAR ===== -->
+        <div class="top-bar scroll-down-div">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-7 col-md-7">
+                        <div class="school-brand">
+                            <a href="{{ url('/') }}">
+                                <img class="logoicon"
+                                    src="https://kgadmission.sems.ac/public/frontend/uploads/school_content/logo/sems.png"
+                                    alt="SEMS Logo">
+                            </a>
+                            <span class="divider"></span>
+                            <div>
+                                <div class="brand-name">SEMS <span>DEMO</span></div>
+                                <span class="brand-sub">ESTD 2000 | EIIN-100000</span>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-lg-5 mobile-3">
-                        <ul
-                            class="top-menu list-inline d-flex mt-2 justify-content-xl-end justify-content-center align-items-center me-xl-2">
-
-
-
-                            <li class="text-white me-md-3 me-lg-2 me-xl-5">
-                                <span class="bg-purple icon-header me-1 me-md-2 me-lg-1 me-xl-2">
-                                    <i class="fas fa-unlock-alt text-white font-size-13" aria-hidden="true"></i>
-                                </span>
-                                <a class="text-white font-weight-medium opacity-80" href="javascript:void(0)"
-                                    data-bs-toggle="modal" data-bs-target="#modal-login">
-                                    Login
-                                </a>
-
-                            </li>
-                            <li class="text-white me-md-3 me-lg-2 me-xl-5 ml-4 mobile" style="margin-left: 10px;">
-                                <button class="navbar-toggler py-2" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
-                                    aria-label="Toggle navigation">
-                                    <i class="fa fa-bars"></i>
-                                </button>
-
-                            </li>
-
-                            <li class="cart-dropdown d-none d-md-block">
-                                <div class="cart-icon" aria-haspopup="true" aria-expanded="false"
-                                    data-display="static">
-                                    <a href="https://www.facebook.com/dhakashaheen" target="_blank">
-
-                                        <span class="rounded-sm bg-pink icon-small icon-badge shopping-icon">
-                                            <i class="fab fa-facebook-f text-white" aria-hidden="true"></i>
-
-                                        </span>
-                                    </a>
-                                </div>
-
-                            </li>
-                        </ul>
+                    <div class="col-5 col-md-5">
+                        <div class="top-menu d-flex justify-content-end align-items-center gap-2 gap-md-3">
+                            <a href="javascript:void(0)" class="btn-login" data-bs-toggle="modal"
+                                data-bs-target="#modal-login">
+                                <i class="fas fa-user"></i> Login
+                            </a>
+                            <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                                aria-label="Toggle navigation">
+                                <i class="fas fa-bars" style="color: #fff; font-size: 1.2rem;"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-md  mobile-menu  navbar-white scroll-up-div">
+        <!-- ===== NAVBAR ===== -->
+        <nav class="navbar navbar-expand-md navbar-custom scroll-up-div">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}"
-                    style="font-family: algerian!important;font-size:x-large;font-weight: bold;line-height: 25px;color: #00ADEF">
-                    BAF Shaheen College Dhaka<br>
-                    <span
-                        style="
-        font-size: 11px;
-        margin-top: -5px;
-        position: absolute;
-        font-family: monotype corsiva!important;
-        z-index: 1;
-        color: black!important;
-
-
-
-        ">ESTD
-                        1960|EIIN-107858</span>
+                <a class="navbar-brand-mobile" href="{{ url('/') }}">
+                    <i class="fas fa-graduation-cap"></i> SEMS DEMO
                 </a>
 
-                <!-- cart-dropdown -->
-                <!-- <div class="dropdown cart-dropdown ms-auto me-5 d-md-none">
-          <div class="cart-icon" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <a href="javascript:void(0)">
-              <span class="rounded-sm bg-pink icon-small icon-badge close-icon">
-                <i class="fas fa-times text-white" aria-hidden="true"></i>
-              </span>
-              <span class="rounded-sm bg-pink icon-small icon-badge shopping-icon">
-                <i class="fa fa-shopping-basket text-white" aria-hidden="true"></i>
-                <span class="badge bg-warning">3</span>
-              </span>
-            </a>
-          </div>
-          <div class="dropdown-menu dropdown-menu-end">
-            <ul class="bg-white list-unstyled">
-              <li class="d-flex align-items-center">
-                <i class="fa fa-shopping-basket font-size-20 me-3" aria-hidden="true"></i>
-                <h3 class="text-capitalize font-weight-bold mb-0">3 items in your cart</h3>
-              </li>
-              <hr>
-              <li>
-                <a href="product-single.html">
-                  <div class="media">
-                    <div class="image">
-                      <img class="bg-light rounded-sm px-5 py-3 me-4" src="{{ asset('public/') }}/assets/img/products/product-sm.png" alt="cart-Image">
-                    </div>
-                    <div class="media-body">
-                      <div class="d-flex justify-content-between">
-                        <h4 class="text-dark">Barbie Racing Car</h4>
-                        <span class="cancel">
-                          <i class="fas fa-times text-muted" aria-hidden="true"></i>
-                        </span>
-                      </div>
-                      <div class="price">
-                        <span class="text-primary font-weight-medium">$50</span>
-                      </div>
-                      <span class="text-muted font-weight-medium text-muted">Qnt: 1</span>
-                    </div>
-                  </div>
-                </a>
-                <hr>
-              </li>
-              <li>
-                <a href="product-single.html">
-                  <div class="media">
-                    <div class="image">
-                      <img class="bg-light rounded-sm px-5 py-3 me-4" src="{{ asset('public/') }}/assets/img/products/product-sm.png" alt="cart-Image">
-                    </div>
-                    <div class="media-body">
-                      <div class="d-flex justify-content-between">
-                        <h4 class="text-dark">Barbie Racing Car</h4>
-                        <span class="cancel">
-                          <i class="fas fa-times text-muted" aria-hidden="true"></i>
-                        </span>
-                      </div>
-                      <div class="price">
-                        <span class="text-primary font-weight-medium">$50</span>
-                      </div>
-                      <span class="text-muted font-weight-medium">Qnt: 1</span>
-                    </div>
-                  </div>
-                </a>
-                <hr>
-              </li>
-              <li>
-                <a href="product-single.html">
-                  <div class="media">
-                    <div class="image">
-                      <img class="bg-light rounded-sm px-5 py-3 me-4" src="{{ asset('public/') }}/assets/img/products/product-sm.png" alt="cart-Image">
-                    </div>
-                    <div class="media-body">
-                      <div class="d-flex justify-content-between">
-                        <h4 class="text-dark font-weight-bold">Barbie Racing Car</h4>
-                        <span class="cancel">
-                          <i class="fas fa-times text-muted" aria-hidden="true"></i>
-                        </span>
-                      </div>
-                      <div class="price">
-                        <span class="text-primary font-weight-medium">$50</span>
-                      </div>
-                      <span class="text-muted font-weight-medium">Qnt: 1</span>
-                    </div>
-                  </div>
-                </a>
-                <hr>
-              </li>
-              <li>
-                <div class="d-flex justify-content-between mb-3">
-                  <h3 class="cart-total font-weight-bold">Subtotal</h3>
-                  <h3 class="cart-price font-weight-bold">$150</h3>
-                </div>
-                <div class="cart-button d-flex justify-content-between">
-                  <button type="button" class="btn btn-danger text-uppercase px-4 shadow-sm me-3" onclick="location.href='product-checkout-step-1.html';">Checkout</button>
-                  <button type="button" class="btn btn-danger text-uppercase px-4 shadow-sm" onclick="location.href='product-cart.html';">View
-                    Cart</button>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div> -->
-
-                <!-- <button class="navbar-toggler py-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-          aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa fa-bars"></i>
-        </button> -->
-                @php
-                    $colors = [
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                    ];
-                    $cs = ['primary', 'danger', 'success', 'info', 'purple', ' pink'];
-                    $icons = [
-                        'fas fa-home',
-                        'far fa-building',
-                        'fas fa-graduation-cap',
-                        'fas fa-balance-scale',
-                        'fa fa-bell',
-                        'fas fa-camera-retro',
-                        'fas fa-map',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                        'bg-primary',
-                        'bg-danger',
-                        'bg-success',
-                        'bg-info',
-                        'bg-purple',
-                        ' bg-pink',
-                    ];
-                @endphp
                 <div class="collapse navbar-collapse" id="navbarContent">
-                    <ul class="navbar-nav ms-lg-auto">
+                    <ul class="navbar-nav ms-auto">
+                        @php
+                            $colors = ['bg-primary', 'bg-danger', 'bg-success', 'bg-info', 'bg-purple', 'bg-pink'];
+                            $icons = [
+                                'fas fa-home',
+                                'far fa-building',
+                                'fas fa-graduation-cap',
+                                'fas fa-balance-scale',
+                                'fa fa-bell',
+                                'fas fa-camera-retro',
+                            ];
+                        @endphp
 
                         @isset($pages)
                             @foreach ($pages as $ke => $page)
-                                <li
-                                    class="nav-item dropdown {{ $colors[$loop->index] }}  {{ $ke == 0 ? 'active' : '' }}">
-
+                                <li class="nav-item {{ $ke == 0 ? 'active' : '' }}">
                                     @if (isset($page['tree']))
-                                        <a class="nav-link dropdown-toggle   " href="javascript:void(0)"
+                                        <a class="nav-link dropdown-toggle" href="javascript:void(0)"
                                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="{{ $icons[$loop->index] }} nav-icon" aria-hidden="true"></i>
+                                            <i class="{{ $icons[$loop->index] ?? 'fas fa-map' }} nav-icon"></i>
                                             <span>{{ $page['title'] }}</span>
                                         </a>
-
-                                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                            @foreach ($page['tree'] as $key => $childpage)
+                                        <ul class="dropdown-menu">
+                                            @foreach ($page['tree'] as $childpage)
                                                 @if (isset($childpage['tree']) && !empty($childpage['tree']))
                                                     <li>
-                                                        <a class="dropdown-item "
-                                                            href="#">{{ $childpage['title'] }}<i
-                                                                class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                                        <a class="dropdown-item" href="#">
+                                                            {{ $childpage['title'] }}
+                                                            <i class="fas fa-chevron-right float-end mt-1"></i>
+                                                        </a>
                                                         <ul class="sub-menu">
-                                                            @foreach ($childpage['tree'] as $key1 => $subchildpage)
-                                                                <li><a
-                                                                        href="{{ url('page/' . $subchildpage['slug']) }}">{{ $subchildpage['title'] }}</a>
+                                                            @foreach ($childpage['tree'] as $subchildpage)
+                                                                <li>
+                                                                    <a href="{{ url('page/' . $subchildpage['slug']) }}">
+                                                                        {{ $subchildpage['title'] }}
+                                                                    </a>
                                                                 </li>
                                                             @endforeach
-
                                                         </ul>
                                                     </li>
                                                 @else
                                                     <li>
-                                                        <a class="dropdown-item "
-                                                            href="{{ url('page/' . $childpage['slug']) }}">{{ $childpage['title'] }}</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ url('page/' . $childpage['slug']) }}">
+                                                            <i class="fas fa-angle-right me-2"></i>
+                                                            {{ $childpage['title'] }}
+                                                        </a>
                                                     </li>
                                                 @endif
                                             @endforeach
                                         </ul>
                                     @else
-                                        @if ($page['title'] == 'Home')
-                                            <a class="nav-link    " href="{{ url('/') }}">
-                                                <i class="fas fa-home nav-icon" aria-hidden="true"></i>
-                                                <span>{{ $page['title'] }}</span>
-                                            </a>
-                                            <!-- <a class="nav-link dropdown-toggle " href="{{ url('/') }}" >{{ $page['title'] }}</a> -->
-                                        @else
-                                            <a class="nav-link  " href="{{ url('page/' . $page['slug']) }}">
-                                                <i class="fas fa-map nav-icon" aria-hidden="true"></i>
-                                                <span>{{ $page['title'] }}</span>
-                                            </a>
-                                        @endif
+                                        <a class="nav-link"
+                                            href="{{ $page['title'] == 'Home' ? url('/') : url('page/' . $page['slug']) }}">
+                                            <i class="{{ $icons[$loop->index] ?? 'fas fa-map' }} nav-icon"></i>
+                                            <span>{{ $page['title'] }}</span>
+                                        </a>
                                     @endif
                                 </li>
                             @endforeach
                         @endisset
-
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
 
-
-
-
-
-
-
+    <!-- ============================================
+    MAIN CONTENT
+    ============================================ -->
     @yield('content')
 
-
-
-
-
+    <!-- ============================================
+    FOOTER
+    ============================================ -->
     <footer class="footer-bg-img">
-        <!-- Footer Color Bar -->
+        <!-- Color Bar -->
         <div class="color-bar">
             <div class="container-fluid">
                 <div class="row">
@@ -666,327 +991,153 @@
             </div>
         </div>
 
-        <div class="pt-8 pb-7  bg-repeat"
-            style="background-image: url({{ asset('public/') }}/assets/img/background/footer-bg-img-1.png);">
+        <!-- Footer Content -->
+        <div class="footer-content">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-lg-3 col-xs-12">
-                        <h4 class="section-title-sm font-weight-bold text-white mb-2">Useful Links</h4>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <h5 class="footer-heading">
+                            <i class="fas fa-graduation-cap text-gold me-2"></i> SEMS DEMO SCHOOL
+                        </h5>
+                        <p style="font-size:0.9rem; opacity:0.7;">
+                            Providing quality education and seamless admission management for students across the
+                            country.
+                        </p>
+                        <div class="d-flex gap-2 mt-3">
+                            <a href="#" class="social-footer-icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-footer-icon"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="social-footer-icon"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <h5 class="footer-heading">Quick Links</h5>
                         <ul class="list-unstyled">
-                            <li class="mb-4">
-                                <a href="http://xiclassadmission.gov.bd" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> XI Class
-                                    Admission: 2023-24
-                                </a>
-                            </li>
-
-                            <li class="mb-4">
-                                <a href="https://dhakaeducationboard.gov.bd/" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> Dhaka Education
-                                    Board
-                                </a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="https://bafsk.edu.bd/" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> BAF Shaheen
-                                    College Kurmitola
-                                </a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="https://bafspkp.edu.bd" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> BAF Shaheen
-                                    College PKP
-                                </a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="http://www.bafss.edu.bd" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> BAF Shaheen
-                                    College Shamshernagar
-                                </a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="http://bafsj.edu.bd" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> BAF Shaheen
-                                    College Jashore
-                                </a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="https://www.bafsc.edu.bd" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> BAF Shaheen
-                                    College Chattogram
-                                </a>
-                            </li>
-
+                            <li><a href="{{ url('/') }}" class="footer-link">Home</a></li>
+                            <li><a href="#" class="footer-link">Admission</a></li>
+                            <li><a href="#" class="footer-link">Notice Board</a></li>
+                            <li><a href="#" class="footer-link">Contact</a></li>
                         </ul>
                     </div>
-
-                    <div class="col-sm-6 col-lg-3 col-xs-12">
-
+                    <div class="col-md-3">
+                        <h5 class="footer-heading">Resources</h5>
                         <ul class="list-unstyled">
-                            <li class="mb-4">
-                                <a href="http://bafsb.edu.bd" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> BAF Shaheen
-                                    College Bogura
-                                </a>
-                            </li>
-                            <li class="mb-4">
-                                <a href="https://mopme.gov.bd/" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> Ministry of
-                                    Primary and Mass Education
-                                </a>
-                            </li>
-
-                            <li class="mb-4">
-                                <a href="http://www.nctb.gov.bd/" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> National
-                                    Curriculum and Textbook Board (NCTB)
-                                </a>
-                            </li>
-
-                            <li class="mb-4">
-                                <a href="https://www.dpe.gov.bd" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> Directorate of
-                                    Primary Education
-                                </a>
-                            </li>
-
-                            <li class="mb-4">
-                                <a href="http://dshe.gov.bd" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> Directorate of
-                                    Secondary and Higher Education
-                                </a>
-                            </li>
-
-
-                            <li class="mb-4">
-                                <a href="https://moedu.portal.gov.bd/" target="_blank">
-                                    <i class="fas fa-angle-double-right me-2" aria-hidden="true"></i> Ministry of
-                                    Education
-                                </a>
-                            </li>
-
+                            <li><a href="#" class="footer-link">Admission Guide</a></li>
+                            <li><a href="#" class="footer-link">Fee Structure</a></li>
+                            <li><a href="#" class="footer-link">Academic Calendar</a></li>
+                            <li><a href="#" class="footer-link">Result Portal</a></li>
                         </ul>
                     </div>
-
-                    <div class="col-sm-6 col-lg-4 col-xs-12">
-                        <h4 class="section-title-sm font-weight-bold text-white mb-2">Contact</h4>
-                        <p style="margin-bottom: .5rem;">02-9836440</p>
-                        <h4 class="section-title-sm font-weight-bold text-white mb-2">Google Map</h4>
-                        <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.172643828997!2d90.38821047533675!3d23.776865778652436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c74302a89761%3A0xd99a5c61d56e1d6d!2sBAF%20Shaheen%20College%20Dhaka!5e0!3m2!1sen!2sbd!4v1714009795417!5m2!1sen!2sbd"
-                            width="350" height="220" style="border:0;" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-2 col-xs-12">
-                        <!-- <h4 class="section-title-sm font-weight-bold text-white mb-3">Feedback</h4> -->
-
-                        <!-- <div class="mb-1 ">
-              <a href="http://localhost/schoolerp/page/message-of-the-principal" class="bg-success btn btn-white btn-sm text-uppercase text-hover-default">Massage Box</a>
-            </div> -->
-                        <h4 class="section-title-sm font-weight-bold text-white mb-3">Address</h4>
-                        <p>3rd Gate, Near Shaheed Jahangir Gate, Dhaka 1206</p>
-
-                        <h4 class="section-title-sm font-weight-bold text-white mb-3">Email Us</h4>
-                        <p style="margin-bottom: .5rem;">info@bafsd.edu.bd</p>
-                        <p style="margin-bottom: .5rem;">infobafsd@gmail.com</p>
+                    <div class="col-md-2">
+                        <h5 class="footer-heading">Support</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Help Desk</a></li>
+                            <li><a href="#" class="footer-link">FAQs</a></li>
+                            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Copy Right -->
-        <div class="copyright" style="background-color: #337AB7 !important">
+        <!-- Copyright -->
+        <div class="copyright">
             <div class="container">
-                <div class="row py-4 align-items-center">
-                    <div class="col-sm-7 col-xs-12 order-1 order-md-0">
-                        <p class="copyright-text"> © <span id="copy-year"></span> BAF Shaheen College Dhaka, Powered
-                            By : Shahin TECH</p>
+                <div class="row align-items-center">
+                    <div class="col-md-7 text-center text-md-start">
+                        <p class="copyright-text">
+                            &copy; <span id="copy-year"></span> Powered By <a href="https://shahintech.org"
+                                target="_blank"><strong>Shahin TECH</strong></a>
+                        </p>
                     </div>
-
-                    <div class="col-sm-5 col-xs-12">
-                        <ul
-                            class="list-inline d-flex align-items-center justify-content-md-end justify-content-center mb-md-0">
-                            <li class="me-3">
-                                <a class="icon-rounded-circle-small bg-primary"
-                                    href="https://www.facebook.com/dhakashaheen" target="_blank">
-                                    <i class="fab fa-facebook-f text-white" aria-hidden="true"></i>
-                                </a>
-                            </li>
-
-                            <!-- <li class="me-3">
-              <a class="icon-rounded-circle-small bg-danger" href="javascript:void(0)">
-                <i class="fab fa-google-plus-g text-white" aria-hidden="true"></i>
-              </a>
-            </li>
-            <li class="me-3">
-              <a class="icon-rounded-circle-small bg-info" href="javascript:void(0)">
-                <i class="fab fa-pinterest-p text-white" aria-hidden="true"></i>
-              </a>
-            </li>
-            <li class="">
-              <a class="icon-rounded-circle-small bg-purple" href="javascript:void(0)">
-                <i class="fab fa-vimeo-v text-white" aria-hidden="true"></i>
-              </a>
-            </li> -->
-                        </ul>
+                    <div class="col-md-5 text-center text-md-end">
+                        <span style="font-size:0.8rem; opacity:0.4;">v2.0 | Admission Management System</span>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Modal Login Login -->
-    {{-- <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-      <div class="bg-warning rounded-top p-2">
-        <h3 class="text-white font-weight-bold mb-0 ms-2">Login</h3>
-      </div>
-
-      <div class="rounded-bottom-md border-top-0">
-        <div class="p-3">
-          <form action="{{ route('login') }}" method="POST" role="form">
-			   @csrf
-            <div class="form-group form-group-icon">
-              <input type="text"  id="email"
-                    name="email" class="form-control border" placeholder="User name" required="">
-            </div>
-
-            <div class="form-group form-group-icon">
-              <input type="password" id="password" name="password" class="form-control border" placeholder="Password" required="">
-            </div>
-
-            <div class="form-group">
-              <button type="submit" class="btn btn-danger text-uppercase w-100">Log In</button>
-            </div>
-
-            <div class="form-group text-center text-secondary mb-0">
-              <a class="text-danger" href="javascript:void(0)">Forgot password?</a>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> --}}
-
-    {{-- Modal Login New --}}
-    <div class="modal fade" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content shadow-lg"
-                style="background: linear-gradient(45deg, #ff512f, #dd2476); border-radius: 15px;">
-                <!-- Logo and School Name -->
-                <div class="app-brand justify-content-center mt-4 text-center" style="font-family: math">
-                    <a href="{{ url('/') }}" class="app-brand-link gap-2">
-                        <span class="app-brand-logo demo">
-                            <img src="{{ asset('public/logo/logo.png') }}" height="80" alt="Logo" />
-                        </span>
-                    </a>
-                    <p class="text-uppercase font-weight-bold mt-2" style="font-size: 18px; color: white;">SHAHEEN
-                        SOFT</p>
-                    <h4 class="mb-3 text-center" style="color: #F0C24B;font-weight: bold">BAF SHAHEEN COLLEGE DHAKA
-                    </h4>
-                </div>
-
-                <!-- Form Content -->
-                <div class="rounded-bottom-md border-top-0">
-                    <div class="p-4">
-                        <!-- Error Message -->
-                        <div id="login-error" class="alert alert-danger text-danger text-center d-none"
-                            style="font-size: 14px; border-radius: 5px;">
-                            {{ session('login_error') }}
-                        </div>
-                        <form action="{{ route('login') }}" method="POST" role="form">
-                            @csrf
-                            <!-- Email Input -->
-                            <div class="form-group mb-3">
-                                <div class="input-group">
-                                    <span class="input-group-text" id="email-addon">
-                                        <i class="fas fa-user text-primary"></i>
-                                    </span>
-                                    <input type="text" id="email" name="email" class="form-control"
-                                        placeholder="User name" aria-describedby="email-addon" required=""
-                                        value="{{ old('email') }}">
-                                </div>
-                            </div>
-
-                            <!-- Password Input -->
-                            <div class="form-group mb-3">
-                                <div class="input-group">
-                                    <span class="input-group-text" id="password-addon">
-                                        <i class="fas fa-lock text-primary"></i>
-                                    </span>
-                                    <input type="password" id="password" name="password" class="form-control"
-                                        placeholder="Password" aria-describedby="password-addon" required="">
-                                </div>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-danger w-100 py-2 text-uppercase text-white"
-                                    style="border-radius: 30px;">
-                                    <span style="color: rgba(240, 194, 75, 1)">Log In</span>
-                                </button>
-                            </div>
-
-                            <!-- Forgot Password -->
-                            <div class="form-group text-center text-white mt-3 mb-0">
-                                <a class="text-white" href="javascript:void(0)" data-bs-toggle="modal"
-                                    data-bs-target="#modal-forgot-password">Forgot password?</a>
-                            </div>
-                        </form>
+    <!-- ============================================
+    LOGIN MODAL — with smooth animation
+    ============================================ -->
+    <div class="modal fade modal-login-custom" id="modal-login" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header-grad">
+                    <div class="w-100">
+                        <div class="icon-badge"><i class="fas fa-user-graduate"></i></div>
+                        <h4>Welcome Back</h4>
+                        <p>Login to your admission account</p>
                     </div>
                 </div>
+
+                <div class="modal-body-custom">
+                    <div id="login-error" class="alert alert-danger d-none text-center">
+                        {{ session('login_error') }}
+                    </div>
+
+                    <form action="{{ route('login') }}" method="POST">
+                        @csrf
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                <input type="text" id="email" name="email" class="form-control"
+                                    placeholder="Username or Email" value="{{ old('email') }}" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                <input type="password" id="password" name="password" class="form-control"
+                                    placeholder="Password" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-login-modal">
+                            <i class="fas fa-sign-in-alt me-2"></i> Log In
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            @if (session('login_error'))
-                // Show the modal
-                const loginModal = new bootstrap.Modal(document.getElementById('modal-login'));
-                loginModal.show();
-
-                // Display the error message
-                const errorDiv = document.getElementById('login-error');
-                errorDiv.classList.remove('d-none');
-            @endif
-        });
-    </script>
-
-
-    <!-- Birthdate Verification Form -->
-    <div class="modal fade" id="modal-forgot-password" tabindex="-1" role="dialog"
-        aria-labelledby="forgotPasswordLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content shadow-lg"
-                style="background: linear-gradient(45deg, #ff512f, #dd2476); border-radius: 15px;">
-                <div class="app-brand justify-content-center mt-4 text-center" style="font-family: math">
-                    <h4 class="mb-3 text-center" style="color: #F0C24B; font-weight: bold">Verify Birthdate</h4>
+    <!-- ============================================
+    FORGOT PASSWORD MODAL
+    ============================================ -->
+    <div class="modal fade modal-login-custom" id="modal-forgot-password" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header-grad">
+                    <div class="w-100">
+                        <div class="icon-badge"><i class="fas fa-calendar-alt"></i></div>
+                        <h4>Verify Birthdate</h4>
+                        <p>Enter your birthdate to reset password</p>
+                    </div>
+                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="p-4">
+
+                <div class="modal-body-custom">
                     <form action="{{ route('password.reset.verify') }}" method="POST">
                         @csrf
-                        <!-- Birthdate Input -->
-                        <div class="form-group mb-3">
+                        <div class="mb-3">
                             <div class="input-group">
-                                <span class="input-group-text">
-                                    <i class="fas fa-calendar-alt text-primary"></i>
-                                </span>
-                                <input type="date" name="birthdate" class="form-control"
-                                    placeholder="Enter your birthdate" required>
+                                <span class="input-group-text"><i class="fas fa-calendar-day"></i></span>
+                                <input type="date" name="birthdate" class="form-control" required>
                             </div>
                         </div>
 
-                        <!-- Submit Button -->
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-danger w-100 py-2 text-uppercase text-white"
-                                style="border-radius: 30px;">
-                                <span style="color: rgba(240, 194, 75, 1)">Verify Birthdate</span>
-                            </button>
+                        <button type="submit" class="btn-login-modal">
+                            <i class="fas fa-check-circle me-2"></i> Verify
+                        </button>
+
+                        <div class="text-center mt-3">
+                            <a href="javascript:void(0)" class="text-primary-custom small" data-bs-toggle="modal"
+                                data-bs-target="#modal-login" data-bs-dismiss="modal">
+                                <i class="fas fa-arrow-left me-1"></i> Back to Login
+                            </a>
                         </div>
                     </form>
                 </div>
@@ -994,270 +1145,81 @@
         </div>
     </div>
 
+    <!-- ============================================
+    BACK TO TOP
+    ============================================ -->
+    <a href="#pageTop" class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
+    <!-- ============================================
+    SCRIPTS
+    ============================================ -->
+    <script src='{{ asset('public/') }}/assets/js/kidz.js'></script>
 
-
-
-
-
-
-    <!-- Modal Create Account -->
-    <div class="modal fade" id="modal-createAccount" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm rounded" role="document">
-            <div class="modal-content">
-                <div class="bg-warning rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ms-2">Create An Account</h3>
-                </div>
-
-                <div class="rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-                            <div class="form-group form-group-icon">
-                                <input type="text" class="form-control border" placeholder="Name" required="">
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="text" class="form-control border" placeholder="User name"
-                                    required="">
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="text" class="form-control border" placeholder="Phone"
-                                    required="">
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="password" class="form-control border" placeholder="Password"
-                                    required="">
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="password" class="form-control border" placeholder="Re-Password"
-                                    required="">
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-danger text-uppercase w-100">Register</button>
-                            </div>
-
-                            <div class="form-group text-center text-secondary mb-0">
-                                <p class="mb-0">Allready have an account? <a class="text-danger"
-                                        href="javascript:void(0)">Log in</a></p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Enroll -->
-    <div class="modal fade" id="modal-enrolAccount" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm rounded" role="document">
-            <div class="modal-content">
-                <div class="bg-pink rounded-top p-2">
-                    <h3 class="text-white font-weight-bold mb-0 ms-2">Create An Account</h3>
-                </div>
-
-                <div class="rounded-bottom-md border-top-0">
-                    <div class="p-3">
-                        <form action="#" method="POST" role="form">
-                            <div class="form-group form-group-icon">
-                                <input type="text" class="form-control border" placeholder="Name" required="">
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="text" class="form-control border" placeholder="User name"
-                                    required="">
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="text" class="form-control border" placeholder="Phone"
-                                    required="">
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="password" class="form-control border" placeholder="Password"
-                                    required="">
-                            </div>
-
-                            <div class="form-group form-group-icon">
-                                <input type="password" class="form-control border" placeholder="Re-Password"
-                                    required="">
-                            </div>
-
-                            <div class="form-group">
-                                <button type="submit"
-                                    class="btn btn-pink text-uppercase text-white w-100">Register</button>
-                            </div>
-
-                            <div class="form-group text-center text-secondary mb-0">
-                                <p class="mb-0">Allready have an account? <a class="text-pink"
-                                        href="javascript:void(0)">Log in</a></p>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Products -->
-    <div class="modal fade" id="modal-products" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header border-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <img class="img-fluid d-block mx-auto"
-                                src="{{ asset('public/') }}/assets/img/products/products-preview01.jpg"
-                                alt="preview01.jpg">
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="product-single">
-                                <h1>Barbie Racing Car</h1>
-
-                                <span class="pricing font-size-55">$50 <del>$60</del></span>
-
-                                <p class="mb-7">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-                                    eiusmod tempor
-                                    incididunt ut
-                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                    ullamco laboris nisi.</p>
-
-                                <div class="add-cart mb-0">
-                                    <div class="count-input">
-                                        <input class="quantity btn-primary" type="text" value="1">
-                                        <a class="incr-btn incr-up" data-action="decrease" href="#"><i
-                                                class="fa fa-caret-up" aria-hidden="true"></i></a>
-                                        <a class="incr-btn incr-down" data-action="increase" href="#"><i
-                                                class="fa fa-caret-down" aria-hidden="true"></i></a>
-                                    </div>
-                                    <button type="button" class="btn btn-danger text-uppercase"
-                                        onclick="location.href='product-cart.html';">Add to cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--scrolling-->
-    <div class="">
-        <a href="#pageTop" class="back-to-top" id="back-to-top" style="opacity: 1;">
-            <i class="fas fa-arrow-up" aria-hidden="true"></i>
-        </a>
-    </div>
-
-    {{-- Login Modal --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            @if (session('login_error'))
-                // Show the modal
-                const loginModal = new bootstrap.Modal(document.getElementById('modal-login'));
-                loginModal.show();
+            // ===== COPYRIGHT YEAR =====
+            document.getElementById('copy-year').textContent = new Date().getFullYear();
 
-                // Display the error message
-                const errorDiv = document.getElementById('login-error');
-                errorDiv.classList.remove('d-none');
-            @endif
-        });
-    </script>
-
-
-    <script>
-        $(document).ready(function() {
-            $("#card1").hover(
-                function() {
-
-                    $(".hidden-content2").fadeIn(); // Show the corresponding div on hover
-                    $(".hidden-content1").fadeOut(); // Show the corresponding div on hover
-                },
-                function() {
-
-                    $(".hidden-content2").fadeOut(); // Show the corresponding div on hover
-                    $(".hidden-content1").fadeIn(); // Show the corresponding div on hover
+            // ===== BACK TO TOP =====
+            const backToTop = document.getElementById('back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 400) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
                 }
-            );
-            $("#card2").hover(
-                function() {
-
-                    $(".hidden-content4").fadeIn(); // Show the corresponding div on hover
-                    $(".hidden-content3").fadeOut(); // Show the corresponding div on hover
-                },
-                function() {
-
-                    $(".hidden-content4").fadeOut(); // Show the corresponding div on hover
-                    $(".hidden-content3").fadeIn(); // Show the corresponding div on hover
-                }
-            );
-        });
-
-
-
-        $(document).ready(function() {
-
-
-            var browserWidth = $(window).width();
-            console.log("Browser width: " + browserWidth + "px");
-
-            // You can also check the width on window resize
-            $(window).resize(function() {
-                var browserWidth = $(window).width();
-                console.log("Updated browser width: " + browserWidth + "px");
             });
 
+            backToTop.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
 
+            // ===== LOGIN ERROR =====
+            @if (session('login_error'))
+                const loginModal = new bootstrap.Modal(document.getElementById('modal-login'));
+                loginModal.show();
+                document.getElementById('login-error').classList.remove('d-none');
+            @endif
 
+            // ===== SWEETALERT =====
+            @if (Session::get('success'))
+                Swal.fire({
+                    title: "Good job!",
+                    text: "{{ Session::get('success') }}",
+                    icon: "success",
+                    confirmButtonColor: "#A51C30"
+                });
+            @endif
+
+            @if (Session::get('warning'))
+                Swal.fire({
+                    title: "Warning!",
+                    html: "{!! Session::get('warning') !!}",
+                    icon: "warning",
+                    confirmButtonColor: "#A51C30"
+                });
+            @endif
+        });
+
+        // Scroll behavior for navbar
+        $(document).ready(function() {
             var $scrollUpDiv = $('.scroll-up-div');
             var $scrollUpDivi = $('.scroll-up-div i');
 
-            // $(window).on('scroll', function() {
-            //     // Check if the user has scrolled to the bottom of the page
-
-            //     if ($(window).scrollTop() + $(window).height() >= 800) {
-            //         if (browserWidth > 1900) {
-            //             if ($(window).scrollTop() + $(window).height() >= 1000) {
-            //                 $scrollUpDiv.css('margin-top', '0px'); // Sho
-            //                 $scrollUpDivi.addClass('d-hide');
-            //             } else {
-            //                 $scrollUpDiv.css('margin-top', '0px'); // Sho
-            //                 $scrollUpDivi.removeClass('d-hide');
-            //             }
-            //         } else {
-            //             $scrollUpDiv.css('margin-top', '85px'); // Sho
-            //             $scrollUpDivi.addClass('d-hide');
-            //         }
-
-            //     } else if ($(window).scrollTop() <= 80) {
-            //         $scrollUpDiv.css('margin-top', '0px'); // Sho
-            //         $scrollUpDivi.removeClass('d-hide');
-            //     } else if ($(window).scrollTop() <= 180) {
-            //         $scrollUpDiv.css('margin-top', '0px'); // Sho
-            //         $scrollUpDivi.removeClass('d-hide');
-            //     }
-
-            // });
             $(window).on('scroll', function() {
                 let scrollPos = $(window).scrollTop() + $(window).height();
 
-                // --- First priority: top of page ---
                 if ($(window).scrollTop() <= 180) {
                     $scrollUpDiv.css('margin-top', '0px');
                     $scrollUpDivi.removeClass('d-hide');
-                }
-
-                // --- Second priority: when scrolled down ---
-                else if (scrollPos >= 800) {
-                    if (browserWidth > 1900) {
+                } else if (scrollPos >= 800) {
+                    if ($(window).width() > 1900) {
                         if (scrollPos >= 1000) {
                             $scrollUpDiv.css('margin-top', '0px');
                             $scrollUpDivi.addClass('d-hide');
@@ -1271,42 +1233,10 @@
                     }
                 }
             });
-
         });
-
-
-
-
-
-
-
-
-        var d = new Date();
-        var year = d.getFullYear();
-        document.getElementById("copy-year").innerHTML = year;
-
-
-        @if (Session::get('success'))
-
-            Swal.fire({
-                title: "Good job!",
-                text: "{{ Session::get('success') }}",
-                icon: "success"
-            });
-        @endif
-        @if (Session::get('warning'))
-
-            Swal.fire({
-                title: "Warning!",
-                html: "{!! Session::get('warning') !!}",
-                icon: "warning"
-            });
-        @endif
     </script>
-    <script src='{{ asset('public/') }}/assets/js/kidz.js'></script>
 
-
-
+    @stack('scripts')
 </body>
 
 </html>

@@ -165,7 +165,8 @@
             .modal-dialog {
                 margin-left: 18%;
             }
-			.notice .modal-dialog {
+
+            .notice .modal-dialog {
                 margin-left: 700px;
             }
         }
@@ -209,49 +210,54 @@
         .row {
             --bs-gutter-x: .75rem;
         }
-		.admission-link {
-        color: #337AB7;       /* Blue text */
-        font-weight: bold;  /* Bold text */
-        text-decoration: none; /* Remove underline if desired */
-        animation: blink 3s step-start infinite; /* Blink effect */
-		}
 
-		@keyframes blink {
-			20% {
-				opacity: 0;
-			}
-		}
+        .admission-link {
+            color: #337AB7;
+            /* Blue text */
+            font-weight: bold;
+            /* Bold text */
+            text-decoration: none;
+            /* Remove underline if desired */
+            animation: blink 3s step-start infinite;
+            /* Blink effect */
+        }
+
+        @keyframes blink {
+            20% {
+                opacity: 0;
+            }
+        }
     </style>
 
-	
+
     <div class="container my-4 notice">
-		<div class="modal fade" id="loginBlockModal" tabindex="-1" aria-labelledby="loginBlockLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-danger text-white">
-                    <h5 class="modal-title" id="loginBlockLabel" style="color: white;margin-left: 42%;">সতর্কতা</h5>
-                    <!--button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button-->
-                </div>
-                <div class="modal-body">
-                    অনলাইন ভর্তি প্রক্রিয়া রাত ১২:০০টা থেকে সকাল ৭:০০ টা পর্যন্ত বন্ধ থাকবে
-                </div>
-                <div class="modal-footer">
-                    <!--button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button-->
+        <div class="modal fade" id="loginBlockModal" tabindex="-1" aria-labelledby="loginBlockLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger text-white">
+                        <h5 class="modal-title" id="loginBlockLabel" style="color: white;margin-left: 42%;">সতর্কতা</h5>
+                        <!--button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button-->
+                    </div>
+                    <div class="modal-body">
+                        অনলাইন ভর্তি প্রক্রিয়া রাত ১২:০০টা থেকে সকাল ৭:০০ টা পর্যন্ত বন্ধ থাকবে
+                    </div>
+                    <div class="modal-footer">
+                        <!--button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Okay</button-->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         <div class="text-center mb-3">
             <h3>Online Admission (অনলাইন ভর্তি)</h3>
             <h4>
-                <a href="{{ asset('public/admission/Admission Guidelines for XI Class-2025-Final-3-1.pdf') }}" target="_blank" class="admission-link">
+                <a href="#" target="_blank" class="admission-link">
                     Admission Instruction (ভর্তির নির্দেশনা)
                 </a>
             </h4>
             <h4>
                 <img src="{{ asset('public/call-thumbnail.png') }}" style="height: 25px" />
-                <a href="tel:01759536622" style="color:red;font-weight:bold;">01759536622</a>,
-                <a href="tel:01777521159" style="color:red;font-weight:bold;">01777521159</a>
+                <a href="tel:01700000000" style="color:red;font-weight:bold;">01700000000</a>,
+                <a href="tel:01700000000" style="color:red;font-weight:bold;">01700000000</a>
             </h4>
         </div>
 
@@ -325,7 +331,7 @@
                                 class="row-value text-danger fw-bold">{{ $admission->end_date }}</span></div>
 
                         <!--div class="grid-item"><span class="row-label">Seats</span> <span
-                                class="row-value">{{ $admission->number_of_admission }}</span></div-->
+                                                        class="row-value">{{ $admission->number_of_admission }}</span></div-->
                         <div class="grid-item"><span class="row-label">Amount</span> <span
                                 class="row-value">{{ $admission->price }}৳</span></div>
 
@@ -414,20 +420,20 @@
         </div>
     </div>
 
-<script>
-		$(function () {
-			var currentHour = new Date().getHours();
+    <script>
+        $(function() {
+            var currentHour = new Date().getHours();
 
-			// Show modal if time is between 9 PM (21) and 8 AM (8)
-			if (currentHour >= 0 && currentHour < 7) {
-				$('#loginBlockModal').modal({
-					backdrop: 'static', // Prevent closing by clicking outside
-					keyboard: false      // Prevent closing with ESC key
-				});
-				$('#loginBlockModal').modal('show');
-			}
-		});
-	</script>
+            // Show modal if time is between 9 PM (21) and 8 AM (8)
+            if (currentHour >= 0 && currentHour < 7) {
+                $('#loginBlockModal').modal({
+                    backdrop: 'static', // Prevent closing by clicking outside
+                    keyboard: false // Prevent closing with ESC key
+                });
+                $('#loginBlockModal').modal('show');
+            }
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('#dob').on('change', function() {
@@ -564,7 +570,7 @@
                 var board_id = $('#board_id').val();
 
                 var url = "{{ route('checkRollRegistrationNumber') }}";
-                if((roll_number.length==6 || roll_number.length==11) && board_id){
+                if ((roll_number.length == 6 || roll_number.length == 11) && board_id) {
                     $.LoadingOverlay("show");
                     $.ajax({
                         type: "post",
@@ -695,7 +701,7 @@
                 var board_id = $('#board_id').val();
 
                 var url = "{{ route('checkRollRegistrationNumber') }}";
-                if((roll_number.length==6 || roll_number.length==11) && board_id){
+                if ((roll_number.length == 6 || roll_number.length == 11) && board_id) {
                     $.LoadingOverlay("show");
                     $.ajax({
                         type: "post",
@@ -758,5 +764,4 @@
             });
         });
     </script>
-
 @endsection

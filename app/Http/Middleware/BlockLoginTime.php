@@ -15,22 +15,22 @@ class BlockLoginTime
     public function handle(Request $request, Closure $next): Response
     {
         // Allow root and logout routes
-        if ($request->is('/') || $request->is('logout') || $request->is('login')) {
-            return $next($request);
-        }
+        // if ($request->is('/') || $request->is('logout') || $request->is('login')) {
+        //     return $next($request);
+        // }
 
-        // Restrict login route
-        
-            $now = Carbon::now();
+        // // Restrict login route
 
-            // Block between 12:00 AM and 7:00 AM
-            $blockStart = Carbon::createFromTime(0, 0);  // 12:00 AM
-            $blockEnd   = Carbon::createFromTime(7, 0);  // 7:00 AM
+        //     $now = Carbon::now();
 
-            if ($now->between($blockStart, $blockEnd)) {
-                return redirect('logout');
-            }
-        
+        //     // Block between 12:00 AM and 7:00 AM
+        //     $blockStart = Carbon::createFromTime(0, 0);  // 12:00 AM
+        //     $blockEnd   = Carbon::createFromTime(7, 0);  // 7:00 AM
+
+        //     if ($now->between($blockStart, $blockEnd)) {
+        //         return redirect('logout');
+        //     }
+
 
         return $next($request);
     }

@@ -227,6 +227,96 @@
                 opacity: 0;
             }
         }
+
+        /* ===== IMPORTANT NOTICE STYLES ===== */
+        .notice-box {
+            background: #fff3cd;
+            border-left: 6px solid #ffc107;
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        .notice-box .notice-title {
+            color: #856404;
+            font-weight: 700;
+            font-size: 1.05rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notice-box .notice-title i {
+            font-size: 1.2rem;
+        }
+
+        .notice-box .notice-content {
+            font-size: 0.92rem;
+            color: #533f03;
+            line-height: 1.7;
+        }
+
+        .notice-box .notice-content strong {
+            color: #856404;
+        }
+
+        .notice-box .roll-range-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px 20px;
+            margin-top: 8px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .notice-box .roll-range-grid li {
+            padding: 4px 0;
+            font-size: 0.9rem;
+        }
+
+        .notice-box .roll-range-grid li .badge-group {
+            display: inline-block;
+            background: #ffc107;
+            color: #533f03;
+            padding: 1px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            margin-right: 6px;
+        }
+
+        .notice-box .board-only {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #e6c87a;
+            font-weight: 600;
+            color: #856404;
+        }
+
+        .notice-box .board-only i {
+            color: #dc3545;
+        }
+
+        @media (max-width: 600px) {
+            .notice-box .roll-range-grid {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+
+            .notice-box {
+                padding: 14px 16px;
+            }
+
+            .notice-box .notice-title {
+                font-size: 0.95rem;
+            }
+
+            .notice-box .notice-content {
+                font-size: 0.85rem;
+            }
+        }
     </style>
 
 
@@ -247,6 +337,26 @@
                 </div>
             </div>
         </div>
+
+        <!-- ===== IMPORTANT NOTICE ===== -->
+        <div class="notice-box">
+            <div class="notice-title">
+                <i class="fas fa-exclamation-triangle"></i> Important Notice
+            </div>
+            <div class="notice-content">
+                <p style="font-weight:600; color:#533f03; margin-bottom:6px;">Student Board Roll Ranges:</p>
+                <ul class="roll-range-grid">
+                    <li><span class="badge-group">Science</span> <strong>100000 - 100274</strong></li>
+                    <li><span class="badge-group">B. Studies</span> <strong>200000 - 200135</strong></li>
+                    <li><span class="badge-group">Humanities</span> <strong>300000 - 300008</strong></li>
+                </ul>
+                <div class="board-only">
+                    <i class="fas fa-university"></i> <strong>Board:</strong> Only <strong>Dhaka</strong> Board students are
+                    eligible for admission.
+                </div>
+            </div>
+        </div>
+
         <div class="text-center mb-3">
             <h3>Online Admission (অনলাইন ভর্তি)</h3>
             <h4>
@@ -331,7 +441,7 @@
                                 class="row-value text-danger fw-bold">{{ $admission->end_date }}</span></div>
 
                         <!--div class="grid-item"><span class="row-label">Seats</span> <span
-                                                        class="row-value">{{ $admission->number_of_admission }}</span></div-->
+                                                                class="row-value">{{ $admission->number_of_admission }}</span></div-->
                         <div class="grid-item"><span class="row-label">Amount</span> <span
                                 class="row-value">{{ $admission->price }}৳</span></div>
 
@@ -379,12 +489,16 @@
                                 <label>SSC Roll Number (এসএসসি রোল নম্বর)<span style="color:red">*</span></label>
                                 <input type="text" class="form-control" id="roll_number" name="roll_number"
                                     value="{{ old('roll_number') }}" required placeholder="SSC Roll Number">
+                                <small class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">
+                                    <i class="fas fa-info-circle"></i> Science: 100000-100274 | B. Studies: 200000-200135 |
+                                    Humanities: 300000-300008
+                                </small>
                             </div>
                             <div class="col-md-6 col-12">
                                 <label>Education Board (শিক্ষাবোর্ড)<span style="color:red">*</span></label>
                                 <select class="form-control" name="board_id" id="board_id" required>
                                     <option value="">Select Board</option>
-                                    <option value="Dhaka">Dhaka (ঢাকা)</option>
+                                    <option value="Dhaka" selected>Dhaka (ঢাকা)</option>
                                     <option value="Rajshahi">Rajshahi (রাজশাহী)</option>
                                     <option value="Cumilla">Cumilla (কুমিল্লা)</option>
                                     <option value="Jashore">Jashore (যশোর)</option>
@@ -397,6 +511,10 @@
                                     <option value="BTEB">BTEB (কারিগরি শিক্ষা)</option>
                                     <option value="BOU">BOU (বাউবি)</option>
                                 </select>
+                                <small class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">
+                                    <i class="fas fa-exclamation-circle" style="color:#dc3545;"></i> Only Dhaka Board is
+                                    eligible
+                                </small>
                             </div>
                             <div class="col-md-6 col-12">
                                 <label>Full Name (সম্পূর্ণ নাম)<span style="color:red">*</span></label>

@@ -17,6 +17,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/storage/framework/views/*
 /public/academic_transcript/*
 /public/admission/*
 /public/admissionxl/*

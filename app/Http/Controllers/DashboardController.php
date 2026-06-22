@@ -41,17 +41,17 @@ class DashboardController extends Controller
             return Redirect(route('StudentProfile', 0));
             //return view('admin.dashboard.student');
         } elseif (Auth::user()->group_id == 4 && Auth::user()->is_admission == 1) {
-			//dd(Auth::user()->ref_id);
-			$version_id = DB::table('student_activity')
-							->where('student_code', Auth::user()->ref_id)
-							->value('version_id');
-			//dd($version_id);
+            //dd(Auth::user()->ref_id);
+            $version_id = DB::table('student_activity')
+                ->where('student_code', Auth::user()->ref_id)
+                ->value('version_id');
+            //dd($version_id);
             //return Redirect(route('StudentProfile',0));
             return view('admin.dashboard.student', compact('version_id'));
         } elseif (Auth::user()->group_id == 4) {
-			$version_id = DB::table('student_activity')
-							->where('student_code', Auth::user()->ref_id)
-							->value('version_id');
+            $version_id = DB::table('student_activity')
+                ->where('student_code', Auth::user()->ref_id)
+                ->value('version_id');
             //return Redirect(route('StudentProfile',0));
             return view('admin.dashboard.student', compact('version_id'));
         } else {
@@ -110,12 +110,12 @@ class DashboardController extends Controller
 
         // Fetch student data
         $studentdata = getStudentByClassType($session->id);
-        
-        $studentcollege = getStudentByCollegeClassType($session->id-((date('m')>7)?0:1));
-        if(count($studentdata)>1){
-            $studentdata[2]=$studentcollege[2];
+
+        $studentcollege = getStudentByCollegeClassType($session->id - ((date('m') > 7) ? 0 : 1));
+        if (count($studentdata) > 1) {
+            $studentdata[2] = $studentcollege[2];
         }
-        
+
         // dd($studentdata);
 
         // Return view with data
@@ -833,7 +833,7 @@ class DashboardController extends Controller
         Session::put('activemenu', 'admission');
         Session::put('activesubmenu', 'cas');
         $m = date('m');
-        if ($m > 6) {
+        if ($m >= 6) {
             $sessions = Sessions::where('active', '1')->first();
         } else {
             $sessions = Sessions::where('id', (date('Y') - 1))->first();

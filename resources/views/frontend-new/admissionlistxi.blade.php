@@ -339,23 +339,26 @@
         </div>
 
         <!-- ===== IMPORTANT NOTICE ===== -->
-        <div class="notice-box">
-            <div class="notice-title">
-                <i class="fas fa-exclamation-triangle"></i> Important Notice
-            </div>
-            <div class="notice-content">
-                <p style="font-weight:600; color:#533f03; margin-bottom:6px;">Student Board Roll Ranges:</p>
-                <ul class="roll-range-grid">
-                    <li><span class="badge-group">Science</span> <strong>100000 - 100274</strong></li>
-                    <li><span class="badge-group">B. Studies</span> <strong>200000 - 200135</strong></li>
-                    <li><span class="badge-group">Humanities</span> <strong>300000 - 300008</strong></li>
-                </ul>
-                <div class="board-only">
-                    <i class="fas fa-university"></i> <strong>Board:</strong> Only <strong>Dhaka</strong> Board students are
-                    eligible for admission.
+        @if (env('APP_ENV') === 'demo')
+            <div class="notice-box">
+                <div class="notice-title">
+                    <i class="fas fa-exclamation-triangle"></i> Important Notice
+                </div>
+                <div class="notice-content">
+                    <p style="font-weight:600; color:#533f03; margin-bottom:6px;">Student Board Roll Ranges:</p>
+                    <ul class="roll-range-grid">
+                        <li><span class="badge-group">Science</span> <strong>100000 - 100274</strong></li>
+                        <li><span class="badge-group">B. Studies</span> <strong>200000 - 200135</strong></li>
+                        <li><span class="badge-group">Humanities</span> <strong>300000 - 300008</strong></li>
+                    </ul>
+                    <div class="board-only">
+                        <i class="fas fa-university"></i> <strong>Board:</strong> Only <strong>Dhaka</strong> Board students
+                        are
+                        eligible for admission.
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
         <div class="text-center mb-3">
             <h3>Online Admission (অনলাইন ভর্তি)</h3>
@@ -441,7 +444,7 @@
                                 class="row-value text-danger fw-bold">{{ $admission->end_date }}</span></div>
 
                         <!--div class="grid-item"><span class="row-label">Seats</span> <span
-                                                                class="row-value">{{ $admission->number_of_admission }}</span></div-->
+                                                                            class="row-value">{{ $admission->number_of_admission }}</span></div-->
                         <div class="grid-item"><span class="row-label">Amount</span> <span
                                 class="row-value">{{ $admission->price }}৳</span></div>
 
@@ -543,7 +546,7 @@
             var currentHour = new Date().getHours();
 
             // Show modal if time is between 9 PM (21) and 8 AM (8)
-            if (currentHour >= 0 && currentHour < 7) {
+            if (currentHour >= 0 && currentHour < 6) {
                 $('#loginBlockModal').modal({
                     backdrop: 'static', // Prevent closing by clicking outside
                     keyboard: false // Prevent closing with ESC key

@@ -1,41 +1,65 @@
 @extends('admin.layouts.layout')
+
+@section('title', 'Dashboard')
+
+@section('page-title', 'Dashboard')
+
 @section('content')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
     <style>
         /* ============================================
-                                   DASHBOARD STYLES
-                                   ============================================ */
+                                                           DASHBOARD STYLES - VIBRANT COLOR EDITION
+                                                           ============================================ */
+
+        /* Dashboard Header - More Vibrant Gradient */
         .dashboard-header {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
-            border-radius: 20px;
-            padding: 2rem 2.5rem;
-            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 30%, #f093fb 60%, #f5576c 100%);
+            border-radius: 24px;
+            padding: 2.5rem 3rem;
+            margin-bottom: 2.5rem;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.3);
         }
 
         .dashboard-header::before {
             content: '';
             position: absolute;
-            top: -50%;
+            top: -60%;
             right: -10%;
-            width: 400px;
-            height: 400px;
-            background: rgba(255, 255, 255, 0.05);
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.08);
             border-radius: 50%;
+            animation: pulseGlow 4s ease-in-out infinite;
         }
 
         .dashboard-header::after {
             content: '';
             position: absolute;
-            bottom: -30%;
-            left: -5%;
-            width: 300px;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.04);
+            bottom: -40%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.06);
             border-radius: 50%;
+            animation: pulseGlow 5s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
         }
 
         .dashboard-header .header-content {
@@ -45,173 +69,309 @@
 
         .dashboard-header h2 {
             color: #fff;
-            font-weight: 700;
-            font-size: 1.8rem;
-            margin-bottom: 0.3rem;
+            font-weight: 800;
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dashboard-header h2 i {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
         }
 
         .dashboard-header p {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.05rem;
             margin-bottom: 0;
+            font-weight: 400;
         }
 
         .dashboard-header .header-date {
-            color: rgba(255, 255, 255, 0.9);
+            color: #fff;
             font-size: 0.9rem;
             background: rgba(255, 255, 255, 0.15);
-            padding: 0.4rem 1.2rem;
+            padding: 0.5rem 1.5rem;
             border-radius: 50px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Stat Cards */
+        /* Floating particles effect */
+        .dashboard-header .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: floatParticle 6s ease-in-out infinite;
+        }
+
+        .dashboard-header .particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            top: 20%;
+            left: 30%;
+            animation-delay: 0s;
+        }
+
+        .dashboard-header .particle:nth-child(2) {
+            width: 30px;
+            height: 30px;
+            top: 60%;
+            right: 20%;
+            animation-delay: 1s;
+        }
+
+        .dashboard-header .particle:nth-child(3) {
+            width: 15px;
+            height: 15px;
+            bottom: 20%;
+            left: 50%;
+            animation-delay: 2s;
+        }
+
+        @keyframes floatParticle {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+        }
+
+        /* Stat Cards - More Colorful and Vibrant */
         .stat-card {
             border: none;
-            border-radius: 16px;
-            padding: 1.5rem 1.2rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            padding: 1.8rem 1.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             height: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
         .stat-card::before {
             content: '';
             position: absolute;
-            top: -50%;
+            top: -30%;
             right: -20%;
-            width: 100px;
-            height: 100px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            opacity: 0.1;
-            transition: all 0.3s ease;
+            opacity: 0.15;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: -40%;
+            left: -30%;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            opacity: 0.08;
+            transition: all 0.4s ease;
         }
 
         .stat-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-card:hover::before {
+            transform: scale(1.5);
+            opacity: 0.2;
+        }
+
+        .stat-card:hover::after {
+            transform: scale(1.3);
+            opacity: 0.15;
         }
 
         .stat-card .stat-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             color: #fff;
             flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
 
         .stat-card .stat-number {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: #0f172a;
             line-height: 1.2;
+            margin-top: 4px;
         }
 
         .stat-card .stat-label {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #64748b;
             font-weight: 500;
             margin-bottom: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .stat-card .stat-change {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 600;
-            padding: 0.15rem 0.6rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 50px;
             display: inline-block;
+            margin-top: 6px;
         }
 
-        .stat-card .stat-change.up {
-            background: #d1fae5;
-            color: #059669;
-        }
-
-        .stat-card .stat-change.down {
-            background: #fee2e2;
-            color: #dc2626;
-        }
-
-        .stat-card .stat-change.neutral {
-            background: #e0e7ff;
-            color: #6366f1;
-        }
-
-        /* Stat card colors */
+        /* Stat card colors - More Vibrant */
         .stat-card-purple {
-            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%);
+            background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 40%, #ddd6fe 100%);
         }
 
         .stat-card-purple .stat-icon {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            background: linear-gradient(135deg, #7c3aed, #6d28d9);
+        }
+
+        .stat-card-purple::before {
+            background: #7c3aed;
+        }
+
+        .stat-card-purple::after {
+            background: #6d28d9;
         }
 
         .stat-card-blue {
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 40%, #bfdbfe 100%);
         }
 
         .stat-card-blue .stat-icon {
-            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+        }
+
+        .stat-card-blue::before {
+            background: #3b82f6;
+        }
+
+        .stat-card-blue::after {
+            background: #2563eb;
         }
 
         .stat-card-green {
-            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+            background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 40%, #a7f3d0 100%);
         }
 
         .stat-card-green .stat-icon {
-            background: linear-gradient(135deg, #10b981, #34d399);
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .stat-card-green::before {
+            background: #10b981;
+        }
+
+        .stat-card-green::after {
+            background: #059669;
         }
 
         .stat-card-orange {
-            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 40%, #fde68a 100%);
         }
 
         .stat-card-orange .stat-icon {
-            background: linear-gradient(135deg, #f59e0b, #fbbf24);
+            background: linear-gradient(135deg, #f59e0b, #d97706);
         }
 
-        /* Chart Cards */
+        .stat-card-orange::before {
+            background: #f59e0b;
+        }
+
+        .stat-card-orange::after {
+            background: #d97706;
+        }
+
+        .stat-card-pink {
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 40%, #fbcfe8 100%);
+        }
+
+        .stat-card-pink .stat-icon {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+        }
+
+        .stat-card-pink::before {
+            background: #ec4899;
+        }
+
+        .stat-card-pink::after {
+            background: #db2777;
+        }
+
+        .stat-card-cyan {
+            background: linear-gradient(135deg, #ecfeff 0%, #cffafe 40%, #a5f3fc 100%);
+        }
+
+        .stat-card-cyan .stat-icon {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+        }
+
+        .stat-card-cyan::before {
+            background: #06b6d4;
+        }
+
+        .stat-card-cyan::after {
+            background: #0891b2;
+        }
+
+        /* Chart Cards - Enhanced */
         .chart-card {
             border: none;
-            border-radius: 16px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s ease;
             overflow: hidden;
             height: 100%;
+            background: #fff;
         }
 
         .chart-card:hover {
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
         }
 
         .chart-card .card-header {
-            background: transparent;
-            border-bottom: 1px solid #f1f5f9;
-            padding: 1.2rem 1.5rem;
-            font-weight: 600;
-            font-size: 1rem;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-bottom: 2px solid #e2e8f0;
+            padding: 1.3rem 1.8rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #0f172a;
         }
 
         .chart-card .card-body {
-            padding: 1.5rem;
+            padding: 1.8rem;
         }
 
         .chart-card .card-header .badge-status {
             font-size: 0.7rem;
             font-weight: 600;
-            padding: 0.2rem 0.8rem;
+            padding: 0.3rem 1rem;
             border-radius: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
         }
 
         .chart-container {
             position: relative;
-            height: 300px;
+            height: 320px;
             width: 100%;
         }
 
@@ -219,25 +379,25 @@
             height: 280px;
         }
 
-        /* Complaint Table */
+        /* Complaint Table - Enhanced */
         .complaint-table {
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
         }
 
         .complaint-table thead th {
-            background: #f8fafc;
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
             border-bottom: 2px solid #e2e8f0;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #64748b;
-            padding: 0.8rem 1rem;
+            letter-spacing: 0.8px;
+            color: #475569;
+            padding: 1rem 1.2rem;
         }
 
         .complaint-table tbody td {
-            padding: 0.8rem 1rem;
+            padding: 1rem 1.2rem;
             vertical-align: middle;
             font-size: 0.9rem;
             border-bottom: 1px solid #f1f5f9;
@@ -248,29 +408,30 @@
         }
 
         .complaint-table .status-badge {
-            padding: 0.2rem 0.8rem;
+            padding: 0.25rem 1rem;
             border-radius: 50px;
             font-size: 0.7rem;
             font-weight: 600;
+            text-transform: uppercase;
         }
 
         .status-badge.pending {
-            background: #fef3c7;
-            color: #d97706;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
         }
 
         .status-badge.resolved {
-            background: #d1fae5;
-            color: #059669;
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
         }
 
         .status-badge.in-progress {
-            background: #dbeafe;
-            color: #2563eb;
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            color: #1e40af;
         }
 
         .priority-badge {
-            padding: 0.15rem 0.6rem;
+            padding: 0.2rem 0.8rem;
             border-radius: 50px;
             font-size: 0.65rem;
             font-weight: 700;
@@ -278,173 +439,94 @@
         }
 
         .priority-badge.high {
-            background: #fee2e2;
-            color: #dc2626;
+            background: linear-gradient(135deg, #fee2e2, #fecaca);
+            color: #991b1b;
         }
 
         .priority-badge.medium {
-            background: #fef3c7;
-            color: #d97706;
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: #92400e;
         }
 
         .priority-badge.low {
-            background: #d1fae5;
-            color: #059669;
+            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+            color: #065f46;
         }
 
-        /* Quick Action Cards */
+        /* Quick Action Cards - More Vibrant */
         .quick-action {
             border: none;
-            border-radius: 16px;
-            padding: 1.2rem;
+            border-radius: 20px;
+            padding: 1.5rem 1.2rem;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             background: #fff;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
             text-decoration: none;
             display: block;
             height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quick-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .quick-action:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
             text-decoration: none;
         }
 
+        .quick-action:hover::before {
+            opacity: 1;
+        }
+
         .quick-action .qa-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 0.6rem;
-            font-size: 1.3rem;
+            margin: 0 auto 0.8rem;
+            font-size: 1.5rem;
             color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .quick-action:hover .qa-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .quick-action .qa-title {
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.95rem;
             color: #0f172a;
             margin-bottom: 0.2rem;
         }
 
         .quick-action .qa-sub {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: #94a3b8;
-        }
-
-        /* Responsive */
-        @media (max-width: 991.98px) {
-            .dashboard-header {
-                padding: 1.5rem;
-                border-radius: 16px;
-            }
-
-            .dashboard-header h2 {
-                font-size: 1.4rem;
-            }
-
-            .stat-card .stat-number {
-                font-size: 1.5rem;
-            }
-
-            .chart-container {
-                height: 240px;
-            }
-
-            .chart-container-sm {
-                height: 220px;
-            }
-        }
-
-        @media (max-width: 767.98px) {
-            .dashboard-header {
-                padding: 1.2rem;
-                text-align: center;
-            }
-
-            .dashboard-header .header-date {
-                margin-top: 0.5rem;
-                display: inline-block;
-                font-size: 0.8rem;
-            }
-
-            .stat-card {
-                padding: 1rem;
-            }
-
-            .stat-card .stat-icon {
-                width: 44px;
-                height: 44px;
-                font-size: 1.2rem;
-            }
-
-            .stat-card .stat-number {
-                font-size: 1.3rem;
-            }
-
-            .chart-container {
-                height: 200px;
-            }
-
-            .chart-container-sm {
-                height: 200px;
-            }
-
-            .complaint-table thead th,
-            .complaint-table tbody td {
-                padding: 0.6rem 0.8rem;
-                font-size: 0.8rem;
-            }
-
-            .quick-action .qa-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
-
-        @media (max-width: 575.98px) {
-            .dashboard-header h2 {
-                font-size: 1.1rem;
-            }
-
-            .dashboard-header p {
-                font-size: 0.85rem;
-            }
-
-            .stat-card .stat-number {
-                font-size: 1.1rem;
-            }
-
-            .stat-card .stat-label {
-                font-size: 0.75rem;
-            }
-
-            .stat-card .stat-icon {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
-
-            .chart-container {
-                height: 180px;
-            }
-
-            .chart-container-sm {
-                height: 180px;
-            }
         }
 
         /* Animation */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
 
             to {
@@ -454,7 +536,7 @@
         }
 
         .animate-fade-in {
-            animation: fadeInUp 0.6s ease forwards;
+            animation: fadeInUp 0.7s ease forwards;
         }
 
         .animate-fade-in:nth-child(2) {
@@ -485,61 +567,176 @@
             animation-delay: 0.7s;
         }
 
-        /* Extra spacing between sections */
-        .section-gap {
-            margin-bottom: 1.5rem;
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .dashboard-header {
+                padding: 1.8rem;
+                border-radius: 20px;
+            }
+
+            .dashboard-header h2 {
+                font-size: 1.6rem;
+            }
+
+            .stat-card .stat-number {
+                font-size: 1.8rem;
+            }
+
+            .chart-container {
+                height: 260px;
+            }
+
+            .chart-container-sm {
+                height: 240px;
+            }
         }
 
-        .section-gap-lg {
+        @media (max-width: 767.98px) {
+            .dashboard-header {
+                padding: 1.5rem;
+                text-align: center;
+            }
+
+            .dashboard-header .header-date {
+                margin-top: 0.8rem;
+                display: inline-block;
+                font-size: 0.8rem;
+            }
+
+            .stat-card {
+                padding: 1.2rem;
+            }
+
+            .stat-card .stat-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 1.3rem;
+            }
+
+            .stat-card .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .chart-container {
+                height: 220px;
+            }
+
+            .chart-container-sm {
+                height: 200px;
+            }
+
+            .complaint-table thead th,
+            .complaint-table tbody td {
+                padding: 0.7rem 0.9rem;
+                font-size: 0.8rem;
+            }
+
+            .quick-action .qa-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .dashboard-header h2 {
+                font-size: 1.2rem;
+            }
+
+            .dashboard-header p {
+                font-size: 0.85rem;
+            }
+
+            .stat-card .stat-number {
+                font-size: 1.2rem;
+            }
+
+            .stat-card .stat-label {
+                font-size: 0.75rem;
+            }
+
+            .stat-card .stat-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+
+            .chart-container {
+                height: 200px;
+            }
+
+            .chart-container-sm {
+                height: 180px;
+            }
+        }
+
+        /* Extra spacing */
+        .stat-row {
             margin-bottom: 2rem;
         }
 
-        .stat-row {
-            margin-bottom: 1.75rem;
-        }
-
         .quick-action-row {
-            margin-bottom: 1.75rem;
+            margin-bottom: 2rem;
         }
 
         .chart-row {
-            margin-bottom: 1.75rem;
+            margin-bottom: 2rem;
         }
 
         .complaint-section {
-            margin-top: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Custom scrollbar for table */
+        .table-responsive::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .table-responsive::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        .table-responsive::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+
+        /* Container adjustments */
+        .container-full {
+            max-width: 100%;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        @media (max-width: 767.98px) {
+            .container-full {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .container-full {
+                padding-left: 0.75rem;
+                padding-right: 0.75rem;
+            }
         }
     </style>
 
     <div class="content-wrapper">
-        <div class="container-xxl flex-grow-1 container-p-y">
+        <div class="container-full flex-grow-1 container-p-y pt-5">
 
             <!-- ============================================
-                                    DASHBOARD HEADER
-                                    ============================================ -->
-            <div class="dashboard-header animate-fade-in">
-                <div class="header-content d-flex flex-wrap justify-content-between align-items-center">
-                    <div>
-                        <h2><i class="bx bx-home-circle me-2"></i> Dashboard</h2>
-                        <p>Welcome back! Here's what's happening with your admission system today.</p>
-                    </div>
-                    <div class="header-date">
-                        {{-- <i class="bx bx-calendar me-1"></i>
-                        {{ date('l, d M Y') }} --}}
-                    </div>
-                </div>
-            </div>
-
-            <!-- ============================================
-                                    STATISTICS CARDS
+                                    STATISTICS CARDS - Colorful & Vibrant
                                     ============================================ -->
             <div class="row g-4 stat-row animate-fade-in">
-                <!-- Total Board List -->
+                <!-- Total Board List - Purple -->
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="stat-card stat-card-purple">
                         <div class="d-flex align-items-start justify-content-between">
                             <div>
-                                <div class="stat-label">Total Board List</div>
+                                <div class="stat-label">📋 Total Board List</div>
                                 <div class="stat-number">1,284</div>
                             </div>
                             <div class="stat-icon">
@@ -549,12 +746,12 @@
                     </div>
                 </div>
 
-                <!-- Total Admitted -->
+                <!-- Total Admitted - Green -->
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="stat-card stat-card-green">
                         <div class="d-flex align-items-start justify-content-between">
                             <div>
-                                <div class="stat-label">Total Admitted</div>
+                                <div class="stat-label">✅ Total Admitted</div>
                                 <div class="stat-number">847</div>
                             </div>
                             <div class="stat-icon">
@@ -564,12 +761,12 @@
                     </div>
                 </div>
 
-                <!-- Remaining Seats -->
+                <!-- Remaining Seats - Orange -->
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="stat-card stat-card-orange">
                         <div class="d-flex align-items-start justify-content-between">
                             <div>
-                                <div class="stat-label">Remaining Seats</div>
+                                <div class="stat-label">💺 Remaining Seats</div>
                                 <div class="stat-number">437</div>
                             </div>
                             <div class="stat-icon">
@@ -579,12 +776,12 @@
                     </div>
                 </div>
 
-                <!-- Daily Admission -->
+                <!-- Daily Admission - Blue -->
                 <div class="col-xl-3 col-lg-4 col-sm-6">
                     <div class="stat-card stat-card-blue">
                         <div class="d-flex align-items-start justify-content-between">
                             <div>
-                                <div class="stat-label">Today's Admission</div>
+                                <div class="stat-label">📅 Today's Admission</div>
                                 <div class="stat-number">32</div>
                             </div>
                             <div class="stat-icon">
@@ -595,13 +792,14 @@
                 </div>
             </div>
 
+
             <!-- ============================================
-                                    QUICK ACTION CARDS
+                                    QUICK ACTION CARDS - Colorful
                                     ============================================ -->
             <div class="row g-3 quick-action-row animate-fade-in">
                 <div class="col-md-3 col-6">
                     <a href="{{ route('boardList') }}" class="quick-action">
-                        <div class="qa-icon" style="background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                        <div class="qa-icon" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);">
                             <i class="bx bx-list-ul"></i>
                         </div>
                         <div class="qa-title">Board List</div>
@@ -610,7 +808,7 @@
                 </div>
                 <div class="col-md-3 col-6">
                     <a href="{{ route('admissionlist.index') }}" class="quick-action">
-                        <div class="qa-icon" style="background: linear-gradient(135deg, #10b981, #34d399);">
+                        <div class="qa-icon" style="background: linear-gradient(135deg, #10b981, #059669);">
                             <i class="bx bx-user-check"></i>
                         </div>
                         <div class="qa-title">Applicants</div>
@@ -619,7 +817,7 @@
                 </div>
                 <div class="col-md-3 col-6">
                     <a href="{{ route('admissionOpen') }}" class="quick-action">
-                        <div class="qa-icon" style="background: linear-gradient(135deg, #f59e0b, #fbbf24);">
+                        <div class="qa-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
                             <i class="bx bx-plus-circle"></i>
                         </div>
                         <div class="qa-title">Open Admission</div>
@@ -628,7 +826,7 @@
                 </div>
                 <div class="col-md-3 col-6">
                     <a href="{{ route('admissionIdCard') }}" class="quick-action">
-                        <div class="qa-icon" style="background: linear-gradient(135deg, #ec4899, #f472b6);">
+                        <div class="qa-icon" style="background: linear-gradient(135deg, #ec4899, #db2777);">
                             <i class="bx bx-id-card"></i>
                         </div>
                         <div class="qa-title">ID Cards</div>
@@ -638,7 +836,7 @@
             </div>
 
             <!-- ============================================
-                                    CHARTS SECTION - TWO COLUMN LAYOUT
+                                    CHARTS SECTION - Two Column Layout
                                     ============================================ -->
             <div class="row g-4 chart-row animate-fade-in">
                 <!-- Daily Admission Overview - LINE CHART -->
@@ -646,7 +844,7 @@
                     <div class="chart-card card">
                         <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
                             <span>📈 Daily Admission Overview</span>
-                            <span class="badge-status bg-primary text-white">
+                            <span class="badge-status">
                                 <i class="bx bx-calendar me-1"></i> Last 7 Days
                             </span>
                         </div>
@@ -671,15 +869,15 @@
                             <div class="row mt-3 text-center">
                                 <div class="col-4">
                                     <div class="small text-muted">Admitted</div>
-                                    <div class="fw-bold text-success">847</div>
+                                    <div class="fw-bold" style="color: #10b981;">847</div>
                                 </div>
                                 <div class="col-4">
                                     <div class="small text-muted">Remaining</div>
-                                    <div class="fw-bold text-warning">312</div>
+                                    <div class="fw-bold" style="color: #f59e0b;">312</div>
                                 </div>
                                 <div class="col-4">
                                     <div class="small text-muted">In Progress</div>
-                                    <div class="fw-bold text-primary">80</div>
+                                    <div class="fw-bold" style="color: #6366f1;">80</div>
                                 </div>
                             </div>
                         </div>
@@ -688,14 +886,17 @@
             </div>
 
             <!-- ============================================
-                                    LATEST COMPLAINTS TABLE
+                                    LATEST COMPLAINTS TABLE - Enhanced
                                     ============================================ -->
             <div class="row complaint-section animate-fade-in">
                 <div class="col-12">
                     <div class="chart-card card">
                         <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-                            <span><i class="bx bx-message-alt-error me-2 text-danger"></i> Latest Complaints</span>
-                            <span class="badge-status bg-danger text-white">5 New</span>
+                            <span><i class="bx bx-message-alt-error me-2" style="color: #ef4444;"></i> Latest
+                                Complaints</span>
+                            <span class="badge-status" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                                5 New
+                            </span>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
@@ -717,19 +918,22 @@
                                             <td>
                                                 <div class="d-flex align-items-center gap-2">
                                                     <div class="avatar avatar-sm" style="width:32px;height:32px;">
-                                                        <img src="https://ui-avatars.com/api/?name=Rahul+Sharma&background=6366f1&color=fff&size=32"
+                                                        <img src="https://ui-avatars.com/api/?name=Rahul+Sharma&background=7c3aed&color=fff&size=32"
                                                             alt="avatar" class="rounded-circle"
                                                             style="width:32px;height:32px;">
                                                     </div>
-                                                    <span>Rahul Sharma</span>
+                                                    <span class="fw-semibold">Rahul Sharma</span>
                                                 </div>
                                             </td>
                                             <td>Admission fee payment issue</td>
                                             <td><span class="priority-badge high">High</span></td>
-                                            <td><span class="status-badge pending">Remaining</span></td>
+                                            <td><span class="status-badge pending">Pending</span></td>
                                             <td>2024-12-20</td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                                <button class="btn btn-sm"
+                                                    style="background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border: none; border-radius: 8px; padding: 0.3rem 1rem;">
+                                                    View
+                                                </button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -741,7 +945,7 @@
                                                             alt="avatar" class="rounded-circle"
                                                             style="width:32px;height:32px;">
                                                     </div>
-                                                    <span>Priya Patel</span>
+                                                    <span class="fw-semibold">Priya Patel</span>
                                                 </div>
                                             </td>
                                             <td>Document verification delay</td>
@@ -749,7 +953,10 @@
                                             <td><span class="status-badge in-progress">In Progress</span></td>
                                             <td>2024-12-19</td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                                <button class="btn btn-sm"
+                                                    style="background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border: none; border-radius: 8px; padding: 0.3rem 1rem;">
+                                                    View
+                                                </button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -761,7 +968,7 @@
                                                             alt="avatar" class="rounded-circle"
                                                             style="width:32px;height:32px;">
                                                     </div>
-                                                    <span>Arif Ahmed</span>
+                                                    <span class="fw-semibold">Arif Ahmed</span>
                                                 </div>
                                             </td>
                                             <td>Wrong subject allocation</td>
@@ -769,7 +976,10 @@
                                             <td><span class="status-badge resolved">Resolved</span></td>
                                             <td>2024-12-18</td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                                <button class="btn btn-sm"
+                                                    style="background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border: none; border-radius: 8px; padding: 0.3rem 1rem;">
+                                                    View
+                                                </button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -781,15 +991,18 @@
                                                             alt="avatar" class="rounded-circle"
                                                             style="width:32px;height:32px;">
                                                     </div>
-                                                    <span>Sara Khan</span>
+                                                    <span class="fw-semibold">Sara Khan</span>
                                                 </div>
                                             </td>
                                             <td>ID card not received</td>
                                             <td><span class="priority-badge low">Low</span></td>
-                                            <td><span class="status-badge pending">Remaining</span></td>
+                                            <td><span class="status-badge pending">Pending</span></td>
                                             <td>2024-12-17</td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                                <button class="btn btn-sm"
+                                                    style="background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border: none; border-radius: 8px; padding: 0.3rem 1rem;">
+                                                    View
+                                                </button>
                                             </td>
                                         </tr>
                                         <tr>
@@ -801,7 +1014,7 @@
                                                             alt="avatar" class="rounded-circle"
                                                             style="width:32px;height:32px;">
                                                     </div>
-                                                    <span>John Das</span>
+                                                    <span class="fw-semibold">John Das</span>
                                                 </div>
                                             </td>
                                             <td>Transport service not available</td>
@@ -809,16 +1022,20 @@
                                             <td><span class="status-badge in-progress">In Progress</span></td>
                                             <td>2024-12-16</td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary">View</button>
+                                                <button class="btn btn-sm"
+                                                    style="background: linear-gradient(135deg, #667eea, #764ba2); color: #fff; border: none; border-radius: 8px; padding: 0.3rem 1rem;">
+                                                    View
+                                                </button>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
-                        <div class="card-footer bg-transparent text-center">
-                            <a href="#" class="text-primary fw-semibold">View All Complaints <i
-                                    class="bx bx-chevron-right"></i></a>
+                        <div class="card-footer bg-transparent text-center py-3">
+                            <a href="#" class="fw-semibold" style="color: #667eea; text-decoration: none;">
+                                View All Complaints <i class="bx bx-chevron-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -834,21 +1051,17 @@
         document.addEventListener('DOMContentLoaded', function() {
 
             // ============================================
-            // COLOR PALETTE
+            // COLOR PALETTE - Enhanced
             // ============================================
             const colors = {
-                primary: '#6366f1',
-                primaryLight: 'rgba(99, 102, 241, 0.1)',
-                primaryGradient: 'rgba(99, 102, 241, 0.3)',
+                primary: '#667eea',
+                primaryGradient: 'rgba(102, 126, 234, 0.3)',
                 green: '#10b981',
-                greenLight: 'rgba(16, 185, 129, 0.1)',
                 orange: '#f59e0b',
-                orangeLight: 'rgba(245, 158, 11, 0.1)',
                 blue: '#3b82f6',
-                blueLight: 'rgba(59, 130, 246, 0.1)',
                 pink: '#ec4899',
-                purple: '#8b5cf6',
-                red: '#ef4444',
+                purple: '#7c3aed',
+                cyan: '#06b6d4',
                 dark: '#0f172a',
                 gray: '#94a3b8'
             };
@@ -871,8 +1084,8 @@
                         pointBackgroundColor: colors.primary,
                         pointBorderColor: '#fff',
                         pointBorderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 8,
+                        pointRadius: 6,
+                        pointHoverRadius: 10,
                         borderWidth: 3
                     }]
                 },
@@ -888,7 +1101,7 @@
                             titleColor: '#fff',
                             bodyColor: '#e2e8f0',
                             cornerRadius: 8,
-                            padding: 10,
+                            padding: 12,
                             callbacks: {
                                 label: function(context) {
                                     return 'Admissions: ' + context.parsed.y;
@@ -901,13 +1114,14 @@
                             beginAtZero: true,
                             grid: {
                                 display: true,
-                                color: 'rgba(0, 0, 0, 0.04)',
+                                color: 'rgba(0, 0, 0, 0.05)',
                                 drawBorder: false
                             },
                             ticks: {
                                 stepSize: 10,
                                 font: {
-                                    size: 11
+                                    size: 11,
+                                    weight: '500'
                                 }
                             }
                         },
@@ -918,7 +1132,7 @@
                             ticks: {
                                 font: {
                                     size: 11,
-                                    weight: '500'
+                                    weight: '600'
                                 }
                             }
                         }
@@ -945,25 +1159,25 @@
                             colors.orange,
                             colors.primary
                         ],
-                        borderWidth: 3,
+                        borderWidth: 4,
                         borderColor: '#ffffff',
-                        hoverOffset: 10
+                        hoverOffset: 15
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    cutout: '65%',
+                    cutout: '60%',
                     plugins: {
                         legend: {
                             position: 'bottom',
                             labels: {
-                                padding: 14,
+                                padding: 16,
                                 usePointStyle: true,
                                 pointStyle: 'circle',
                                 font: {
                                     size: 12,
-                                    weight: '500'
+                                    weight: '600'
                                 },
                                 color: '#0f172a'
                             }
@@ -973,7 +1187,7 @@
                             titleColor: '#fff',
                             bodyColor: '#e2e8f0',
                             cornerRadius: 8,
-                            padding: 10,
+                            padding: 12,
                             callbacks: {
                                 label: function(context) {
                                     let total = context.dataset.data.reduce((a, b) => a + b, 0);
@@ -986,7 +1200,7 @@
                     },
                     animation: {
                         animateRotate: true,
-                        duration: 1200
+                        duration: 1500
                     }
                 }
             });

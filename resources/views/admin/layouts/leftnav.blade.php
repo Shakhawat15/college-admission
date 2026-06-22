@@ -1,107 +1,27 @@
-<style>
-    /* Smooth Navigation Styling Engine */
-    .menu-inner {
-        padding: 10px 14px !important;
-    }
-
-    .bg-menu-theme .menu-link {
-        color: #9295b8 !important;
-        font-weight: 500;
-        border-radius: 8px;
-        margin: 3px 0;
-        padding: 10px 14px;
-        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    /* Vibrant Glow Active States */
-    .bg-menu-theme .menu-item.active>.menu-link {
-        background: var(--active-item-gradient) !important;
-        color: #ffffff !important;
-        box-shadow: var(--accent-glow) !important;
-        font-weight: 600;
-    }
-
-    .bg-menu-theme .menu-item.active>.menu-link i {
-        color: #ffffff !important;
-    }
-
-    /* Sidebar Item Hover Configuration */
-    .bg-menu-theme .menu-item:not(.active)>.menu-link:hover,
-    .bg-menu-theme .menu-item.open:not(.active)>.menu-link {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        color: #ffffff !important;
-    }
-
-    .menu-item .menu-icon {
-        font-size: 1.25rem;
-        transition: transform 0.2s ease;
-        color: #6c7293;
-    }
-
-    .menu-item:hover .menu-icon {
-        transform: scale(1.08);
-        color: #a855f7;
-    }
-
-    /* Premium Submenu Line Alignments */
-    .bg-menu-theme .menu-sub {
-        background: transparent !important;
-        padding-left: 12px;
-        margin: 4px 0 6px 8px;
-        border-left: 1px dashed rgba(255, 255, 255, 0.12);
-        list-style: none !important;
-    }
-
-    .bg-menu-theme .menu-sub .menu-link {
-        padding: 8px 14px;
-        font-size: 0.88rem;
-    }
-
-    /* Highlight class for selected configurations */
-    .menu-item.highlight .menu-link {
-        color: #38bdf8 !important;
-        background: rgba(56, 189, 248, 0.06);
-    }
-
-    /* Handle CSS Truncations cleanly when layout is collapsed */
-    .layout-menu-collapsed .layout-menu .text-truncate {
-        opacity: 0;
-        display: none;
-    }
-
-    .bg-menu-theme .menu-sub>.menu-item>.menu-link:before {
-        content: "";
-        position: absolute;
-        left: -0.5625rem;
-        width: .375rem;
-        height: .375rem;
-        border-radius: 50%;
-    }
-</style>
-
 <ul class="menu-inner py-1">
     <!-- Dashboards -->
     <li class="menu-item {{ Session::get('activemenu') == 'dashboard' ? 'active open' : '' }}">
         <a href="{{ url('admin/dashboard') }}" class="menu-link">
-            <i class="menu-icon tf-icons bx bx-grid-alt text-primary"></i>
+            <i class="menu-icon tf-icons bx bx-grid-alt"></i>
             <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
         </a>
     </li>
 
-    <!-- Layouts -->
+    <!-- Profile (Student) -->
     @if (Auth::user()->group_id == 4)
         <li class="menu-item {{ Session::get('activemenu') == 'profile' ? 'active open' : '' }}">
             <a href="{{ route('StudentProfile', 0) }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-circle text-info"></i>
+                <i class="menu-icon tf-icons bx bx-user-circle"></i>
                 <div class="text-truncate" data-i18n="Profile">Profile</div>
             </a>
         </li>
     @endif
 
+    <!-- Admission (Group 7) -->
     @if (Auth::user()->group_id == 7)
         <li class="menu-item {{ Session::get('activemenu') == 'admission' ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user-plus text-success"></i>
+                <i class="menu-icon tf-icons bx bx-user-plus"></i>
                 <div class="text-truncate" data-i18n="Admission">Admission</div>
             </a>
             <ul class="menu-sub">
@@ -133,16 +53,17 @@
 
         <li class="menu-item {{ Session::get('activesubmenu') == 'ul' ? 'active open' : '' }}">
             <a href="{{ route('users.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-key text-warning"></i>
+                <i class="menu-icon tf-icons bx bx-key"></i>
                 <div class="text-truncate" data-i18n="Resend password">Resend password</div>
             </a>
         </li>
     @endif
 
+    <!-- Teacher Profile (Group 3) -->
     @if (Auth::user()->group_id == 3)
         <li class="menu-item {{ Session::get('activemenu') == 'Profile' ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-user-badge text-info"></i>
+                <i class="menu-icon tf-icons bx bx-user-badge"></i>
                 <div class="text-truncate" data-i18n="Profile">Profile</div>
             </a>
             <ul class="menu-sub">
@@ -161,19 +82,19 @@
 
         <li class="menu-item {{ Session::get('activemenu') == 'Class' ? 'active open' : '' }}">
             <a href="{{ route('teacherClass') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-layer text-success"></i>
+                <i class="menu-icon tf-icons bx bx-layer"></i>
                 <div class="text-truncate" data-i18n="Class">Class</div>
             </a>
         </li>
         <li class="menu-item {{ Session::get('activemenu') == 'Routen' ? 'active open' : '' }}">
             <a href="{{ route('teacherRouten') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-calendar-event text-warning"></i>
+                <i class="menu-icon tf-icons bx bx-calendar-event"></i>
                 <div class="text-truncate" data-i18n="My Routine">My Routine</div>
             </a>
         </li>
         <li class="menu-item {{ Session::get('activemenu') == 'Student' ? 'active open' : '' }}">
             <a href="{{ route('teacherStudent') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-group text-primary"></i>
+                <i class="menu-icon tf-icons bx bx-group"></i>
                 <div class="text-truncate" data-i18n="Student">Student</div>
             </a>
         </li>
@@ -181,7 +102,7 @@
         @if (Auth::user()->id == 10881)
             <li class="menu-item {{ Session::get('activemenu') == 'ca' ? 'active open' : '' }}">
                 <a href="{{ route('collegeAdmission') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-select-multiple text-danger"></i>
+                    <i class="menu-icon tf-icons bx bx-select-multiple"></i>
                     <div class="text-truncate" data-i18n="College Admission">College Admission</div>
                 </a>
             </li>
@@ -189,17 +110,18 @@
         @if (Auth::user()->id == 10909)
             <li class="menu-item {{ Session::get('activemenu') == 'ks' ? 'active open' : '' }}">
                 <a href="{{ route('showStudentCounts') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-pie-chart-alt-2 text-secondary"></i>
+                    <i class="menu-icon tf-icons bx bx-pie-chart-alt-2"></i>
                     <div class="text-truncate" data-i18n="Student Statistics">Student Statistics</div>
                 </a>
             </li>
         @endif
     @endif
 
+    <!-- Students Module -->
     @if (Auth::user()->getMenu('Students', 'module_name'))
         <li class="menu-item {{ Session::get('activemenu') == 'student' ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-group text-primary"></i>
+                <i class="menu-icon tf-icons bx bx-group"></i>
                 <div class="text-truncate" data-i18n="Students">Students</div>
             </a>
             <ul class="menu-sub">
@@ -221,10 +143,11 @@
         </li>
     @endif
 
+    <!-- Admission Module -->
     @if (Auth::user()->getMenu('Admission', 'module_name'))
         <li class="menu-item {{ Session::get('activemenu') == 'admission' ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-id-card text-success"></i>
+                <i class="menu-icon tf-icons bx bx-id-card"></i>
                 <div class="text-truncate" data-i18n="Admission">Admission</div>
             </a>
             <ul class="menu-sub">
@@ -282,10 +205,11 @@
         </li>
     @endif
 
+    <!-- Class Module -->
     @if (Auth::user()->getMenu('Class', 'module_name') && Auth::user()->is_view_user == 0)
         <li class="menu-item {{ Session::get('activemenu') == 'class' ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-spreadsheet text-info"></i>
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
                 <div class="text-truncate" data-i18n="Class">Class</div>
             </a>
             <ul class="menu-sub">
@@ -314,10 +238,11 @@
         </li>
     @endif
 
+    <!-- Academy Settings -->
     @if (Auth::user()->getMenu('Academy Settings', 'module_name') && Auth::user()->is_view_user == 0)
         <li class="menu-item {{ Session::get('activemenu') == 'setting' ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-cog text-warning"></i>
+                <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div class="text-truncate" data-i18n="Academy Settings">Academy Settings</div>
             </a>
             <ul class="menu-sub">
@@ -374,10 +299,11 @@
         </li>
     @endif
 
+    <!-- Users Module -->
     @if (Auth::user()->getMenu('Users', 'module_name') && Auth::user()->is_view_user == 0)
         <li class="menu-item {{ Session::get('activemenu') == 'users' ? 'active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-shield-quarter text-danger"></i>
+                <i class="menu-icon tf-icons bx bx-shield-quarter"></i>
                 <div class="text-truncate" data-i18n="Users">Users</div>
             </a>
             <ul class="menu-sub">
@@ -388,20 +314,6 @@
                         </a>
                     </li>
                 @endif
-                {{-- @if (Auth::user()->getMenu('roles.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'ur' ? 'highlight' : '' }}">
-                        <a href="{{ route('roles.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Roles List">Roles List</div>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->getMenu('permissions.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'pr' ? 'highlight' : '' }}">
-                        <a href="{{ route('permissions.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Roles Permissions">Roles Permissions</div>
-                        </a>
-                    </li>
-                @endif --}}
             </ul>
         </li>
     @endif

@@ -1,630 +1,366 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en" class="light-style layout-navbar-fixed layout-menu-fixed layout-compact " dir="ltr"
+    data-theme="theme-default" data-assets-path="{{ asset('public') }}/backend//assets/"
+    data-template="vertical-menu-template">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Dashboard') - {{ config('app.name') }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>BAF Shaheen College Dhaka</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="description" content="BAF Shaheen College Dhaka" />
+    <meta name="keywords" content="school,college,student,teacher">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo/favicon.png') }}" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&amp;display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/vendor/fonts/fontawesome.css" />
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/vendor/fonts/flag-icons.css" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/vendor/css/rtl/core.css"
+        class="template-customizer-core-css" />
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/vendor/css/rtl/theme-default.css"
+        class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/css/demo.css" />
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/css/dashboard.css" />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet"
+        href="{{ asset('public') }}/backend//assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/vendor/libs/apex-charts/apex-charts.css" />
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//assets/vendor/css/pages/card-analytics.css" />
+    <link rel="stylesheet" href="{{ asset('public') }}/backend//css/index.min.css" />
+    <!-- Helpers -->
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/js/helpers.js"></script>
+    <link rel="stylesheet"
+        href="{{ asset('public') }}/backend//assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css">
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    {{-- <script src="{{asset('/')}}public/backend//assets/vendor/js/template-customizer.js"></script> --}}
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="{{ asset('public') }}/backend//assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/js/template-customizer.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
 
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    {{-- Toaster CDN File --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-    <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Boxicons -->
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.css">
-
-    <!-- Custom Styles -->
     <style>
         :root {
-            --sidebar-width: 260px;
-            --sidebar-collapsed-width: 80px;
-            --navbar-height: 70px;
-            --primary-color: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary-color: #8b5cf6;
-            --sidebar-bg: #1a1a2e;
-            --sidebar-hover: rgba(255, 255, 255, 0.05);
-            --active-item-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
-            --accent-glow: 0 4px 20px rgba(99, 102, 241, 0.3);
-            --text-muted: #9295b8;
-            --card-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
-            --transition-speed: 0.3s;
+            --bs-breadcrumb-divider: ">";
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        .scrollable {
+            overflow-y: scroll;
+            max-height: 500px;
+            scrollbar-width: thin;
+            scrollbar-color: #888 #f1f1f1;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #f8f9fa;
-            color: #495057;
-            overflow-x: hidden;
-        }
-
-        /* Layout Structure */
-        .layout-wrapper {
-            display: flex;
-            min-height: 100vh;
-        }
-
-        /* Sidebar Styles */
-        .layout-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: var(--sidebar-bg);
-            color: #fff;
-            z-index: 1000;
-            transition: width var(--transition-speed) ease;
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        .layout-menu::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .layout-menu::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-        }
-
-        .layout-menu::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        /* Sidebar Brand */
-        .app-brand {
-            display: flex;
-            align-items: center;
-            padding: 20px 24px;
-            height: var(--navbar-height);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .app-brand-link {
-            display: flex;
-            align-items: center;
+        .breadcrumb a {
             text-decoration: none;
-            color: #fff;
+            color: #007bff;
         }
 
-        .app-brand-logo {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--active-item-gradient);
-            border-radius: 10px;
-            margin-right: 12px;
-            flex-shrink: 0;
+        .breadcrumb a:hover {
+            text-decoration: underline;
+            color: #0056b3;
         }
 
-        .app-brand-text {
-            font-size: 20px;
-            font-weight: 700;
-            color: #fff;
-            white-space: nowrap;
-            transition: opacity var(--transition-speed) ease;
-        }
+        .clockdate-wrapper {
+            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-        /* Menu Styles */
-        .menu-inner {
-            padding: 16px 14px !important;
-            list-style: none;
-        }
-
-        .bg-menu-theme .menu-link {
-            display: flex;
-            align-items: center;
-            color: var(--text-muted) !important;
-            font-weight: 500;
-            border-radius: 8px;
-            margin: 4px 0;
-            padding: 10px 14px;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            position: relative;
-        }
-
-        .bg-menu-theme .menu-link:hover {
-            background-color: var(--sidebar-hover) !important;
-            color: #ffffff !important;
-        }
-
-        .bg-menu-theme .menu-item.active>.menu-link {
-            background: var(--active-item-gradient) !important;
-            color: #ffffff !important;
-            box-shadow: var(--accent-glow) !important;
-            font-weight: 600;
-        }
-
-        .bg-menu-theme .menu-item.active>.menu-link i {
-            color: #ffffff !important;
-        }
-
-        .menu-item .menu-icon {
-            font-size: 1.25rem;
-            transition: transform 0.2s ease;
-            color: #6c7293;
-            width: 24px;
+            color: rgb(0, 149, 221) border-radius:5px;
+            margin: 0 auto;
             text-align: center;
-            margin-right: 12px;
-            flex-shrink: 0;
+
         }
 
-        .menu-item:hover .menu-icon {
-            transform: scale(1.08);
+        #clock {
+            font-family: Digital-7, 'sans-serif';
+            font-size: 20px;
+            text-shadow: 0px 0px 1px #fff;
+            color: rgb(0, 149, 221);
+            font-weight: bold;
         }
 
-        .menu-item.active .menu-icon {
-            color: #fff;
-        }
-
-        .text-truncate {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            transition: opacity var(--transition-speed) ease;
-        }
-
-        /* Submenu Styles */
-        .bg-menu-theme .menu-sub {
-            background: transparent !important;
-            padding-left: 12px;
-            margin: 4px 0 6px 8px;
-            border-left: 1px dashed rgba(255, 255, 255, 0.12);
-            list-style: none !important;
-            display: none;
-        }
-
-        .bg-menu-theme .menu-item.open>.menu-sub {
-            display: block;
-        }
-
-        .bg-menu-theme .menu-sub .menu-link {
-            padding: 8px 14px;
-            font-size: 0.88rem;
-            padding-left: 36px;
-        }
-
-        .bg-menu-theme .menu-sub>.menu-item>.menu-link:before {
-            content: "";
-            position: absolute;
-            left: -0.5625rem;
-            width: 0.375rem;
-            height: 0.375rem;
-            border-radius: 50%;
-            background: var(--text-muted);
-            top: 50%;
-            transform: translateY(-50%);
-            transition: background 0.3s ease;
-        }
-
-        .bg-menu-theme .menu-sub>.menu-item.highlight>.menu-link:before {
-            background: var(--primary-color);
-        }
-
-        .bg-menu-theme .menu-sub .menu-item.highlight .menu-link {
-            color: #38bdf8 !important;
-            background: rgba(56, 189, 248, 0.06);
-        }
-
-        /* Menu Toggle */
-        .menu-toggle {
+        #clock span {
+            color: rgb(0, 149, 221);
+            text-shadow: 0px 0px 1px #333;
+            font-size: 20px;
             position: relative;
+
+            left: 5px;
         }
 
-        .menu-toggle:after {
-            content: '\f105';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            right: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            transition: transform 0.3s ease;
-            color: var(--text-muted);
+        #date {
+            font-size: 14px;
+            font-weight: bold;
+            font-family: arial, sans-serif;
+            color: rgb(0, 149, 221);
         }
 
-        .menu-item.open>.menu-toggle:after {
-            transform: translateY(-50%) rotate(90deg);
+        .avatar.avatar-online {
+            position: relative;
+            width: 3rem !important;
+            height: 2rem !important;
+            cursor: pointer;
         }
 
-        /* Collapsed Menu */
-        .layout-menu-collapsed .layout-menu {
-            width: var(--sidebar-collapsed-width);
+        .search-input-wrapper {
+            width: 100%;
         }
 
-        .layout-menu-collapsed .app-brand-text,
-        .layout-menu-collapsed .text-truncate {
-            opacity: 0;
-            display: none;
+        ::-webkit-scrollbar {
+            width: 10px;
         }
 
-        .layout-menu-collapsed .menu-item .menu-icon {
-            margin-right: 0;
+        .fixTableHead,
+        .fixed {
+            overflow-y: auto;
+            height: 90vh;
         }
 
-        .layout-menu-collapsed .menu-item .menu-toggle:after {
-            display: none;
-        }
-
-        .layout-menu-collapsed .menu-sub {
-            display: none !important;
-        }
-
-        .layout-menu-collapsed .app-brand {
-            padding: 20px 20px;
-        }
-
-        /* Main Content Area */
-        .layout-page {
-            flex: 1;
-            margin-left: var(--sidebar-width);
-            transition: margin-left var(--transition-speed) ease;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .layout-menu-collapsed .layout-page {
-            margin-left: var(--sidebar-collapsed-width);
-        }
-
-        /* Navbar */
-        .layout-navbar {
+        .fixed thead th,
+        .fixTableHead thead th {
             position: sticky;
             top: 0;
-            z-index: 999;
-            background: #fff;
-            height: var(--navbar-height);
-            padding: 0 24px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
 
-        .navbar-left {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .navbar-toggle {
-            background: transparent;
-            border: none;
-            font-size: 1.5rem;
-            color: #495057;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            transition: background 0.2s ease;
-        }
-
-        .navbar-toggle:hover {
-            background: #f1f3f5;
-        }
-
-        .navbar-right {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        /* Content Wrapper */
-        .content-wrapper {
-            flex: 1;
-            padding: 0;
-        }
-
-        /* Footer */
-        .layout-footer {
-            padding: 16px 24px;
-            background: #fff;
-            border-top: 1px solid #e9ecef;
-            text-align: center;
-            color: #6c757d;
-            font-size: 14px;
-        }
-
-        /* Dropdown */
-        .dropdown-menu {
-            border: none;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            padding: 8px 0;
-        }
-
-        .dropdown-item {
-            padding: 8px 20px;
-            border-radius: 6px;
-            margin: 0 4px;
-        }
-
-        .dropdown-item:hover {
-            background: #f1f3f5;
-        }
-
-        .dropdown-item i {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-
-        /* Avatar */
-        .avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--active-item-gradient);
-            color: #fff;
-            font-weight: 600;
-            font-size: 16px;
-        }
-
-        .avatar img {
+        table {
+            border-collapse: collapse;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
         }
 
-        /* Responsive */
-        @media (max-width: 992px) {
-            .layout-menu {
-                transform: translateX(-100%);
-                width: var(--sidebar-width);
-            }
-
-            .layout-menu.show {
-                transform: translateX(0);
-            }
-
-            .layout-page {
-                margin-left: 0 !important;
-            }
-
-            .layout-menu-collapsed .layout-menu {
-                transform: translateX(-100%);
-                width: var(--sidebar-width);
-            }
-
-            .layout-menu-collapsed .layout-menu.show {
-                transform: translateX(0);
-            }
-
-            /* Mobile Overlay */
-            .layout-menu-overlay {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                background: rgba(0, 0, 0, 0.5);
-                z-index: 999;
-                display: none;
-            }
-
-            .layout-menu-overlay.show {
-                display: block;
-            }
+        .pagination {
+            padding: 10px;
         }
 
-        @media (max-width: 576px) {
-            .layout-navbar {
-                padding: 0 16px;
+        .content-wrapper {
+            height: calc(100vh - 60px);
+            /* Subtract height of navbar and footer */
+            overflow-y: auto;
+            /* Vertical scrolling enabled */
+        }
+
+        /* Customize the scrollbar */
+        .content-wrapper::-webkit-scrollbar {
+            width: 15px;
+        }
+
+        .content-wrapper::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        .content-wrapper::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+            cursor: pointer;
+        }
+
+
+        @media (max-width: 600px) {
+            .navbar-nav {
+                width: 190px !important;
             }
-        }
-
-        /* Utility Classes */
-        .bg-gradient-primary {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-        }
-
-        .bg-gradient-success {
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-        }
-
-        .bg-gradient-warning {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-        }
-
-        .bg-gradient-danger {
-            background: linear-gradient(135deg, #ef4444, #dc2626);
-        }
-
-        .bg-gradient-info {
-            background: linear-gradient(135deg, #06b6d4, #0891b2);
-        }
-
-        .dropdown-toggle::after {
-            display: inline-block;
-            margin-left: .255em;
-            vertical-align: .255em;
-            content: none;
-            border-top: .3em solid;
-            border-right: .3em solid transparent;
-            border-bottom: 0;
-            border-left: .3em solid transparent;
         }
     </style>
-    @stack('styles')
+
+
+
 </head>
 
 <body>
-    <!-- Layout Wrapper -->
-    <div class="layout-wrapper" id="app">
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar  ">
+        <div class="layout-container">
+            <!-- Menu -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+                <div class="app-brand demo ">
+                    <a href="{{ route('dashboard') }}" class="app-brand-link">
+                        <span class="app-brand-logo demo">
+                            <img src="{{ asset('public/logo/logo.png') }}" width="50" />
+                        </span>
 
-        <!-- Sidebar Overlay (Mobile) -->
-        <div class="layout-menu-overlay" id="sidebarOverlay"></div>
-
-        <!-- Sidebar -->
-        <aside class="layout-menu bg-menu-theme" id="sidebar">
-            <div class="app-brand">
-                <a href="{{ url('/') }}" class="app-brand-link">
-                    <span class="app-brand-logo">
-                        <i class="bx bx-building"></i>
-                    </span>
-                    <span class="app-brand-text">Academy</span>
-                </a>
-            </div>
-
-            <!-- Menu Items -->
-            @include('admin.layouts.leftnav')
-        </aside>
-
-        <!-- Main Content -->
-        <div class="layout-page">
-            <!-- Navbar -->
-            <nav class="layout-navbar navbar navbar-expand-lg">
-                <div class="navbar-left">
-                    <button class="navbar-toggle" id="sidebarToggle">
-                        <i class="bx bx-menu"></i>
-                    </button>
-                    <div class="d-none d-md-block">
-                        <h5 class="mb-0">@yield('page-title', 'Dashboard')</h5>
-                    </div>
-                </div>
-
-                <div class="navbar-right">
-                    <!-- User Profile -->
-                    <div class="dropdown">
-                        <button class="btn btn-link p-0 text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="avatar">
-                                    {{ substr(Auth::user()->name ?? 'U', 0, 1) }}
-                                </div>
-                                <div class="d-none d-lg-block text-start">
-                                    <div class="small fw-semibold">{{ Auth::user()->name ?? 'User' }}</div>
-                                    <div class="small text-muted" style="font-size: 11px;">
-                                        {{ Auth::user()->email ?? '' }}</div>
+                    </a>
+                    <a href="javascript:void(0);">
+                        <div class="navbar-nav " style="margin-left:5%;width: 100%;">
+                            <!-- Digital Clock HTML -->
+                            <div id="clockdate">
+                                <div class="clockdate-wrapper">
+                                    <div id="clock"></div>
+                                    <div id="date"></div>
                                 </div>
                             </div>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <div class="px-3 py-2 border-bottom">
-                                <div class="small fw-semibold">{{ Auth::user()->name ?? 'User' }}</div>
-                                <div class="small text-muted">{{ Auth::user()->email ?? '' }}</div>
-                            </div>
-                            {{-- <a href="{{ route('profile.edit') }}" class="dropdown-item">
-                                <i class="bx bx-user"></i> Profile
-                            </a>
-                            <a href="#" class="dropdown-item">
-                                <i class="bx bx-cog"></i> Settings
-                            </a>
-                            <div class="dropdown-divider"></div> --}}
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button type="submit" class="dropdown-item text-danger">
-                                    <i class="bx bx-log-out"></i> Logout
-                                </button>
-                            </form>
+                            <!-- End Digital Clock HTML -->
                         </div>
-                    </div>
+                    </a>
+                    <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+                        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                    </a>
                 </div>
-            </nav>
-
-            <!-- Content Wrapper -->
-            <div class="content-wrapper">
-                @yield('content')
+                <div class="menu-inner-shadow"></div>
+                @include('admin.layouts.leftnav')
+            </aside>
+            <!-- / Menu -->
+            <!-- Layout container -->
+            <div class="layout-page">
+                <!-- Navbar -->
+                @include('admin.layouts.topnav')
+                <div class="content-wrapper">
+                    @yield('content') <!-- Dynamic content goes here -->
+                </div>
+                @include('admin.layouts.footer')
             </div>
-
-            <!-- Footer -->
-            <footer class="layout-footer">
-                &copy; {{ date('Y') }} Shahin Tech. All rights reserved.
-                <span class="d-none d-sm-inline">| Version 1.0.0</span>
-            </footer>
+            <!-- / Layout page -->
         </div>
+        <!-- Overlay -->
+        <div class="layout-overlay layout-menu-toggle"></div>
+        <!-- Drag Target Area To SlideIn Menu On Small Screens -->
+        <div class="drag-target"></div>
     </div>
+    <!-- / Layout wrapper -->
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
 
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/popper/popper.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/js/bootstrap.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/hammer/hammer.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/i18n/i18n.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+    <!-- Vendors JS -->
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <!-- Main JS -->
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Sidebar Toggle
-            const sidebarToggle = document.getElementById('sidebarToggle');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            const body = document.body;
+    <!-- Page JS -->
 
-            function toggleSidebar() {
-                if (window.innerWidth <= 992) {
-                    sidebar.classList.toggle('show');
-                    overlay.classList.toggle('show');
-                } else {
-                    body.classList.toggle('layout-menu-collapsed');
-                }
-            }
 
-            sidebarToggle.addEventListener('click', toggleSidebar);
-            overlay.addEventListener('click', toggleSidebar);
-
-            // Menu Toggle (Submenu)
-            document.querySelectorAll('.menu-toggle').forEach(toggle => {
-                toggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const parent = this.closest('.menu-item');
-                    parent.classList.toggle('open');
-
-                    // Close other open menus
-                    document.querySelectorAll('.menu-item.open').forEach(item => {
-                        if (item !== parent) {
-                            item.classList.remove('open');
-                        }
-                    });
-                });
-            });
-
-            // Handle resize
-            window.addEventListener('resize', function() {
-                if (window.innerWidth > 992) {
-                    sidebar.classList.remove('show');
-                    overlay.classList.remove('show');
-                }
-            });
-
-            // Active menu highlight based on URL
-            const currentUrl = window.location.pathname;
-            document.querySelectorAll('.menu-link').forEach(link => {
-                if (link.getAttribute('href') === currentUrl) {
-                    const parent = link.closest('.menu-item');
-                    if (parent) {
-                        parent.classList.add('active');
-                        // Open parent menu if it's a submenu
-                        let parentSub = parent.closest('.menu-sub');
-                        if (parentSub) {
-                            let parentItem = parentSub.closest('.menu-item');
-                            if (parentItem) {
-                                parentItem.classList.add('open');
-                                parentItem.classList.add('active');
-                            }
-                        }
-                    }
-                }
-            });
-        });
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/select2/select2.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/moment/moment.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/tagify/tagify.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js">
+    </script>
+    <script src="{{ asset('public') }}/backend//assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js">
     </script>
 
-    @stack('scripts')
+    <script src="{{ asset('public') }}/backend//assets/js/main.js"></script>
+
+
+    <!-- Page JS -->
+    <script src="{{ asset('public') }}/backend//assets/js/form-validation.js"></script>
+
+    <script src="{{ asset('public') }}/backend/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+    <script src="{{ asset('public') }}/backend/assets/js/form-wizard-icons.js"></script>
+
+    <script>
+        $(function() {
+            $(document.body).on('click', '.viewsearch', function() {
+                $('.search-input-wrapper').removeClass('d-none');
+                //$('.navbar-search-suggestion').toggle('tt-open');
+                $('#navbar-collapse').addClass('d-none');
+            });
+            $(document.body).on('click', '.close-search', function() {
+
+                $('.search-input-wrapper').addClass('d-none');
+                //$('.navbar-search-suggestion').toggle('tt-open');
+                $('#navbar-collapse').removeClass('d-none');
+            });
+            // $(document.body).on('click','.d-md-inline-block',function(){
+            //    $('.search-input-wrapper').toggleClass('d-none');
+            //   $('#navbar-collapse').toggleClass('d-none');
+            // });
+        });
+
+        function startTime() {
+            var today = new Date();
+            var hr = today.getHours();
+            var min = today.getMinutes();
+            var sec = today.getSeconds();
+            ap = (hr < 12) ? "<span>AM</span>" : "<span>PM</span>";
+            hr = (hr == 0) ? 12 : hr;
+            hr = (hr > 12) ? hr - 12 : hr;
+            //Add a zero in front of numbers<10
+            hr = checkTime(hr);
+            min = checkTime(min);
+            sec = checkTime(sec);
+            document.getElementById("clock").innerHTML = hr + ":" + min + ":" + sec + " " + ap;
+
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+                'November', 'December'
+            ];
+            var days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            var curWeekDay = days[today.getDay()];
+            var curDay = today.getDate();
+            var curMonth = months[today.getMonth()];
+            var curYear = today.getFullYear();
+            var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
+            document.getElementById("date").innerHTML = date;
+
+            var time = setTimeout(function() {
+                startTime()
+            }, 500);
+        }
+
+        function checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+        startTime();
+
+        function fnExcelReport() {
+            var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+            var j = 0;
+            var tab = document.getElementById('headerTable'); // id of table
+
+            for (j = 0; j < tab.rows.length; j++) {
+                tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+                //tab_text=tab_text+"</tr>";
+            }
+
+            tab_text = tab_text + "</table>";
+            tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, ""); //remove if u want links in your table
+            tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+            tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+            var msie = window.navigator.userAgent.indexOf("MSIE ");
+
+            // If Internet Explorer
+            if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+                txtArea1.document.open("txt/html", "replace");
+                txtArea1.document.write(tab_text);
+                txtArea1.document.close();
+                txtArea1.focus();
+
+                sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+            } else {
+                // other browser not tested on IE 11
+                sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+            }
+
+            return sa;
+        }
+    </script>
 </body>
 
 </html>

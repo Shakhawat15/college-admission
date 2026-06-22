@@ -10,8 +10,8 @@
 
     <style>
         /* ============================================
-                                                           DASHBOARD STYLES - VIBRANT COLOR EDITION
-                                                           ============================================ */
+                                                               DASHBOARD STYLES - VIBRANT COLOR EDITION
+                                                               ============================================ */
 
         /* Dashboard Header - More Vibrant Gradient */
         .dashboard-header {
@@ -725,11 +725,11 @@
     </style>
 
     <div class="content-wrapper">
-        <div class="container-full flex-grow-1 container-p-y pt-5">
+        <div class="container-xxl flex-grow-1 container-p-y pt-5">
 
             <!-- ============================================
-                                    STATISTICS CARDS - Colorful & Vibrant
-                                    ============================================ -->
+                                        STATISTICS CARDS - Colorful & Vibrant
+                                        ============================================ -->
             <div class="row g-4 stat-row animate-fade-in">
                 <!-- Total Board List - Purple -->
                 <div class="col-xl-3 col-lg-4 col-sm-6">
@@ -794,8 +794,8 @@
 
 
             <!-- ============================================
-                                    QUICK ACTION CARDS - Colorful
-                                    ============================================ -->
+                                        QUICK ACTION CARDS - Colorful
+                                        ============================================ -->
             <div class="row g-3 quick-action-row animate-fade-in">
                 <div class="col-md-3 col-6">
                     <a href="{{ route('boardList') }}" class="quick-action">
@@ -836,8 +836,8 @@
             </div>
 
             <!-- ============================================
-                                    CHARTS SECTION - Two Column Layout
-                                    ============================================ -->
+                                        CHARTS SECTION - Two Column Layout
+                                        ============================================ -->
             <div class="row g-4 chart-row animate-fade-in">
                 <!-- Daily Admission Overview - LINE CHART -->
                 <div class="col-xl-8 col-lg-7">
@@ -886,8 +886,8 @@
             </div>
 
             <!-- ============================================
-                                    LATEST COMPLAINTS TABLE - Enhanced
-                                    ============================================ -->
+                                        LATEST COMPLAINTS TABLE - Enhanced
+                                        ============================================ -->
             <div class="row complaint-section animate-fade-in">
                 <div class="col-12">
                     <div class="chart-card card">
@@ -1045,8 +1045,8 @@
     </div>
 
     <!-- ============================================
-                            CHARTS JAVASCRIPT
-                            ============================================ -->
+                                CHARTS JAVASCRIPT
+                                ============================================ -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 

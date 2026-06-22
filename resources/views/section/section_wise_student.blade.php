@@ -161,30 +161,43 @@
                                         <select id="class_id" name="class_id" class=" form-select" required="">
                                             <option value="">Select Class</option>
 
-                                            <option value="0" {{ $class_id == 0 ? 'selected="selected"' : '' }}>KG</option>
-                                            <option value="1" {{ $class_id == 1 ? 'selected="selected"' : '' }}>CLass I
+                                            <option value="0" {{ $class_id == 0 ? 'selected="selected"' : '' }}>KG
                                             </option>
-                                            <option value="2" {{ $class_id == 2 ? 'selected="selected"' : '' }}>CLass II
+                                            <option value="1" {{ $class_id == 1 ? 'selected="selected"' : '' }}>CLass
+                                                I
                                             </option>
-                                            <option value="3" {{ $class_id == 3 ? 'selected="selected"' : '' }}>CLass III
+                                            <option value="2" {{ $class_id == 2 ? 'selected="selected"' : '' }}>CLass
+                                                II
                                             </option>
-                                            <option value="4" {{ $class_id == 4 ? 'selected="selected"' : '' }}>CLass IV
+                                            <option value="3" {{ $class_id == 3 ? 'selected="selected"' : '' }}>CLass
+                                                III
                                             </option>
-                                            <option value="5" {{ $class_id == 5 ? 'selected="selected"' : '' }}>CLass V
+                                            <option value="4" {{ $class_id == 4 ? 'selected="selected"' : '' }}>CLass
+                                                IV
                                             </option>
-                                            <option value="6" {{ $class_id == 6 ? 'selected="selected"' : '' }}>CLass VI
+                                            <option value="5" {{ $class_id == 5 ? 'selected="selected"' : '' }}>CLass
+                                                V
                                             </option>
-                                            <option value="7" {{ $class_id == 7 ? 'selected="selected"' : '' }}>CLass VII
+                                            <option value="6" {{ $class_id == 6 ? 'selected="selected"' : '' }}>CLass
+                                                VI
                                             </option>
-                                            <option value="8" {{ $class_id == 8 ? 'selected="selected"' : '' }}>CLass VIII
+                                            <option value="7" {{ $class_id == 7 ? 'selected="selected"' : '' }}>CLass
+                                                VII
                                             </option>
-                                            <option value="9" {{ $class_id == 9 ? 'selected="selected"' : '' }}>CLass IX
+                                            <option value="8" {{ $class_id == 8 ? 'selected="selected"' : '' }}>CLass
+                                                VIII
                                             </option>
-                                            <option value="10" {{ $class_id == 10 ? 'selected="selected"' : '' }}>CLass X
+                                            <option value="9" {{ $class_id == 9 ? 'selected="selected"' : '' }}>CLass
+                                                IX
                                             </option>
-                                            <option value="11" {{ $class_id == 11 ? 'selected="selected"' : '' }}>CLass XI
+                                            <option value="10" {{ $class_id == 10 ? 'selected="selected"' : '' }}>CLass
+                                                X
                                             </option>
-                                            <option value="12" {{ $class_id == 12 ? 'selected="selected"' : '' }}>CLass XII
+                                            <option value="11" {{ $class_id == 11 ? 'selected="selected"' : '' }}>CLass
+                                                XI
+                                            </option>
+                                            <option value="12" {{ $class_id == 12 ? 'selected="selected"' : '' }}>CLass
+                                                XII
                                             </option>
                                         </select>
                                     </label>
@@ -216,10 +229,10 @@
 
                     </div>
                     <!-- <div class="col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end">
-                   <div style="padding: 5px" id="DataTables_Table_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control" id="search" placeholder="" aria-controls="DataTables_Table_1"></label></div>
-                </div> -->
+                       <div style="padding: 5px" id="DataTables_Table_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control" id="search" placeholder="" aria-controls="DataTables_Table_1"></label></div>
+                    </div> -->
                 </div>
-                
+
                 @php
                     $gender = collect($students)->groupBy('gender');
 
@@ -231,8 +244,8 @@
                             <td class="tdcenter bordernone" colspan="2"><img src="{{ asset('public/logo/logo.png') }}"
                                     style="width: 120px;"></td>
                             <td class="tdcenter bordernone" colspan="3">
-                                <h3>BAF Shaheen College Dhaka</h3>
-                                <p>Dhaka Cantonment Dhaka-1206</p>
+                                <h3>SEMS DEMO SCHOOL</h3>
+                                <p>Dhaka Bangladesh Dhaka-1200</p>
                                 <h4>Section Wise Students' List</h4>
                             </td>
                             <td colspan="2" class="bordernone">
@@ -270,14 +283,14 @@
                             </tr>
                         @endforeach
                         <!-- <tr>
-                        <td colspan="2">Class Teacher-2:</td>
-                        <td colspan="1"></td>
-                        <td>Designation:</td>
-                        <td colspan="1"></td>
-                        <td>Contact Number:</td>
-                        <td colspan="1"></td>
+                            <td colspan="2">Class Teacher-2:</td>
+                            <td colspan="1"></td>
+                            <td>Designation:</td>
+                            <td colspan="1"></td>
+                            <td>Contact Number:</td>
+                            <td colspan="1"></td>
 
-                    </tr> -->
+                        </tr> -->
                         <tr>
                             <td class="bordernone" colspan="7"></td>
                         </tr>

@@ -230,8 +230,8 @@
 
                     </div>
                     <!-- <div class="col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end">
-                           <div style="padding: 5px" id="DataTables_Table_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control" id="search" placeholder="" aria-controls="DataTables_Table_1"></label></div>
-                        </div> -->
+                               <div style="padding: 5px" id="DataTables_Table_1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control" id="search" placeholder="" aria-controls="DataTables_Table_1"></label></div>
+                            </div> -->
                 </div>
                 @php
                     $totalban = 0;
@@ -265,8 +265,8 @@
                             <td class="tdcenter bordernone" colspan="2"><img src="{{ asset('public/logo/logo.png') }}"
                                     style="width: 120px;"></td>
                             <td class="tdcenter bordernone" colspan="3">
-                                <h3>BAF Shaheen College Dhaka</h3>
-                                <p>Dhaka Cantonment Dhaka-1206</p>
+                                <h3>SEMS DEMO SCHOOL</h3>
+                                <p>Dhaka Bangladesh Dhaka-1200</p>
                                 <h4>Section Wise Subject Statistics (With Optional)</h4>
                             </td>
                             <td colspan="2" class="bordernone">
@@ -313,11 +313,10 @@
 
                             @foreach ($value as $key1 => $data)
                                 @php
-							$j = 0;
+                                    $j = 0;
 
-                              
-							@endphp 
-							
+                                @endphp
+
                                 @foreach ($data as $key0 => $section)
                                     <tr>
                                         @if ($i == 0)
@@ -478,11 +477,10 @@
                                         {{ $totalsta }}</a></td>
                             </tr>
                         </table>
-					@if (Auth::user()->is_view_user == 0)
-								<button type="button" id="print-view" class="btn btn-success me-2"><i
-                                class="fa fa-print"></i></button>
-							@endif
-                        
+                        @if (Auth::user()->is_view_user == 0)
+                            <button type="button" id="print-view" class="btn btn-success me-2"><i
+                                    class="fa fa-print"></i></button>
+                        @endif
                     @endif
                 </div>
 

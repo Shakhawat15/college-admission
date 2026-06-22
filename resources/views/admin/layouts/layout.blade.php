@@ -244,7 +244,7 @@
                 <div class="app-brand demo mt-2 mb-2">
                     <a href="{{ route('dashboard') }}" class="app-brand-link">
                         <span class="app-brand-logo demo">
-                            <img src="{{ asset('public/logo/logo.png') }}" width="45"
+                            <img src="{{ asset('public/logo/demo-logo.png') }}" width="45"
                                 style="border-radius: 8px;" />
                         </span>
                         <span class="app-brand-text demo menu-text fw-bold ms-2"

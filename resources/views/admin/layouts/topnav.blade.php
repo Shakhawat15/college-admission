@@ -25,7 +25,7 @@
                             <img src="{{ asset(Auth::user()->photo) }}" alt
                                 style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #4361ee;">
                         @else
-                            <img src="{{ asset('public/logo/logo.png') }}" alt
+                            <img src="{{ asset('public/logo/demo-logo.png') }}" alt
                                 style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #4361ee;">
                         @endif
                     </div>

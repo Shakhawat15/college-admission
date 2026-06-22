@@ -537,7 +537,7 @@
                         <div class="app-brand">
                             <a href="{{ url('/') }}" class="app-brand-link">
                                 <span class="app-brand-logo">
-                                    <img src="{{ asset('public/logo/logo.png') }}" alt="Logo" />
+                                    <img src="{{ asset('public/logo/demo-logo.png') }}" alt="Logo" />
                                 </span>
                             </a>
                             <div class="brand-name">SEMS <span>DEMO</span></div>

@@ -324,13 +324,13 @@
                                             </div>
                                         </div>
                                         <!-- <div class="col-md-6 col-sm-6">
-                                                <div class="form-group">
-                                                <label>Board</label><small class="req"> *</small>
-                                                <input type="text"  readonly="" class="form-control" required="" value="{{ strtolower($checkadmission->board) }}" name="board" id="board" autocomplete="off">
+                                                    <div class="form-group">
+                                                    <label>Board</label><small class="req"> *</small>
+                                                    <input type="text"  readonly="" class="form-control" required="" value="{{ strtolower($checkadmission->board) }}" name="board" id="board" autocomplete="off">
 
-                                                <span class="text-danger" id="error_status_board"></span>
-                                                </div>
-                                            </div> -->
+                                                    <span class="text-danger" id="error_status_board"></span>
+                                                    </div>
+                                                </div> -->
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
                                                 <label>Group (বিভাগ):</label><small class="req"> *</small>
@@ -374,14 +374,14 @@
                                         </div>
 
                                         <!-- <div class="col-md-6 col-sm-6">
-                                                        <div class="form-group">
-                                                            <label>Admission Serial (এডমিশন সিরিয়াল):</label>
-                                                            <div><input type="text" readonly="readonly" class="form-control" placeholder="Valid S.S.C Serial"  value="{{ $serial }}" readonly="readonly" name="serial" id="serial" autocomplete="off">
+                                                            <div class="form-group">
+                                                                <label>Admission Serial (এডমিশন সিরিয়াল):</label>
+                                                                <div><input type="text" readonly="readonly" class="form-control" placeholder="Valid S.S.C Serial"  value="{{ $serial }}" readonly="readonly" name="serial" id="serial" autocomplete="off">
+                                                                </div>
+                                                                <span class="text-danger" id="error_status_serial"></span>
                                                             </div>
-                                                            <span class="text-danger" id="error_status_serial"></span>
-                                                        </div>
 
-                                                </div> -->
+                                                    </div> -->
 
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
@@ -412,7 +412,7 @@
             var currentHour = new Date().getHours();
 
             // Show modal if time is between 9 PM (21) and 8 AM (8)
-            if (currentHour >= 0 && currentHour < 7) {
+            if (currentHour >= 0 && currentHour < 6) {
                 $('#loginBlockModal').modal({
                     backdrop: 'static', // Prevent closing by clicking outside
                     keyboard: false // Prevent closing with ESC key

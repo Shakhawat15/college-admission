@@ -7,10 +7,10 @@
     <meta charset="utf-8" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>BAF Shaheen College Dhaka</title>
+    <title>SEMS Demo Admission</title>
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <meta name="description" content="BAF Shaheen College Dhaka" />
-    <meta name="keywords" content="school,college,student,teacher">
+    <meta name="description" content="SEMS Demo Admission" />
+    <meta name="keywords" content="school,college,student,teacher, admission, eleven admission, college admission">
     <link rel="icon" type="image/x-icon" href="{{ asset('logo/favicon.png') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>

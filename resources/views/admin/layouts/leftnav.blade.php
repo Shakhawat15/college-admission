@@ -388,7 +388,7 @@
                         </a>
                     </li>
                 @endif
-                @if (Auth::user()->getMenu('roles.index', 'name'))
+                {{-- @if (Auth::user()->getMenu('roles.index', 'name'))
                     <li class="menu-item {{ Session::get('activesubmenu') == 'ur' ? 'highlight' : '' }}">
                         <a href="{{ route('roles.index') }}" class="menu-link">
                             <div class="text-truncate" data-i18n="Roles List">Roles List</div>
@@ -401,7 +401,7 @@
                             <div class="text-truncate" data-i18n="Roles Permissions">Roles Permissions</div>
                         </a>
                     </li>
-                @endif
+                @endif --}}
             </ul>
         </li>
     @endif

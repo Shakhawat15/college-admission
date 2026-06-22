@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\sttings\House;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 class HouseController extends Controller
 {
     /**
@@ -12,13 +14,13 @@ class HouseController extends Controller
      */
     public function index()
     {
-        if(Auth::user()->group_id!=2 && Auth::user()->group_id!=10){
+        if (Auth::user()->group_id != 2 && Auth::user()->group_id != 10) {
             return 1;
         }
-        Session::put('activemenu','setting');
-        Session::put('activesubmenu','ho');
-        $houses=House::all();
-        return view('setting.house',compact('houses'));
+        Session::put('activemenu', 'setting');
+        Session::put('activesubmenu', 'ho');
+        $houses = House::all();
+        return view('setting.house', compact('houses'));
     }
 
     /**
@@ -34,40 +36,40 @@ class HouseController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::user()->group_id!=2 && Auth::user()->group_id!=10){
+        if (Auth::user()->group_id != 2 && Auth::user()->group_id != 10) {
             return 1;
         }
-        $id=$request->id;
+        $id = $request->id;
         try {
-           
-            if($id==0){
-               
+
+            if ($id == 0) {
+
                 $validated = $request->validate([
                     'house_name' => 'required',
                     'active' => 'required',
                 ]);
-            }else{
+            } else {
                 $validated = $request->validate([
                     'house_name' => 'required',
                     'active' => 'required',
                 ]);
             }
-            
-            
-            if($id==0){
-                
+
+
+            if ($id == 0) {
+
                 House::insert($validated);
-                $sms="Successfully Inserted";
-            }else{
-               
-                House::where('id',$id)->update($validated);
-                $sms="Successfully Updated";
+                $sms = "Successfully Inserted";
+            } else {
+
+                House::where('id', $id)->update($validated);
+                $sms = "Successfully Updated";
             }
-            return redirect(route('house.index'))->with('success',$sms);
-          } catch (Exception $e) {
-            
+            return redirect(route('house.index'))->with('success', $sms);
+        } catch (\Exception $e) {
+
             return redirect(route('house.index'))->with(['msg' => $e]);
-          }
+        }
     }
 
     /**
@@ -99,11 +101,11 @@ class HouseController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::user()->group_id!=2 && Auth::user()->group_id!=10){
+        if (Auth::user()->group_id != 2 && Auth::user()->group_id != 10) {
             return 1;
         }
         try {
-            $House=House::find($id);
+            $House = House::find($id);
             $House->delete();
             return 1;
         } catch (Exception $e) {

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>BAF Shanheen College Dhaka</title>
+    <title>SEMS DEMO SCHOOL</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -167,10 +167,10 @@
                         style="width: auto;height: 80px;" />
                 </td>
                 <td class="head" style="width:73.33%;border:0px;text-align:center;">
-                    <h2 style="color: rgb(0,173,239)">BAF Shaheen College Dhaka</h2>
-                    <span>Dhaka Cantonmnet, Dhaka-1206</span>
-                    <br /><span>Web: www.bafsd.edu.bd</span><br />
-                    <span>Email: info@bafsd.edu.bd</span>
+                    <h2 style="color: rgb(0,173,239)">SEMS DEMO SCHOOL</h2>
+                    <span>Dhaka Bangladesh, Dhaka-1200</span>
+                    <br /><span>Web: www.demo.com</span><br />
+                    <span>Email: info@demo.com</span>
                 </td>
                 <td style="width:13.33%;border:0px;text-align:right">
                     <img src="{{ $student->photo ?? '' }}" id="photo_preview" style="height: 80px; width: auto" />
@@ -547,7 +547,7 @@
                 </tr>
                 <tr>
                     <td style="padding: 10px;width:4%;border:0px;font-size: 11pt;font-weight: bold"></td>
-					<td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Category: <span>Son/daughter of
+                    <td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Category: <span>Son/daughter of
                             Armed Forces' Member</span>
                     </td>
                     <td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Service
@@ -622,7 +622,7 @@
                     </td>
                 </tr>
             @else
-               <tr>
+                <tr>
                     <td style="padding: 10px;width:4%;border:0px;font-size: 11pt;font-weight: bold">6.</td>
                     <td colspan="2" style="padding: 10px;width:96%;border:0px;font-size: 11pt;font-weight: bold">
                         Special information for Parent:</td>
@@ -651,9 +651,9 @@
                 <td style="padding: 10px;width:4%;border:0px;font-size: 11pt;font-weight: bold"></td>
                 <td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Shift:
                     {{ $activity->shift->shift_name ?? '' }}</td>
-				<td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Group:
+                <td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Group:
                     {{ $activity->group->group_name ?? '' }}</td>
-				<!--
+                <!--
                 <td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Category:
                     {{ $activity->category->category_name ?? '' }}</td> -->
             </tr>
@@ -670,7 +670,7 @@
                     {{ $activity->section->section_name ?? '' }}</td>
                 <td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Roll: {{ $activity->roll ?? '' }}</td>
             </tr>
-			<!--
+            <!--
             <tr>
                 <td style="padding: 10px;width:4%;border:0px;font-size: 11pt;font-weight: bold"></td>
                 <td style="padding: 10px;width:48%;border:0px;font-size: 11pt;">Group:

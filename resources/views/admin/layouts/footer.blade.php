@@ -6,7 +6,8 @@
                 document.write(new Date().getFullYear())
             </script>,
             <span class="fw-medium text-secondary">Crafted by</span>
-            <a href="+01913366387" target="_blank" class="footer-link fw-bold text-primary text-decoration-none">Shahin
+            <a href="https://www.shahintech.org/" target="_blank"
+                class="footer-link fw-bold text-primary text-decoration-none">Shahin
                 Tech</a>
             <span class="ms-1">| All Rights Reserved</span>
         </div>

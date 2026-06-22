@@ -12,12 +12,12 @@
             margin-bottom: 0px;
             margin: 1px;
             padding: 2px;
-            background-repeat: no-repeat;
-            background-image: url("{{ public_path('logo/logob.png') }}");
+            /* background-repeat: no-repeat;
+            background-image: url("{{ public_path('logo/logo.png') }}"); */
             background-blend-mode: screen;
             background-size: 400px auto;
             background-position: center 165px;
-			border: 1px solid blue;
+            border: 1px solid blue;
         }
 
 
@@ -127,7 +127,7 @@
     @foreach ($studentdata as $key => $student)
         @php
             $student = collect($student)->toArray();
-			//@dd($student);
+            //@dd($student);
         @endphp
         {{-- @php
             $url = $student['photo'];
@@ -170,20 +170,20 @@
                             <td>
                                 <div class="college-info" style="text-align: center;  font-family: freeserif">
                                     <p style="text-align: center;font-size:12.5px;">
-                                        <strong>BAF Shaheen College Dhaka</strong>
+                                        <strong>SEMS DEMO SCHOOL</strong>
                                     </p>
                                     <p class="text-center" style="color: #000; font-size: 9.5px;font-weight:bold">
                                         &nbsp;&nbsp;&nbsp;Dhaka
-                                        Cantonment,
-                                        Dhaka-1206</p>
+                                        Bangladesh,
+                                        Dhaka-1200</p>
                                 </div>
                             </td>
                         </tr>
                     </table>
 
                 </div>
-					
-				<p class="text-center" style="color: #000; font-size: 9.5px;font-weight:bold">Temporary ID Card</p>
+
+                <p class="text-center" style="color: #000; font-size: 9.5px;font-weight:bold">Temporary ID Card</p>
                 <div class="photo-section" style="text-align: center;margin-top: <?= $imageMarginTop ?>;">
                     @if ($student['photo'] && File::exists(public_path(getRelativePath($student['photo']))))
                         <img src="{{ public_path(getRelativePath($student['photo'])) }}" alt="Student Photo"
@@ -214,7 +214,7 @@
                             style="text-align: center;font-size:12px;margin:0px;padding:3px; color: blue; font-family: sans-serif">
                             <strong>{{ strtoupper($student['first_name']) }}</strong>
                         </p>
-						<p
+                        <p
                             style="text-align: center;font-size:10px;margin:0px;padding:3px; color: black; font-family: sans-serif">
                             <strong>Class: XI</strong>
                         </p>
@@ -239,7 +239,7 @@
                         @endif
                         <div style="clear:both;"></div>
                     </div>
-					<!--
+                    <!--
                     <div style="font-size: 9px; margin-top: 4px;">
                         <div style="float:left; width:100%;text-align:left;">
                             <strong>&nbsp;Guardian:</strong>

@@ -444,7 +444,7 @@
                                 class="row-value text-danger fw-bold">{{ $admission->end_date }}</span></div>
 
                         <!--div class="grid-item"><span class="row-label">Seats</span> <span
-                                                                            class="row-value">{{ $admission->number_of_admission }}</span></div-->
+                                                                                    class="row-value">{{ $admission->number_of_admission }}</span></div-->
                         <div class="grid-item"><span class="row-label">Amount</span> <span
                                 class="row-value">{{ $admission->price }}৳</span></div>
 
@@ -492,10 +492,13 @@
                                 <label>SSC Roll Number (এসএসসি রোল নম্বর)<span style="color:red">*</span></label>
                                 <input type="text" class="form-control" id="roll_number" name="roll_number"
                                     value="{{ old('roll_number') }}" required placeholder="SSC Roll Number">
-                                <small class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">
-                                    <i class="fas fa-info-circle"></i> Science: 100000-100274 | B. Studies: 200000-200135 |
-                                    Humanities: 300000-300008
-                                </small>
+                                @if (env('APP_ENV') === 'demo')
+                                    <small class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">
+                                        <i class="fas fa-info-circle"></i> Science: 100000-100274 | B. Studies:
+                                        200000-200135 |
+                                        Humanities: 300000-300008
+                                    </small>
+                                @endif
                             </div>
                             <div class="col-md-6 col-12">
                                 <label>Education Board (শিক্ষাবোর্ড)<span style="color:red">*</span></label>
@@ -514,10 +517,14 @@
                                     <option value="BTEB">BTEB (কারিগরি শিক্ষা)</option>
                                     <option value="BOU">BOU (বাউবি)</option>
                                 </select>
-                                <small class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">
-                                    <i class="fas fa-exclamation-circle" style="color:#dc3545;"></i> Only Dhaka Board is
-                                    eligible
-                                </small>
+                                @if (env('APP_ENV') === 'demo')
+                                    <small class="text-muted" style="font-size:0.75rem; display:block; margin-top:4px;">
+                                        <i class="fas fa-exclamation-circle" style="color:#dc3545;"></i> Only Dhaka Board
+                                        is
+                                        eligible
+                                    </small>
+                                @endif
+
                             </div>
                             <div class="col-md-6 col-12">
                                 <label>Full Name (সম্পূর্ণ নাম)<span style="color:red">*</span></label>

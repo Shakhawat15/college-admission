@@ -20,7 +20,7 @@ class ClassWiseSubjectController extends Controller
         if (Auth::user()->group_id != 2) {
             return 1;
         }
-        Session::put('activemenu', 'class');
+        Session::put('activemenu', 'setting');
         Session::put('activesubmenu', 'sm');
         $classes = Classes::where('active', 1)->with(['shift', 'version'])->get();
 

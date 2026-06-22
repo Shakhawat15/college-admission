@@ -28,7 +28,7 @@ class SectionsController extends Controller
         if (Auth::user()->group_id != 2) {
             return 1;
         }
-        Session::put('activemenu', 'class');
+        Session::put('activemenu', 'setting');
         Session::put('activesubmenu', 'sc');
         $classvalue = Classes::where('active', 1)->get();
         $groups = AcademySection::where('active', 1)->get();
@@ -45,7 +45,7 @@ class SectionsController extends Controller
         if (Auth::user()->group_id != 2) {
             return 1;
         }
-        Session::put('activemenu', 'admission');
+        Session::put('activemenu', 'student');
         Session::put('activesubmenu', 'scws');
         $groupData = [];
         $class_id = $request->class_id;
@@ -158,7 +158,7 @@ class SectionsController extends Controller
         if (Auth::user()->group_id != 2) {
             return 1;
         }
-        Session::put('activemenu', 'admission');
+        Session::put('activemenu', 'student');
         Session::put('activesubmenu', 'sws');
         $groupData = [];
         $class_id = $request->class_id;

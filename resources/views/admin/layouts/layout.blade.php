@@ -549,7 +549,7 @@
 
             <!-- Footer -->
             <footer class="layout-footer">
-                &copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.
+                &copy; {{ date('Y') }} Shahin Tech. All rights reserved.
                 <span class="d-none d-sm-inline">| Version 1.0.0</span>
             </footer>
         </div>

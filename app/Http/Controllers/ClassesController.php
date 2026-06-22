@@ -19,7 +19,7 @@ class ClassesController extends Controller
         if (Auth::user()->group_id != 2) {
             return 1;
         }
-        Session::put('activemenu', 'class');
+        Session::put('activemenu', 'setting');
         Session::put('activesubmenu', 'cl');
         $shifts = Shifts::where('active', 1)->get();
         $versions = Versions::where('active', 1)->get();

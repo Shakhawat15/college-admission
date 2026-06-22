@@ -128,17 +128,32 @@
                 @if (Auth::user()->getMenu('students.index', 'name'))
                     <li class="menu-item {{ Session::get('activesubmenu') == 'si' ? 'highlight' : '' }}">
                         <a href="{{ route('students.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Students Info">Students Info</div>
+                            <div class="text-truncate" data-i18n="Student List">Student List</div>
                         </a>
                     </li>
                 @endif
-                @if (Auth::user()->getMenu('studentXlUpload', 'name') && Auth::user()->is_view_user == 0)
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'spu' ? 'highlight' : '' }}">
-                        <a href="{{ route('studentPIDUpload') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Students PID">Students PID</div>
+                @if (Auth::user()->getMenu('admissionstatus', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'cas' ? 'highlight' : '' }}">
+                        <a href="{{ route('admissionstatus') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Student Statistics">Student
+                                Statistics</div>
                         </a>
                     </li>
                 @endif
+                {{-- @if (Auth::user()->getMenu('subjectWiseStudent', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'sws' ? 'highlight' : '' }}">
+                        <a href="{{ route('subjectWiseStudent') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Subject Wise Student">Subject Wise Student</div>
+                        </a>
+                    </li>
+                @endif
+                @if (Auth::user()->getMenu('sectionWiseStudent', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'scws' ? 'highlight' : '' }}">
+                        <a href="{{ route('sectionWiseStudent') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Section Wise Student">Section Wise Student</div>
+                        </a>
+                    </li>
+                @endif --}}
             </ul>
         </li>
     @endif
@@ -151,28 +166,6 @@
                 <div class="text-truncate" data-i18n="Admission">Admission</div>
             </a>
             <ul class="menu-sub">
-                @if (Auth::user()->getMenu('boardList', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'bl' ? 'highlight' : '' }}">
-                        <a href="{{ route('boardList') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Board List">Board List</div>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->getMenu('admissionstatus', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'cas' ? 'highlight' : '' }}">
-                        <a href="{{ route('admissionstatus') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="College Student Statistics">College Student
-                                Statistics</div>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->getMenu('admissionlist.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'al' ? 'highlight' : '' }}">
-                        <a href="{{ route('admissionlist.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Applicant List">Applicant List</div>
-                        </a>
-                    </li>
-                @endif
                 @if (Auth::user()->getMenu('admissionOpen', 'name'))
                     <li class="menu-item {{ Session::get('activesubmenu') == 'oa' ? 'highlight' : '' }}">
                         <a href="{{ route('admissionOpen') }}" class="menu-link">
@@ -180,13 +173,23 @@
                         </a>
                     </li>
                 @endif
-                @if (Auth::user()->getMenu('sectionWiseStudent', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'scws' ? 'highlight' : '' }}">
-                        <a href="{{ route('sectionWiseStudent') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Section Wise Student">Section Wise Student</div>
+                @if (Auth::user()->getMenu('boardList', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'bl' ? 'highlight' : '' }}">
+                        <a href="{{ route('boardList') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Board List">Board List</div>
                         </a>
                     </li>
                 @endif
+
+                @if (Auth::user()->getMenu('admissionlist.index', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'al' ? 'highlight' : '' }}">
+                        <a href="{{ route('admissionlist.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Applicant List">Applicant List</div>
+                        </a>
+                    </li>
+                @endif
+
+
                 @if (Auth::user()->getMenu('admissionIdCard', 'name'))
                     <li class="menu-item {{ Session::get('activesubmenu') == 'adc' ? 'highlight' : '' }}">
                         <a href="{{ route('admissionIdCard') }}" class="menu-link">
@@ -194,46 +197,7 @@
                         </a>
                     </li>
                 @endif
-                @if (Auth::user()->getMenu('subjectWiseStudent', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'sws' ? 'highlight' : '' }}">
-                        <a href="{{ route('subjectWiseStudent') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Subject Wise Student">Subject Wise Student</div>
-                        </a>
-                    </li>
-                @endif
-            </ul>
-        </li>
-    @endif
 
-    <!-- Class Module -->
-    @if (Auth::user()->getMenu('Class', 'module_name') && Auth::user()->is_view_user == 0)
-        <li class="menu-item {{ Session::get('activemenu') == 'class' ? 'active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
-                <div class="text-truncate" data-i18n="Class">Class</div>
-            </a>
-            <ul class="menu-sub">
-                @if (Auth::user()->getMenu('classes.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'cl' ? 'highlight' : '' }}">
-                        <a href="{{ route('classes.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Class List">Class List</div>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->getMenu('section.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'sc' ? 'highlight' : '' }}">
-                        <a href="{{ route('section.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Section">Section</div>
-                        </a>
-                    </li>
-                @endif
-                @if (Auth::user()->getMenu('subjectmapping.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'sm' ? 'highlight' : '' }}">
-                        <a href="{{ route('subjectmapping.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Subject Mapping">Subject Mapping</div>
-                        </a>
-                    </li>
-                @endif
             </ul>
         </li>
     @endif
@@ -246,10 +210,11 @@
                 <div class="text-truncate" data-i18n="Academy Settings">Academy Settings</div>
             </a>
             <ul class="menu-sub">
-                @if (Auth::user()->getMenu('category.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'cat' ? 'highlight' : '' }}">
-                        <a href="{{ route('category.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Category">Category</div>
+
+                @if (Auth::user()->getMenu('session.index', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'ss' ? 'highlight' : '' }}">
+                        <a href="{{ route('session.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Session">Session</div>
                         </a>
                     </li>
                 @endif
@@ -260,13 +225,7 @@
                         </a>
                     </li>
                 @endif
-                @if (Auth::user()->getMenu('session.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'ss' ? 'highlight' : '' }}">
-                        <a href="{{ route('session.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Session">Session</div>
-                        </a>
-                    </li>
-                @endif
+
                 @if (Auth::user()->getMenu('shift.index', 'name'))
                     <li class="menu-item {{ Session::get('activesubmenu') == 'sh' ? 'highlight' : '' }}">
                         <a href="{{ route('shift.index') }}" class="menu-link">
@@ -281,13 +240,6 @@
                         </a>
                     </li>
                 @endif
-                @if (Auth::user()->getMenu('subject.index', 'name'))
-                    <li class="menu-item {{ Session::get('activesubmenu') == 'su' ? 'highlight' : '' }}">
-                        <a href="{{ route('subject.index') }}" class="menu-link">
-                            <div class="text-truncate" data-i18n="Subject">Subject</div>
-                        </a>
-                    </li>
-                @endif
                 @if (Auth::user()->getMenu('house.index', 'name'))
                     <li class="menu-item {{ Session::get('activesubmenu') == 'ho' ? 'highlight' : '' }}">
                         <a href="{{ route('house.index') }}" class="menu-link">
@@ -295,6 +247,36 @@
                         </a>
                     </li>
                 @endif
+                @if (Auth::user()->getMenu('classes.index', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'cl' ? 'highlight' : '' }}">
+                        <a href="{{ route('classes.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Class">Class</div>
+                        </a>
+                    </li>
+                @endif
+                @if (Auth::user()->getMenu('section.index', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'sc' ? 'highlight' : '' }}">
+                        <a href="{{ route('section.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Section">Section</div>
+                        </a>
+                    </li>
+                @endif
+
+                @if (Auth::user()->getMenu('subject.index', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'su' ? 'highlight' : '' }}">
+                        <a href="{{ route('subject.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Subject">Subject</div>
+                        </a>
+                    </li>
+                @endif
+                @if (Auth::user()->getMenu('subjectmapping.index', 'name'))
+                    <li class="menu-item {{ Session::get('activesubmenu') == 'sm' ? 'highlight' : '' }}">
+                        <a href="{{ route('subjectmapping.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Subject Mapping">Subject Mapping</div>
+                        </a>
+                    </li>
+                @endif
+
             </ul>
         </li>
     @endif

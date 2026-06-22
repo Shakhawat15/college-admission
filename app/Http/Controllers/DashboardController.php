@@ -830,7 +830,7 @@ class DashboardController extends Controller
     }
     public function admissionstatus()
     {
-        Session::put('activemenu', 'admission');
+        Session::put('activemenu', 'student');
         Session::put('activesubmenu', 'cas');
         $m = date('m');
         if ($m >= 6) {

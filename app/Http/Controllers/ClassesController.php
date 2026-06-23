@@ -23,7 +23,7 @@ class ClassesController extends Controller
         Session::put('activesubmenu', 'cl');
         $shifts = Shifts::where('active', 1)->get();
         $versions = Versions::where('active', 1)->get();
-        $classvalue = Classes::with('shift')->where('active', 1)->get();
+        $classvalue = Classes::with(['shift', 'version'])->where('active', 1)->get();
         return view('setting.classes', compact('classvalue', 'shifts', 'versions'));
     }
 

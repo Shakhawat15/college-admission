@@ -1,171 +1,506 @@
 @extends('admin.layouts.layout')
 @section('content')
+    <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('public/backend') }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="{{ asset('public/backend') }}/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="{{ asset('public/backend') }}/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
     <link rel="stylesheet" href="{{ asset('public/backend') }}/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="{{ asset('public/backend') }}/assets/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="{{ asset('public/backend') }}/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="{{ asset('public/backend') }}/assets/vendor/libs/tagify/tagify.css" />
     <link rel="stylesheet"
         href="{{ asset('public/backend') }}/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
+
+    <style>
+        /* ============================================
+                   CLASS PAGE STYLES - VIBRANT INDIGO EDITION
+                   ============================================ */
+
+        /* Cards - Modern Design */
+        .modern-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .modern-card:hover {
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        /* List Card - Gradient Header */
+        .list-card .card-header {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: #fff;
+            border: none;
+            padding: 1.2rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .list-card .card-header i {
+            margin-right: 10px;
+        }
+
+        /* Form Card - Colorful Header */
+        .form-card .card-header {
+            background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 100%);
+            color: #fff;
+            border: none;
+            padding: 1.2rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .form-card .card-header i {
+            margin-right: 10px;
+        }
+
+        /* Table Design */
+        .table-modern {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .table-modern thead th {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-bottom: 2px solid #e2e8f0;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #475569;
+            padding: 1rem 1.2rem;
+        }
+
+        .table-modern tbody td {
+            padding: 0.9rem 1.2rem;
+            vertical-align: middle;
+            font-size: 0.9rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .table-modern tbody tr {
+            transition: all 0.3s ease;
+        }
+
+        .table-modern tbody tr:hover {
+            background: #f8fafc;
+            transform: scale(1.01);
+        }
+
+        /* Status Badges */
+        .status-badge {
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .status-badge.active {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #065f46;
+            box-shadow: 0 2px 10px rgba(16, 185, 129, 0.2);
+        }
+
+        .status-badge.inactive {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            color: #991b1b;
+            box-shadow: 0 2px 10px rgba(239, 68, 68, 0.2);
+        }
+
+        /* Class For Badges */
+        .class-for-badge {
+            padding: 0.2rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .class-for-badge.primary {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: #1e40af;
+        }
+
+        .class-for-badge.secondary {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            color: #065f46;
+        }
+
+        .class-for-badge.college {
+            background: linear-gradient(135deg, #ede9fe 0%, #c4b5fd 100%);
+            color: #5b21b6;
+        }
+
+        .class-for-badge.university {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            color: #92400e;
+        }
+
+        .class-for-badge.english {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            color: #9d174d;
+        }
+
+        /* Action Buttons */
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .action-btn.edit {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+        }
+
+        .action-btn.delete {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Form Elements */
+        .form-control-modern {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .form-control-modern:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-label-modern {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #475569;
+            margin-bottom: 0.3rem;
+        }
+
+        .form-select-modern {
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .form-select-modern:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Submit Button */
+        .btn-gradient {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(99, 102, 241, 0.4);
+            color: #fff;
+        }
+
+        .btn-gradient:active {
+            transform: translateY(0);
+        }
+
+        .btn-gradient-secondary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.6rem 1.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-gradient-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.4);
+            color: #fff;
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.7s ease forwards;
+        }
+
+        .animate-fade-in:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+        .animate-fade-in:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+        .animate-fade-in:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+        .animate-fade-in:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+        .animate-fade-in:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .table-modern thead th,
+            .table-modern tbody td {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .table-modern thead th,
+            .table-modern tbody td {
+                padding: 0.4rem 0.6rem;
+                font-size: 0.75rem;
+            }
+            .form-control-modern {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+
 <div class="content-wrapper">
     <!-- Content -->
-    <div class="container-xxl flex-grow-1 container-p-y">
-       <h4 class="py-3 mb-4">
-          <span class="text-muted fw-light">Dashboard /</span> Class
-       </h4>
+    <div class="container-xxl flex-grow-1 container-p-y pt-4">
+
+        <!-- Simple Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4 animate-fade-in">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{{ route('dashboard') }}" style="color: #6366f1; text-decoration: none;">
+                        <i class="bx bx-home me-1"></i> Dashboard
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" style="color: #4f46e5; font-weight: 600;">
+                    <i class="bx bx-book me-1"></i> Class
+                </li>
+            </ol>
+        </nav>
+
+       <!-- Main Content Row -->
        <div class="row mb-4">
-          <!-- Browser Default -->
-          <div class="col-md mb-4 mb-md-0">
-             <div class="card">
-                <h5 class="card-header">Class List</h5>
-                <div class="table-responsive text-nowrap">
-                    <table class="table">
-                      <thead>
-                        <tr class="text-nowrap">
-                          <th>#</th>
-                          <th>Class Name</th>
-                          <th>Class For</th>
-                          <th>Shift</th>
-                          <th>Active</th>
-                          @if (Auth::user()->is_view_user == 0)
-                          <th>Action</th>
-                          @endif
-                        </tr>
-                      </thead>
-                      <tbody class="table-border-bottom-0">
-                        @foreach ($classvalue as $key => $classdata)
-                        <tr id="row{{ $classdata->id }}">
-                          <th scope="row">{{ $key + 1 }}</th>
-                          <td>{{ $classdata->class_name }}</td>
-                          <td>
-                            @if ($classdata->class_for == 1)
-                            Primary
-                            @elseif($classdata->class_for == 2)
-                            Secondary
-                            @elseif($classdata->class_for == 3)
-                            Collage
-                            @elseif($classdata->class_for == 4)
-                            University
-                            @elseif($classdata->class_for == 5)
-                            English Medium
-                            @endif
-                          </td>
-                          <td>{{ $classdata->shift->shift_name ?? '' }}</td>
-                          <td>
-                            @if ($classdata->active == 1)
-                            Active
-                            @elseif($classdata->active == 0)
-                            Inactive
-                            @endif
-                          </td>
-                          @if (Auth::user()->is_view_user == 0)
-                          <td>
-                            <div class="dropdown">
-                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-vertical-rounded"></i></button>
-                                 <div class="dropdown-menu" style="">
-                                     <a class="dropdown-item edit"
-                                     data-id="{{ $classdata->id }}"
-                                     data-class_name="{{ $classdata->class_name }}"
-                                     data-class_code="{{ $classdata->class_code }}"
-                                     data-active="{{ $classdata->active }}"
-                                     data-shift_id="{{ $classdata->shift_id }}"
-                                     data-class_for="{{ $classdata->class_for }}"
-                                     data-version_id="{{ $classdata->version_id }}"
-                                     href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                     <a class="dropdown-item delete" data-url="{{ route('classes.destroy', $classdata->id) }}" data-id="{{ $classdata->id }}"  href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                 </div>
-                             </div>
-                           </td>
-                          @endif
-                        </tr> @endforeach
-                      </tbody>
-                    </table>
-                  </div>
+          <!-- Class List Card -->
+          <div class="col-md mb-4 mb-md-0 animate-fade-in">
+             <div class="card modern-card list-card">
+                <h5 class="card-header">
+                    <i class="bx bx-book me-1"></i> Class List
+                    <span class="badge bg-light text-dark ms-2">{{ count($classvalue) }}</span>
+                </h5>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-modern mb-0">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">SL</th>
+                                    <th>Class</th>
+                                    <th>Version</th>
+                                    <th>Shift</th>
+                                    <th>Status</th>
+                                    @if (Auth::user()->is_view_user == 0)
+                                    <th style="width: 100px; text-align: center;">Actions</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($classvalue as $key => $classdata)
+                                <tr id="row{{ $classdata->id }}">
+                                    <td>
+                                        <span class="fw-bold" style="color: #6366f1;">{{ $key + 1 }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="fw-semibold">{{ $classdata->class_name }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">
+                                            {{ $classdata->version->version_name ?? 'N/A' }}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark border">{{ $classdata->shift->shift_name ?? 'N/A' }}</span>
+                                    </td>
+                                    <td>
+                                        <span class="status-badge {{ $classdata->active == 1 ? 'active' : 'inactive' }}">
+                                            <i class="bx {{ $classdata->active == 1 ? 'bx-check-circle' : 'bx-x-circle' }} me-1"></i>
+                                            {{ $classdata->active == 1 ? 'Active' : 'Inactive' }}
+                                        </span>
+                                    </td>
+                                    @if (Auth::user()->is_view_user == 0)
+                                    <td style="text-align: center;">
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <button class="action-btn edit"
+                                                data-id="{{ $classdata->id }}"
+                                                data-class_name="{{ $classdata->class_name }}"
+                                                data-class_code="{{ $classdata->class_code }}"
+                                                data-active="{{ $classdata->active }}"
+                                                data-shift_id="{{ $classdata->shift_id }}"
+                                                data-class_for="{{ $classdata->class_for }}"
+                                                data-version_id="{{ $classdata->version_id }}"
+                                                title="Edit">
+                                                <i class="bx bx-edit-alt"></i>
+                                            </button>
+                                            <button class="action-btn delete"
+                                                data-url="{{ route('classes.destroy', $classdata->id) }}"
+                                                data-id="{{ $classdata->id }}"
+                                                title="Delete">
+                                                <i class="bx bx-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                    @endif
+                                </tr> @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
              </div>
           </div>
-          <!-- /Browser Default -->
-          <!-- Bootstrap Validation -->
-          <div class="col-md">
-    <div class="card">
-        <h5 class="card-header">Class Entry</h5>
+
+          <!-- Class Form Card -->
+          <div class="col-md
+        animate-fade-in">
+    <div class="card modern-card form-card">
+        <h5 class="card-header">
+            <i class="bx bx-plus-circle me-1"></i> <span id="formTitle">Add New Class</span>
+        </h5>
         <div class="card-body">
             <form class="needs-validation" method="post" action="{{ route('classes.store') }}" novalidate=""
                 id="formsubmit">
                 @csrf
                 <input type="hidden" name="id" id="id" value="0" />
+
                 <div class="mb-3">
-                    <label class="form-label" for="bs-validation-name">Class Name</label>
-                    <input type="text" class="form-control" name="class_name" id="class_name" placeholder="Class Name"
-                        required="">
+                    <label class="form-label-modern" for="class_name">
+                        <i class="bx bx-text me-1" style="color: #6366f1;"></i> Class Name
+                    </label>
+                    <input type="text" class="form-control form-control-modern" name="class_name" id="class_name"
+                        placeholder="Enter class name" required="">
                     <div class="valid-feedback"> Looks good! </div>
                     <div class="invalid-feedback"> Please enter Class Name. </div>
                 </div>
+
                 <div class="mb-3">
-                    <label class="form-label" for="bs-validation-name">Class Code</label>
-                    <input type="text" class="form-control" name="class_code" id="class_code" placeholder="Class Code"
-                        required="">
+                    <label class="form-label-modern" for="class_code">
+                        <i class="bx bx-hash me-1" style="color: #6366f1;"></i> Class Code
+                    </label>
+                    <input type="text" class="form-control form-control-modern" name="class_code" id="class_code"
+                        placeholder="Enter class code" required="">
                     <div class="valid-feedback"> Looks good! </div>
                     <div class="invalid-feedback"> Please enter Class Code. </div>
                 </div>
+
                 <div class="mb-3">
-                    <label class="form-label" for="bs-Session For">Class For</label>
-                    <select class="form-select" name="class_for" id="class_for" required="">
+                    <label class="form-label-modern" for="class_for">
+                        <i class="bx bx-layer me-1" style="color: #6366f1;"></i> Class For
+                    </label>
+                    <select class="form-select form-select-modern" name="class_for" id="class_for" required="">
                         <option value="">Select Class For</option>
                         <option value="1">Primary</option>
                         <option value="2">Secondary</option>
-                        <option value="3">Collage</option>
+                        <option value="3">College</option>
                         <option value="5">English Medium</option>
-                        {{-- <option value="4">University</option> --}}
-
-
                     </select>
                     <div class="valid-feedback"> Looks good! </div>
-                    <div class="invalid-feedback"> Please select Session For </div>
+                    <div class="invalid-feedback"> Please select Class For. </div>
                 </div>
+
                 <div class="mb-3">
-                    <label class="form-label" for="bs-Active">Version</label>
-                    <select class="form-select" name="version_id" id="version_id" required="">
+                    <label class="form-label-modern" for="version_id">
+                        <i class="bx bx-layer me-1" style="color: #6366f1;"></i> Version
+                    </label>
+                    <select class="form-select form-select-modern" name="version_id" id="version_id" required="">
                         <option value="">Select Version</option>
                         @foreach ($versions as $version)
                             <option value="{{ $version->id }}">{{ $version->version_name }}</option>
                         @endforeach
-
-
                     </select>
                     <div class="valid-feedback"> Looks good! </div>
-                    <div class="invalid-feedback"> Please select Active </div>
+                    <div class="invalid-feedback"> Please select Version. </div>
                 </div>
+
                 <div class="mb-3">
-                    <label class="form-label" for="bs-Active">Shift</label>
-                    <select class="form-select" name="shift_id" id="shift_id" required="">
+                    <label class="form-label-modern" for="shift_id">
+                        <i class="bx bx-time me-1" style="color: #6366f1;"></i> Shift
+                    </label>
+                    <select class="form-select form-select-modern" name="shift_id" id="shift_id" required="">
                         <option value="">Select Shift</option>
                         @foreach ($shifts as $shift)
                             <option value="{{ $shift->id }}">{{ $shift->shift_name }}</option>
                         @endforeach
-
-
                     </select>
                     <div class="valid-feedback"> Looks good! </div>
-                    <div class="invalid-feedback"> Please select Active </div>
+                    <div class="invalid-feedback"> Please select Shift. </div>
                 </div>
-                <div class="mb-3">
-                    <label class="form-label" for="bs-Active">Active</label>
-                    <select class="form-select" name="active" id="active" required="">
-                        <option value="">Select Active</option>
+
+                <div class="mb-4">
+                    <label class="form-label-modern" for="active">
+                        <i class="bx bx-toggle-left me-1" style="color: #6366f1;"></i> Status
+                    </label>
+                    <select class="form-select form-select-modern" name="active" id="active" required="">
+                        <option value="">Select Status</option>
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
-
                     </select>
                     <div class="valid-feedback"> Looks good! </div>
-                    <div class="invalid-feedback"> Please select Active </div>
+                    <div class="invalid-feedback"> Please select Status. </div>
                 </div>
 
                 <div class="row">
                     <div class="col-12">
                         @if (Auth::user()->is_view_user == 0)
-                            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-gradient" id="submit">
+                                    <i class="bx bx-save me-1"></i> <span id="submitText">Save Class</span>
+                                </button>
+                                <button type="button" class="btn btn-gradient-secondary" id="resetForm">
+                                    <i class="bx bx-reset me-1"></i> Reset
+                                </button>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -173,43 +508,44 @@
         </div>
     </div>
     </div>
-    <!-- /Bootstrap Validation -->
     </div>
-
     </div>
     <!-- / Content -->
 
     <div class="content-backdrop fade"></div>
     </div>
 
+    <!-- JavaScript -->
     <script>
         @if ($errors->any())
-
             Swal.fire({
                 title: "Error",
                 text: "{{ implode(',', $errors->all(':message')) }}",
-                icon: "warning"
+                icon: "warning",
+                confirmButtonColor: '#6366f1'
             });
         @endif
-        @if (Session::get('success'))
 
+        @if (Session::get('success'))
             Swal.fire({
                 title: "Good job!",
                 text: "{{ Session::get('success') }}",
-                icon: "success"
+                icon: "success",
+                confirmButtonColor: '#6366f1'
             });
         @endif
 
         @if (Session::get('error'))
-
             Swal.fire({
                 title: "Error",
                 text: "{{ Session::get('error') }}",
-                icon: "warning"
+                icon: "warning",
+                confirmButtonColor: '#6366f1'
             });
         @endif
 
         $(function() {
+            // Edit Class
             $(document.body).on('click', '.edit', function() {
                 var id = $(this).data('id');
                 var class_name = $(this).data('class_name');
@@ -218,6 +554,7 @@
                 var shift_id = $(this).data('shift_id');
                 var version_id = $(this).data('version_id');
                 var class_for = $(this).data('class_for');
+
                 $('#id').val(id);
                 $('#class_name').val(class_name);
                 $('#class_code').val(class_code);
@@ -225,50 +562,106 @@
                 $('#shift_id').val(shift_id);
                 $('#version_id').val(version_id);
                 $('#class_for').val(class_for);
-                $('#submit').text('Update');
+
+                $('#submit').removeClass('btn-gradient').addClass('btn-gradient-secondary');
+                $('#submitText').text('Update Class');
+                $('#formTitle').text('Edit Class');
+
+                // Scroll to form
+                $('html, body').animate({
+                    scrollTop: $(".form-card").offset().top - 100
+                }, 500);
             });
 
+            // Reset Form
+            $('#resetForm').on('click', function() {
+                $('#id').val(0);
+                $('#class_name').val('');
+                $('#class_code').val('');
+                $('#active').val('');
+                $('#shift_id').val('');
+                $('#version_id').val('');
+                $('#class_for').val('');
 
+                $('#submit').removeClass('btn-gradient-secondary').addClass('btn-gradient');
+                $('#submitText').text('Save Class');
+                $('#formTitle').text('Add New Class');
+
+                // Remove any validation errors
+                $('.is-invalid').removeClass('is-invalid');
+                $('.invalid-feedback').hide();
+            });
+
+            // Delete Class
             $(document.body).on('click', '.delete', function() {
                 var id = $(this).data('id');
                 var url = $(this).data('url');
-                $.ajax({
-                    type: "delete",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-                    },
-                    url: url,
-                    data: {
-                        "_token": "{{ csrf_token() }}"
-                    },
-                    success: function(response) {
-                        if (response == 1) {
-                            Swal.fire({
-                                title: "Good job!",
-                                text: "Deleted successfully",
-                                icon: "success"
-                            });
-                            $('#row' + id).remove();
-                        } else {
-                            Swal.fire({
-                                title: "Error!",
-                                text: response,
-                                icon: "warning"
-                            });
-                        }
 
-                    },
-                    error: function(data, errorThrown) {
-                        Swal.fire({
-                            title: "Error",
-                            text: errorThrown,
-                            icon: "warning"
+                Swal.fire({
+                    title: 'Delete Class?',
+                    text: 'This action cannot be undone!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ef4444',
+                    cancelButtonColor: '#64748b',
+                    confirmButtonText: '<i class="bx bx-trash me-1"></i> Yes, Delete',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "delete",
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                            },
+                            url: url,
+                            data: {
+                                "_token": "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                if (response == 1) {
+                                    Swal.fire({
+                                        title: "Deleted!",
+                                        text: "Class deleted successfully",
+                                        icon: "success",
+                                        confirmButtonColor: '#6366f1'
+                                    });
+                                    $('#row' + id).remove();
+                                } else {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: response,
+                                        icon: "warning",
+                                        confirmButtonColor: '#6366f1'
+                                    });
+                                }
+                            },
+                            error: function(data, errorThrown) {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: errorThrown,
+                                    icon: "warning",
+                                    confirmButtonColor: '#6366f1'
+                                });
+                            }
                         });
-
                     }
                 });
             });
 
+            // Form validation
+            (function() {
+                'use strict';
+                var forms = document.querySelectorAll('.needs-validation');
+                Array.prototype.slice.call(forms).forEach(function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            })();
         });
     </script>
 @endsection

@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\sttings\AcademySection;
 use App\Models\sttings\Classes;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Session;
+
 class AcademySectionController extends Controller
 {
     /**
@@ -13,11 +14,11 @@ class AcademySectionController extends Controller
      */
     public function index()
     {
-        Session::put('activemenu','setting');
-        Session::put('activesubmenu','gu');
-        $classvalue=Classes::where('active',1)->whereIn('class_for',[2,3,4])->get();
-        $academyGroups=AcademySection::all();
-        return view('setting.group',compact('classvalue','academyGroups'));
+        Session::put('activemenu', 'setting');
+        Session::put('activesubmenu', 'gu');
+        $classvalue = Classes::where('active', 1)->whereIn('class_for', [2, 3, 4])->get();
+        $academyGroups = AcademySection::all();
+        return view('setting.group', compact('classvalue', 'academyGroups'));
     }
 
     /**
@@ -33,39 +34,39 @@ class AcademySectionController extends Controller
      */
     public function store(Request $request)
     {
-        $id=$request->id;
+        $id = $request->id;
         try {
-           
-            if($id==0){
-               
+
+            if ($id == 0) {
+
                 $validated = $request->validate([
                     'group_name' => 'required',
                     'active' => 'required',
                     'class_id' => 'required',
                 ]);
-            }else{
+            } else {
                 $validated = $request->validate([
                     'group_name' => 'required',
                     'active' => 'required',
                     'class_id' => 'required',
                 ]);
             }
-            
-            
-            if($id==0){
-                
+
+
+            if ($id == 0) {
+
                 AcademySection::insert($validated);
-                $sms="Successfully Inserted";
-            }else{
-               
-                AcademySection::where('id',$id)->update($validated);
-                $sms="Successfully Updated";
+                $sms = "Successfully Inserted";
+            } else {
+
+                AcademySection::where('id', $id)->update($validated);
+                $sms = "Successfully Updated";
             }
-            return redirect(route('group.index'))->with('success',$sms);
-          } catch (Exception $e) {
-            
+            return redirect(route('group.index'))->with('success', $sms);
+        } catch (Exception $e) {
+
             return redirect(route('group.index'))->with(['msg' => $e]);
-          }
+        }
     }
 
     /**
@@ -98,7 +99,7 @@ class AcademySectionController extends Controller
     public function destroy($id)
     {
         try {
-            $Sessions=AcademySection::find($id);
+            $Sessions = AcademySection::find($id);
             $Sessions->delete();
             return 1;
         } catch (Exception $e) {

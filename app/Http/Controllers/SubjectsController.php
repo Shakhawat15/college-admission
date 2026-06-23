@@ -20,7 +20,10 @@ class SubjectsController extends Controller
         }
         Session::put('activemenu', 'setting');
         Session::put('activesubmenu', 'su');
-        $subjects = Subjects::all();
+
+        // CHANGE THIS LINE: Use paginate() instead of all()
+        $subjects = Subjects::paginate(10); // 10 items per page
+
         foreach ($subjects as $key => $subject) {
             $groupid = explode(",", $subject->group_id);
             $subjects[$key]->group = AcademySection::whereIn('id', $groupid)->get();

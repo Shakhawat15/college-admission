@@ -1,4 +1,9 @@
 @extends('admin.layouts.layout')
+
+@section('title', 'Students List')
+
+@section('page-title', 'Students')
+
 @section('content')
     <style>
         .control {
@@ -77,29 +82,11 @@
 
         .swal2-container {
             z-index: 9999 !important;
-            /* Ensure it is above Bootstrap modals */
         }
     </style>
-    @php
-        use Illuminate\Support\Facades\Cache;
-        use Illuminate\Support\Facades\DB;
 
-        function getCauserName($userId, $datetime)
-        {
-            // Check if the user ID is valid
-            if (!$userId) {
-                return 'N/A';
-            }
 
-            // Fetch the user data from the cache or database
-            $user = Cache::remember("user_$userId", 60, function () use ($userId) {
-                return DB::table('users')->find($userId);
-            });
 
-            // Return the user's name and datetime, or 'N/A' if the user doesn't exist
-            return optional($user)->name ? $user->name . ' ' . $datetime : 'N/A';
-        }
-    @endphp
     <div class="content-wrapper">
         <!-- Content -->
         <div class="container-xxl flex-grow-1 container-p-y">
@@ -183,7 +170,6 @@
                                             class="btn btn-primary me-2  btn-block">Search</button>
                                         <button type="button" id="resetbtn"
                                             class="btn btn-danger me-2  btn-block">Reset</button>
-
                                     </div>
                                 </div>
                             </div>
@@ -213,21 +199,21 @@
                                     </label>
                                 </div>
                             </div>
-							@if (Auth::user()->is_view_user == 0)
-								<div class="d-flex align-items-center justify-sapce-beteween gap-3">
-									<div>
-										<button type="button" id="printBtn" class="btn btn-success btn-sm"
-											style="display: none">Print</button>
-									</div>
-									@if (Auth::user()->group_id != 6)
-										<div>
-											<button type="button" class="btn btn-success btn-sm" id="excelDownload"
-												style="display: none">Excel
-												Download</button>
-										</div>
-									@endif
-								</div>
-							@endif
+                            @if (Auth::user()->is_view_user == 0)
+                                <div class="d-flex align-items-center justify-sapce-beteween gap-3">
+                                    <div>
+                                        <button type="button" id="printBtn" class="btn btn-success btn-sm"
+                                            style="display: none">Print</button>
+                                    </div>
+                                    @if (Auth::user()->group_id != 6)
+                                        <div>
+                                            <button type="button" class="btn btn-success btn-sm" id="excelDownload"
+                                                style="display: none">Excel
+                                                Download</button>
+                                        </div>
+                                    @endif
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -250,14 +236,9 @@
                                         <tr>
                                             <th style="width: 20px;">SL</th>
                                             <th style="width: 50px;">Roll</th>
-                                            <th style="width: 60px;">SID</th>
-                                            <th style="width: 60px;">PID</th>
                                             <th style="width: 250px;">Name</th>
-                                            <th style="width: 100px;">Father Name</th>
                                             <th style="width: 100px;">Gender</th>
                                             <th style="width: 100px;">Email/Phone</th>
-                                            <th style="width: 180px;">Created</th>
-                                            <th style="width: 180px;">Updated</th>
                                             <th style="width: 60px;">Actions</th>
                                         </tr>
                                     </thead>
@@ -270,16 +251,10 @@
                                                 </td>
                                                 <td style="width: 50px;text-align:left;">
                                                     {{ $student->studentActivity->roll ?? '' }}</td>
-                                                <td style="width: 140px;text-align:left;">
-                                                    {{ $student->student_code ?? '' }}</td>
-                                                <td style="width: 140px;text-align:left;">{{ $student->PID ?? 'NA' }}</td>
-                                                <td class="studentinfo" data-studentcode="{{ $student->student_code }}"
-                                                    style="width: 200px;">
+                                                <td style="width: 200px;">
                                                     <img src="{{ $student->photo ?? asset('public/student.png') }}"
                                                         alt="Avatar" class="rounded avatar avatar-xl student-photo">
                                                     {{ strtoupper($student->first_name . ' ' . $student->last_name) }}
-                                                </td>
-                                                <td style="width: 200px;">{{ strtoupper($student->father_name) ?? '' }}
                                                 </td>
                                                 <td style="width: 100px;text-align:left;">
                                                     {{ $student->gender == 1 ? 'Male' : 'Female' }}
@@ -287,13 +262,6 @@
                                                 <td style="width: 100px;text-align:left;">
                                                     {{ $student->email ?? '' }}<br />
                                                     {{ $student->mobile ? $student->mobile : ($student->father_phone ? $student->father_phone : $student->sms_notification) }}
-                                                </td>
-
-                                                <td style="width: 180px;">
-                                                    {{ getCauserName($student->created_by, $student->created_at) }}
-                                                </td>
-                                                <td style="width: 180px;">
-                                                    {{ getCauserName($student->updated_by, $student->updated_at) }}
                                                 </td>
                                                 <td style="width: 60px;text-align:left;">
                                                     <div class="dropdown">
@@ -325,24 +293,13 @@
                                                                     <i class="bx bx-block me-1"></i>Inactive
                                                                 </button>
                                                             @endif
-                                                            @if (
-                                                                (Auth::user()->group_id == 2 || Auth::user()->group_id == 8) &&
-                                                                    $student->pid == null &&
-                                                                    Auth::user()->is_view_user == 0)
-                                                                <button class="dropdown-item text-info"
-                                                                    onclick="openPIDModal({{ $student->id }})">
-                                                                    <i class="bx bx-money me-1"></i> Add PID
-                                                                </button>
-                                                            @endif
-                                                            @if (
-                                                                (Auth::user()->group_id == 2 || Auth::user()->group_id == 8) &&
-                                                                    $student->pid == null &&
-                                                                    Auth::user()->is_view_user == 0)
-                                                                <button class="dropdown-item text-info"
-                                                                    onclick="disciplinaryIssuesModal({{ $student->id }})">
-                                                                    <i class="bx bx-money me-1"></i> disciplinary issues
-                                                                </button>
-                                                            @endif
+                                                            <!-- New Download PDF Option -->
+                                                            <a class="dropdown-item"
+                                                                href="{{ route('student.download.pdf', $student->id) }}"
+                                                                target="_blank">
+                                                                <i class="bx bx-file me-1" style="color: #dc3545;"></i>
+                                                                Download PDF
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -413,7 +370,8 @@
                     </div>
                 </div>
             </div>
-            <div class="modal fade" id="disciplinaryIssuesModal" tabindex="-1" aria-labelledby="pIdModalLabel" aria-hidden="true">
+            <div class="modal fade" id="disciplinaryIssuesModal" tabindex="-1" aria-labelledby="pIdModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -423,21 +381,23 @@
                             <input type="hidden" id="studentId">
                             <div class="mb-3">
                                 <label for="photo" class="form-label">Upload Disciplinary Issues
-                                                (pdf,jpg,jpeg format)<span class="text-danger">*</span></label>
-                                            <input class="form-control" type="file" id="photo"
-                                                onchange="loadFile(event,'disciplinary_issues_preview')" name="photo">
-                                            <span style="color: rgb(0,149,221)">(File size max 2000 KB)</span>
-                                            <input class="form-control" type="hidden" id="disciplinary_issues_old"
-                                                value="" name="disciplinary_issues_old">
+                                    (pdf,jpg,jpeg format)<span class="text-danger">*</span></label>
+                                <input class="form-control" type="file" id="photo"
+                                    onchange="loadFile(event,'disciplinary_issues_preview')" name="photo">
+                                <span style="color: rgb(0,149,221)">(File size max 2000 KB)</span>
+                                <input class="form-control" type="hidden" id="disciplinary_issues_old" value=""
+                                    name="disciplinary_issues_old">
 
-                                            <div class="mb-3 col-md-12">
-                                                <img src="" id="disciplinary_issues_preview"
-                                                    style="height: 100px; width: auto" />
-                                            </div>
+                                <div class="mb-3 col-md-12">
+                                    <img src="" id="disciplinary_issues_preview"
+                                        style="height: 100px; width: auto" />
+                                </div>
                             </div>
                             <div class="mb-3">
-                                            <label for="first_name" class="form-label">Details Disciplinary Issues<span class="text-danger">*</span></label>
-                                            <textarea colspan="20" rows="6" class="form-control" type="text" id="details" name="details" required="" placeholder="Details Disciplinary Issues" autofocus=""></textarea>
+                                <label for="first_name" class="form-label">Details Disciplinary Issues<span
+                                        class="text-danger">*</span></label>
+                                <textarea colspan="20" rows="6" class="form-control" type="text" id="details" name="details"
+                                    required="" placeholder="Details Disciplinary Issues" autofocus=""></textarea>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -464,7 +424,6 @@
                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                                 Close
                             </button>
-                            {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
                         </div>
                     </div>
                 </div>
@@ -473,42 +432,37 @@
         <!-- / Content -->
         <div class="content-backdrop fade"></div>
     </div>
+
     <script>
         var loadFile = function(event, preview) {
-
             var sizevalue = (event.target.files[0].size);
-
             if (sizevalue > 200000) {
-
                 Swal.fire({
                     title: "warning!",
                     text: "File Size Too Large",
                     icon: "warning"
                 });
                 var idvalue = preview.slice(0, -8);
-
                 $('#' + idvalue).val('');
                 return false;
             } else {
                 var output = document.getElementById(preview);
                 output.src = URL.createObjectURL(event.target.files[0]);
                 output.onload = function() {
-                    URL.revokeObjectURL(output.src) // free memory
+                    URL.revokeObjectURL(output.src);
                 }
             }
-
         };
-    </script>
-    <script>
+
         function disciplinaryIssuesModal(studentId) {
             document.getElementById('studentId').value = studentId;
-            // Clear previous reason
             var myModal = new bootstrap.Modal(document.getElementById('disciplinaryIssuesModal'));
             myModal.show();
         }
+
         function openPIDModal(studentId) {
             document.getElementById('pIdStudentId').value = studentId;
-            document.getElementById('paymentId').value = ''; // Clear previous reason
+            document.getElementById('paymentId').value = '';
             var myModal = new bootstrap.Modal(document.getElementById('pIdModal'));
             myModal.show();
         }
@@ -522,58 +476,55 @@
                     title: 'Error',
                     text: 'Please enter Payment ID',
                     icon: 'warning',
-                    zIndex: 9999 // Adjust the z-index here (higher than Bootstrap modal's default z-index of 1050)
+                    zIndex: 9999
                 });
                 return;
             }
 
-            // Send AJAX request using jQuery
             $.ajax({
                 type: "POST",
                 url: `{{ route('studentPid', '') }}/${studentId}`,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
-                    "_token": "{{ csrf_token() }}", // CSRF token
+                    "_token": "{{ csrf_token() }}",
                     pid: pid
                 },
                 success: function(response) {
-                    // Check if there's a message indicating success
                     if (response.message) {
                         Swal.fire({
                             title: 'Success',
                             text: response.message,
                             icon: 'success',
-                            zIndex: 9999 // Adjust the z-index here too
+                            zIndex: 9999
                         }).then(() => {
-                            location.reload(); // Reload page to reflect changes
+                            location.reload();
                         });
                     } else {
                         Swal.fire({
                             title: 'Error',
-                            text: 'Failed to mark inactive.',
+                            text: 'Failed to add PID.',
                             icon: 'error',
-                            zIndex: 9999 // Adjust the z-index here too
+                            zIndex: 9999
                         });
                     }
                 },
                 error: function(data, errorThrown) {
-                    // Handle errors
                     Swal.fire({
                         title: "Error",
                         text: errorThrown,
                         icon: "error",
-                        zIndex: 9999 // Adjust the z-index here too
+                        zIndex: 9999
                     });
                 }
             });
         }
+
         function disciplinaryIssues() {
             var fileInput = $('#photo')[0].files[0];
             var details = $('#details').val().trim();
 
-            // Validate file and details
             if (!fileInput) {
                 alert("Please upload a disciplinary issue file.");
                 return;
@@ -584,53 +535,49 @@
                 return;
             }
 
-            // File size check (max 200 KB)
             if (fileInput.size > 2000 * 1024) {
                 alert("File size must be less than 2000 KB.");
                 return;
             }
-            var _token="{{ csrf_token() }}";
+
             var formData = new FormData();
             formData.append('photo', fileInput);
             formData.append('details', details);
             formData.append('student_id', $('#studentId').val());
-            formData.append('_token', _token);
+            formData.append('_token', "{{ csrf_token() }}");
 
             $.ajax({
-                url: '{{ route("saveDisciplinaryIssues") }}', // Replace with your route
+                url: '{{ route('saveDisciplinaryIssues') }}',
                 type: 'POST',
                 data: formData,
                 contentType: false,
                 processData: false,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // if using Laravel
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
                     Swal.fire({
                         title: "Success",
                         text: response,
                         icon: "success",
-                        zIndex: 9999 // Adjust the z-index here too
+                        zIndex: 9999
                     });
                     $('#disciplinaryIssuesModal').modal('hide');
-                    // Optionally clear the form
                 },
                 error: function(xhr) {
                     Swal.fire({
                         title: "Error",
-                        text: xhr,
+                        text: xhr.responseText || "An error occurred",
                         icon: "error",
-                        zIndex: 9999 // Adjust the z-index here too
+                        zIndex: 9999
                     });
-                    
                 }
             });
         }
-    </script>
-    <script>
+
         function openInactiveModal(studentId) {
             document.getElementById('inactiveStudentId').value = studentId;
-            document.getElementById('inactiveReason').value = ''; // Clear previous reason
+            document.getElementById('inactiveReason').value = '';
             var myModal = new bootstrap.Modal(document.getElementById('inactiveModal'));
             myModal.show();
         }
@@ -644,82 +591,52 @@
                     title: 'Error',
                     text: 'Please enter a reason for inactivation.',
                     icon: 'warning',
-                    zIndex: 9999 // Adjust the z-index here (higher than Bootstrap modal's default z-index of 1050)
+                    zIndex: 9999
                 });
                 return;
             }
 
-            // Send AJAX request using jQuery
             $.ajax({
                 type: "POST",
                 url: `{{ route('studentInactive', '') }}/${studentId}`,
                 headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 data: {
-                    "_token": "{{ csrf_token() }}", // CSRF token
+                    "_token": "{{ csrf_token() }}",
                     reason: reason
                 },
                 success: function(response) {
-                    // Check if there's a message indicating success
                     if (response.message) {
                         Swal.fire({
                             title: 'Success',
                             text: response.message,
                             icon: 'success',
-                            zIndex: 9999 // Adjust the z-index here too
+                            zIndex: 9999
                         }).then(() => {
-                            location.reload(); // Reload page to reflect changes
+                            location.reload();
                         });
                     } else {
                         Swal.fire({
                             title: 'Error',
                             text: 'Failed to mark inactive.',
                             icon: 'error',
-                            zIndex: 9999 // Adjust the z-index here too
+                            zIndex: 9999
                         });
                     }
                 },
                 error: function(data, errorThrown) {
-                    // Handle errors
                     Swal.fire({
                         title: "Error",
                         text: errorThrown,
                         icon: "error",
-                        zIndex: 9999 // Adjust the z-index here too
+                        zIndex: 9999
                     });
                 }
             });
         }
     </script>
-    <script>
-        @if (session('success'))
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: "{{ session('success') }}",
-                showConfirmButton: true,
-            });
-        @endif
 
-        @if (session('error'))
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "{{ session('error') }}",
-                showConfirmButton: true
-            });
-        @endif
-
-        @if ($errors->any())
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Errors',
-                html: '<ul>@foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach</ul>',
-                showConfirmButton: true
-            });
-        @endif
-    </script>
     <script>
         // Print button click event
         $(function() {
@@ -731,7 +648,7 @@
                 $('#headerTable th:nth-child(10), #headerTable td:nth-child(10)').hide();
                 $('#headerTable th:nth-child(11), #headerTable td:nth-child(11)').hide();
 
-                var createdBy = "{{ $createdBy }}";
+                var createdBy = "{{ $createdBy ?? '' }}";
 
                 // Get the content element
                 var contentElement = document.getElementById('print-table');
@@ -778,28 +695,22 @@
                     'tr:nth-child(even) { background-color: #f9f9f9; }' +
                     'img.avatar { display: none }' +
                     '#headerTable th:nth-child(3), #headerTable td:nth-child(3) { width: 20px !important; }' +
-                    // SID
                     '#headerTable th:nth-child(4), #headerTable td:nth-child(4) { width: 20px !important; }' +
-                    // PID
                     '#headerTable th:nth-child(7), #headerTable td:nth-child(7) { width: 20px !important; }' +
-                    // Gender
                     '#headerTable th:nth-child(5), #headerTable td:nth-child(5) { width: 240px !important; }' +
-                    // Name
                     '</style>'
                 );
 
-
                 // Add the content from the print-table and append "Created By" dynamically
                 mywindow.document.write('</head><body>');
-                mywindow.document.write('<div id="printContent">' + content +
-                    '</div>'); // Wrap content in a div
+                mywindow.document.write('<div id="printContent">' + content + '</div>');
 
                 // "Created By" section after content
                 mywindow.document.write(`
-            <div style="margin-top: 10px; font-size: 12px; text-align: left;">
-                <p><strong>Created By:</strong> ${createdBy}</p>
-            </div>
-        `);
+                <div style="margin-top: 10px; font-size: 12px; text-align: left;">
+                    <p><strong>Created By:</strong> ${createdBy}</p>
+                </div>
+            `);
 
                 mywindow.document.write('</body></html>');
 
@@ -827,11 +738,8 @@
                 $('#headerTable th:nth-child(10), #headerTable td:nth-child(10)').show();
                 $('#headerTable th:nth-child(11), #headerTable td:nth-child(11)').show();
             });
-        });
 
-        // Search button click event
-        $(function() {
-            // Trigger search when the Search button is clicked
+            // Search button click event
             $('#searchtop').on('click', function() {
                 $.LoadingOverlay("show");
                 fetch_data(1);
@@ -840,22 +748,24 @@
 
             // Trigger search when Enter key is pressed in the #text_search input
             $('#text_search').on('keypress', function(e) {
-                if (e.which === 13) { // Enter key code
+                if (e.which === 13) {
                     e.preventDefault();
-                    fetch_data(1); // Perform the search
+                    fetch_data(1);
                 }
             });
 
             // Handle pagination size change
             $('#pageSize').on('change', function() {
-                fetch_data(1); // Reset to page 1 when the page size changes
+                fetch_data(1);
             });
+
             var globalPage = 1;
+
             // Handle pagination links
             $(document).on('click', '.pagination a', function(e) {
                 e.preventDefault();
                 var page = $(this).attr('href').split('page=')[1];
-                globalPage = page; // Update the global page variable
+                globalPage = page;
                 fetch_data(page);
             });
 
@@ -875,7 +785,7 @@
             var shift_id = $('#shift_id').val();
             var class_code = $('#class_id').val();
             var section_id = $('#section_id').val();
-            var text_search = $('#text_search').val()
+            var text_search = $('#text_search').val();
             var page_size = $('#pageSize').val();
 
             // Build the query string
@@ -892,24 +802,29 @@
             $.ajax({
                 url: url + "?page=" + page + searchtext,
                 success: function(data) {
-                    // console.log(data, "Data");
-                    $('#item-list').html(data); // Populate the student list
-                    window.history.pushState("", "", '?page=' + page + searchtext); // Update the URL
-                    $('#excelDownload').show(); // Show
-                    $('#printBtn').show(); // Show
+                    $('#item-list').html(data);
+                    window.history.pushState("", "", '?page=' + page + searchtext);
+                    $('#excelDownload').show();
+                    $('#printBtn').show();
+                },
+                error: function(data, errorThrown) {
+                    Swal.fire({
+                        title: "Error",
+                        text: errorThrown,
+                        icon: "warning"
+                    });
                 }
             });
         }
 
         function downloadExcel(globalPage) {
-
             var searchQuery = $('#search').val();
             var session_id = $('#session_id').val();
             var version_id = $('#version_id').val();
             var shift_id = $('#shift_id').val();
             var class_code = $('#class_id').val();
             var section_id = $('#section_id').val();
-            var text_search = $('#text_search').val()
+            var text_search = $('#text_search').val();
             var per_page = $('#pageSize').val();
 
             // Build the query string
@@ -928,18 +843,15 @@
             if (APP_ENV === 'local') {
                 var downloadUrl = '/admin/export' + queryString;
             } else if (APP_ENV === 'production') {
-                var downloadUrl = '/admin/export' + queryString
+                var downloadUrl = '/admin/export' + queryString;
             }
 
             // Create a hidden iframe to detect when the download starts
             var iframe = document.createElement('iframe');
             iframe.style.display = 'none';
             iframe.src = downloadUrl;
-            // Append iframe to the body to trigger download
             document.body.appendChild(iframe);
-            // Use a timeout to hide the loader after the download starts
             monitorDownload();
-            // Fallback to hide loader after a maximum time in case of errors
             setTimeout(function() {
                 $.LoadingOverlay("hide");
                 if (document.body.contains(iframe)) {
@@ -949,16 +861,15 @@
         }
 
         function monitorDownload() {
-            // Use a timeout or user action to hide the loader
             setTimeout(function() {
                 $.LoadingOverlay("hide");
-            }, 5000); // Assume download starts within 5 seconds
+            }, 5000);
         }
     </script>
+
     <script>
         // Function to reset filters
         function resetFilters() {
-            // Reset all dropdowns and input fields to their default state
             $('#session_id').val('');
             $('#version_id').val('');
             $('#shift_id').val('');
@@ -966,11 +877,8 @@
             $('#section_id').val('');
             $('#text_search').val('');
 
-            // Hide the result table and clear dynamic data
             document.getElementById('result-table').style.display = 'none';
             $('.dynamic-data').empty();
-
-            // Hide specific buttons or elements
             $('#excelDownload').hide();
         }
 
@@ -983,21 +891,19 @@
         // Check sessionStorage for reload tracking
         $(document).ready(function() {
             if (!sessionStorage.getItem('reloadedOnce')) {
-                // First reload: Clear the URL and reload the page
                 clearURL();
-                sessionStorage.setItem('reloadedOnce', true); // Mark as reloaded once
+                sessionStorage.setItem('reloadedOnce', true);
                 location.reload();
             } else {
-                // Second reload: Clear the table and reset filters
-                sessionStorage.removeItem('reloadedOnce'); // Clear the reload tracking
+                sessionStorage.removeItem('reloadedOnce');
                 resetFilters();
             }
         });
 
         // Attach event listener to the reset button
         $(document.body).on('click', '#resetbtn', function() {
-            sessionStorage.removeItem('reloadedOnce'); // Reset sessionStorage tracking
-            location.reload(); // Reload the page to trigger the sequence
+            sessionStorage.removeItem('reloadedOnce');
+            location.reload();
         });
     </script>
 
@@ -1010,11 +916,10 @@
                 var url = "{{ route('getAttendanceByDate') }}";
                 if (start_date && end_date) {
                     $.LoadingOverlay("show");
-
                     $.ajax({
                         type: "post",
                         headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         url: url,
                         data: {
@@ -1026,8 +931,6 @@
                         success: function(response) {
                             $.LoadingOverlay("hide");
                             $('#attendanceDetails').html(response);
-
-
                         },
                         error: function(data, errorThrown) {
                             $.LoadingOverlay("hide");
@@ -1036,11 +939,11 @@
                                 text: errorThrown,
                                 icon: "warning"
                             });
-
                         }
                     });
                 }
             });
+
             $(document.body).on('click', '.studentinfo', function() {
                 var student_code = $(this).data('studentcode');
                 var session_id = $('#session_id').val();
@@ -1049,7 +952,7 @@
                 $.ajax({
                     type: "post",
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     url: url,
                     data: {
@@ -1060,8 +963,6 @@
                     success: function(response) {
                         $.LoadingOverlay("hide");
                         $('.modal-body').html(response);
-
-
                     },
                     error: function(data, errorThrown) {
                         $.LoadingOverlay("hide");
@@ -1070,14 +971,13 @@
                             text: errorThrown,
                             icon: "warning"
                         });
-
                     }
                 });
                 $('#fullscreenModal').modal('show');
             });
+
             // dynamic table generation
             $(document.body).on('click', '#searchtop', function() {
-                // Get filter values
                 var session_id = $('#session_id').val();
                 var session_text = $('#session_id option:selected').text();
                 var version_id = $('#version_id').val();
@@ -1089,40 +989,28 @@
                 var section_id = $('#section_id').val();
                 var section_text = $('#section_id option:selected').text();
                 var text_search = $('#text_search').val();
-                // Loop through each row in the students table
 
-                // Hide the result table initially
                 $('#result-table').hide();
-                $('.dynamic-data').empty(); // Clear previous results
+                $('.dynamic-data').empty();
 
-                // Logic to generate table rows based on conditions
                 var innerData = '';
 
-                // Create a row based on the session_id (if present)
                 if (session_id) {
-                    innerData += `
-            <span>Session: <strong style="margin-left: 5px">${session_id}</strong></span>`;
+                    innerData +=
+                        `<span>Session: <strong style="margin-left: 5px">${session_id}</strong></span>`;
                 }
-
-                // Create a row based on the version_id (if present)
                 if (version_id) {
                     innerData +=
                         `<span>Version: <strong style="margin-left: 5px">${version_text}</strong> </span>`;
                 }
-
-                // Create a row based on the shift_id (if present)
                 if (shift_id) {
                     innerData +=
                         `<span>Shift: <strong style="margin-left: 5px">${shift_text}</strong></span>`;
                 }
-
-                // Create a row based on the class_code (if present)
                 if (class_code) {
                     innerData +=
                         `<span>Class: <strong style="margin-left: 5px">${class_text}</strong></span>`;
                 }
-
-                // Create a row based on the section_id (if present)
                 if (section_id) {
                     innerData +=
                         `<span>Section: <strong style="margin-left: 5px" >${section_text}</strong></span>`;
@@ -1133,13 +1021,10 @@
                     return;
                 }
 
-                // Add closing tag for row
-                // innerData += '</tr>';
                 $('.dynamic-data').append(innerData);
-                // Show the result table after populating rows
                 $('#result-table').show();
             });
-            // dynamic table generation ends
+
             $(document.body).on('change', '#search_by', function() {
                 if ($('#search').val() && $(this).val()) {
                     location.href = "{{ route('students.index') }}" + '?search_by=' + $(this).val() +
@@ -1147,6 +1032,7 @@
                 }
             });
         });
+
         $(function() {
             $(document.body).on('change', '#class_id', function() {
                 var id = $(this).val();
@@ -1157,7 +1043,7 @@
                 $.ajax({
                     type: "post",
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     url: url,
                     data: {
@@ -1169,8 +1055,6 @@
                     success: function(response) {
                         $.LoadingOverlay("hide");
                         $('#section_id').html(response);
-
-
                     },
                     error: function(data, errorThrown) {
                         $.LoadingOverlay("hide");
@@ -1179,10 +1063,10 @@
                             text: errorThrown,
                             icon: "warning"
                         });
-
                     }
                 });
             });
+
             $(document.body).on('change', '#shift_id', function() {
                 var shift_id = $('#shift_id').val();
                 var version_id = $('#version_id').val();
@@ -1192,7 +1076,7 @@
                     $.ajax({
                         type: "post",
                         headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
                         url: url,
                         data: {
@@ -1211,11 +1095,11 @@
                                 text: errorThrown,
                                 icon: "warning"
                             });
-
                         }
                     });
                 }
             });
+
             $(document.body).on('click', '.delete', function() {
                 var id = $(this).data('id');
                 var url = $(this).data('url');
@@ -1235,7 +1119,7 @@
                         $.ajax({
                             type: "delete",
                             headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                             },
                             url: url,
                             data: {
@@ -1256,7 +1140,6 @@
                                         icon: "warning"
                                     });
                                 }
-
                             },
                             error: function(data, errorThrown) {
                                 Swal.fire({
@@ -1264,17 +1147,41 @@
                                     text: errorThrown,
                                     icon: "warning"
                                 });
-
                             }
                         });
-                    } else if (result.isDenied) {
-
                     }
-                })
-
+                });
             });
-
-
         });
+    </script>
+
+    <!-- Flash Messages -->
+    <script>
+        @if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: "{{ session('success') }}",
+                showConfirmButton: true,
+            });
+        @endif
+
+        @if (session('error'))
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "{{ session('error') }}",
+                showConfirmButton: true
+            });
+        @endif
+
+        @if ($errors->any())
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Errors',
+                html: '<ul>@foreach ($errors->all() as $error) <li>{{ $error }}</li> @endforeach</ul>',
+                showConfirmButton: true
+            });
+        @endif
     </script>
 @endsection

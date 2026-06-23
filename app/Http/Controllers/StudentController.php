@@ -32,7 +32,9 @@ use App\Models\sttings\Category;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Imports\StudentsImports;
+use App\Models\District;
 use App\Models\Employee\Employee;
+use App\Models\sttings\House;
 use App\Models\Student\BoardResult;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Maatwebsite\Excel\Facades\Excel;
@@ -45,7 +47,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
-
+use Barryvdh\DomPDF\Facade\Pdf;
 use function Laravel\Prompts\table;
 
 ini_set('max_execution_time', 36000); // 3600 seconds = 60 minutes
@@ -1681,6 +1683,176 @@ class StudentController extends Controller
             ->where('class_id', $class_id)
             ->count();
         return (($count - 1) % 4) + 1;
+    }
+    public function downloadPDF($id)
+    {
+        // Get student data
+        $studentdata = Student::where('id', $id)->first();
+
+        if (!$studentdata) {
+            abort(404, 'Student not found');
+        }
+
+        // Get student activity with relationships
+        $activity = StudentActivity::with(['classes'])
+            ->where('student_code', $studentdata->student_code)
+            ->where('active', 1)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        // Get class name (Roman numerals)
+        $roman = [
+            '0' => 'KG',
+            '1' => 'Class I',
+            '2' => 'Class II',
+            '3' => 'Class III',
+            '4' => 'Class IV',
+            '5' => 'Class V',
+            '6' => 'Class VI',
+            '7' => 'Class VII',
+            '8' => 'Class VIII',
+            '9' => 'Class IX',
+            '10' => 'Class X',
+            '11' => 'Class XI',
+            '12' => 'Class XII',
+        ];
+
+        $className = isset($activity) && isset($activity->class_code) ? ($roman[$activity->class_code] ?? 'N/A') : 'N/A';
+
+        // Get group name
+        $groups = ['1' => 'Science', '2' => 'Humanities', '3' => 'Business Studies', '4' => 'Others'];
+        $groupName = isset($activity) && isset($activity->group_id) ? ($groups[$activity->group_id] ?? 'N/A') : 'N/A';
+
+        // Get section name
+        $sectionName = 'N/A';
+        if (isset($activity->section_id) && $activity->section_id != null) {
+            $section = Sections::where('id', $activity->section_id)->first();
+            $sectionName = $section ? $section->section_name : 'N/A';
+        }
+
+        // Get version name
+        $versionName = 'N/A';
+        if (isset($activity->version_id) && $activity->version_id != null) {
+            $version = Versions::where('id', $activity->version_id)->first();
+            $versionName = $version ? $version->version_name : 'N/A';
+        }
+
+        // Get shift name
+        $shiftName = 'N/A';
+        if (isset($activity->shift_id) && $activity->shift_id != null) {
+            $shift = Shifts::where('id', $activity->shift_id)->first();
+            $shiftName = $shift ? $shift->shift_name : 'N/A';
+        }
+
+        // Get house name
+        $houseName = 'N/A';
+        if (isset($activity->house_id) && $activity->house_id != null) {
+            $house = House::where('id', $activity->house_id)->first();
+            $houseName = $house ? $house->house_name : 'N/A';
+        }
+
+        // Get district names
+        $prsDistName = 'N/A';
+        if (isset($studentdata->present_district_id) && $studentdata->present_district_id != null) {
+            $district = District::where('id', $studentdata->present_district_id)->first();
+            $prsDistName = $district ? $district->name : 'N/A';
+        }
+
+        $perDisName = 'N/A';
+        if (isset($studentdata->permanent_district_id) && $studentdata->permanent_district_id != null) {
+            $district = District::where('id', $studentdata->permanent_district_id)->first();
+            $perDisName = $district ? $district->name : 'N/A';
+        }
+
+        // Get category name
+        $categoryName = 'N/A';
+        if (isset($studentdata->category_id) && $studentdata->category_id != null) {
+            $category = Category::where('id', $studentdata->category_id)->first();
+            $categoryName = $category ? $category->category_name : 'N/A';
+        }
+
+        // Get created by user
+        $createdByName = 'N/A';
+        if ($studentdata->created_by) {
+            $user = User::where('id', $studentdata->created_by)->first();
+            $createdByName = $user ? $user->name : 'N/A';
+        }
+
+        // Get religion text
+        $religionText = 'N/A';
+        if (isset($studentdata->religion)) {
+            $religions = ['1' => 'Islam', '2' => 'Hindu', '3' => 'Christian', '4' => 'Buddhism', '5' => 'Others'];
+            $religionText = $religions[$studentdata->religion] ?? 'Unknown';
+        }
+
+        // Get gender
+        $gender = isset($studentdata->gender) ? ($studentdata->gender == 1 ? 'Male' : 'Female') : 'N/A';
+
+        // Get third and fourth subjects
+        $student_third_subject = [];
+        $student_fourth_subject = [];
+
+        if ($activity && ($activity->class_code == '11' || $activity->class_code == '12')) {
+            $student_third_subject = DB::table('student_subject')
+                ->join('subjects', 'subjects.id', '=', 'student_subject.subject_id')
+                ->join('class_wise_subject', 'class_wise_subject.subject_id', '=', 'student_subject.subject_id')
+                ->where('student_subject.session_id', $activity->session_id)
+                ->where('student_subject.student_code', $activity->student_code)
+                ->where('is_fourth_subject', 2)
+                ->select('subjects.*', 'class_wise_subject.subject_code')
+                ->get();
+            $student_third_subject = collect($student_third_subject->groupBy('parent_subject'));
+
+            $student_fourth_subject = DB::table('student_subject')
+                ->join('subjects', 'subjects.id', '=', 'student_subject.subject_id')
+                ->join('class_wise_subject', 'class_wise_subject.subject_id', '=', 'student_subject.subject_id')
+                ->where('student_subject.session_id', $activity->session_id)
+                ->where('student_subject.student_code', $activity->student_code)
+                ->where('is_fourth_subject', 1)
+                ->select('subjects.*', 'class_wise_subject.subject_code')
+                ->get();
+            $student_fourth_subject = collect($student_fourth_subject->groupBy('parent_subject'));
+        }
+
+        // Prepare data for PDF
+        $data = [
+            'student' => $studentdata,
+            'activity' => $activity,
+            'className' => $className,
+            'groupName' => $groupName,
+            'sectionName' => $sectionName,
+            'versionName' => $versionName,
+            'shiftName' => $shiftName,
+            'houseName' => $houseName,
+            'prsDistName' => $prsDistName,
+            'perDisName' => $perDisName,
+            'categoryName' => $categoryName,
+            'createdByName' => $createdByName,
+            'religionText' => $religionText,
+            'gender' => $gender,
+            'createdAt' => $studentdata->created_at ? \Carbon\Carbon::parse($studentdata->created_at)->format('d M Y h:i A') : 'N/A',
+            'updatedAt' => $studentdata->updated_at ? \Carbon\Carbon::parse($studentdata->updated_at)->format('d M Y h:i A') : 'N/A',
+            'student_third_subject' => $student_third_subject,
+            'student_fourth_subject' => $student_fourth_subject,
+        ];
+
+        // Generate PDF using mPDF
+        $pdf = new \Mpdf\Mpdf([
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'default_font_size' => 12,
+            'margin_left' => 15,
+            'margin_right' => 15,
+            'margin_top' => 15,
+            'margin_bottom' => 15,
+        ]);
+
+        // Load the view and render HTML
+        $html = view('student.pdf', $data)->render();
+        $pdf->WriteHTML($html);
+
+        // Download PDF
+        return $pdf->Output('student_cv_' . $studentdata->student_code . '.pdf', 'D');
     }
     public function StudentProfile($id)
     {

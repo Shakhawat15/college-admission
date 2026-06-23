@@ -35,13 +35,10 @@
                         <th style="width: 30px;">SL</th>
                         <th style="width: 65px;">Roll</th>
                         <th style="width: 65px;">SID</th>
-                        <th style="width: 70px;">PID</th>
                         <th style="width: 240px;">Name</th>
                         <th style="width: 200px;">Father Name</th>
                         <th style="width: 60px;">Gender</th>
                         <th style="width: 100px;">Phone</th>
-                        <th style="width: 140px;">Created</th>
-                        <th style="width: 140px;">Updated</th>
                         <th style="width: 65px;">Actions</th>
                     </tr>
                 </thead>
@@ -53,9 +50,7 @@
                                 {{ ($students->currentPage() - 1) * $students->perPage() + $loop->iteration }}</td>
                             <td style="width: 50px;text-align:center;">{{ $student->studentActivity->roll ?? '' }}</td>
                             <td style="width: 140px;text-align:center;">{{ $student->student_code ?? '' }}</td>
-                            <td style="width: 140px;text-align:center;">{{ $student->PID ?? 'NA' }}</td>
-                            <td class="studentinfo" data-studentcode="{{ $student->student_code }}"
-                                style="width: 200px;">
+                            <td style="width: 200px;">
                                 <img src="{{ $student->photo ?? asset('public/student.png') }}" alt="Avatar"
                                     class="rounded avatar avatar-xl student-photo">
                                 {{ strtoupper($student->first_name . ' ' . $student->last_name) }}
@@ -65,17 +60,6 @@
                             </td>
                             <td style="width: 100px;text-align:left;">
                                 {{ $student->mobile ? $student->mobile : ($student->father_phone ? $student->father_phone : $student->sms_notification) }}
-                            </td>
-
-                            <td style="width: 150px;">
-                                <span>{{ getCauserName($student->created_by, '') }}</span><br>
-                                <small
-                                    class="text-muted">{{ \Carbon\Carbon::parse($student->created_at)->format('d M Y h:i A') }}</small>
-                            </td>
-                            <td style="width: 150px;">
-                                <span>{{ getCauserName($student->updated_by, '') }}</span><br>
-                                <small
-                                    class="text-muted">{{ \Carbon\Carbon::parse($student->updated_at)->format('d M Y h:i A') }}</small>
                             </td>
                             <td style="width: 60px;text-align:center;">
                                 <div class="dropdown">
@@ -106,24 +90,11 @@
                                                 <i class="bx bx-block me-1"></i>Inactive
                                             </button>
                                         @endif
-                                        @if (
-                                            (Auth::user()->group_id == 2 || Auth::user()->group_id == 8) &&
-                                                $student->pid == null &&
-                                                Auth::user()->is_view_user == 0)
-                                            <button class="dropdown-item text-info"
-                                                onclick="openPIDModal({{ $student->id }})">
-                                                <i class="bx bx-money me-1"></i> Add PID
-                                            </button>
-                                        @endif
-                                        @if (
-                                            (Auth::user()->group_id == 2 || Auth::user()->group_id == 8) &&
-                                                $student->pid == null &&
-                                                Auth::user()->is_view_user == 0)
-                                            <button class="dropdown-item text-info"
-                                                onclick="disciplinaryIssuesModal({{ $student->id }})">
-                                                <i class="bx bx-money me-1"></i> disciplinary issues
-                                            </button>
-                                        @endif
+                                        <a class="dropdown-item"
+                                            href="{{ route('student.download.pdf', $student->id) }}" target="_blank">
+                                            <i class="bx bx-file me-1" style="color: #dc3545;"></i>
+                                            Download PDF
+                                        </a>
                                     </div>
                                 </div>
                             </td>

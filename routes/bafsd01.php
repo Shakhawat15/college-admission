@@ -97,6 +97,7 @@ use App\Http\Controllers\ReconcilationDateController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/logout', function () {
     Auth::logout();
     request()->session()->invalidate();
@@ -137,7 +138,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function () {
 Route::post('/password-reset/verify', [ForgotPasswordController::class, 'verify'])->name('password.reset.verify');
 Route::get('/password-reset-form', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset.customForm');
 Route::post('/password-reset', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset.custom');
-    Route::get('/attendanceDashboard', [DashboardController::class, 'attendanceDashboard'])->name('attendanceDashboard');
+Route::get('/attendanceDashboard', [DashboardController::class, 'attendanceDashboard'])->name('attendanceDashboard');
 
 // // Route to display change password form
 // Route::get('/change-password', [PasswordChangeController::class, 'showChangePasswordForm'])->name('password.change')->middleware('auth');
@@ -213,10 +214,10 @@ Route::post('/payment', [WebsiteController::class, 'payment'])->name('payment');
 Route::post('/usernamecheck', [WebsiteController::class, 'usernamecheck'])->name('usernamecheck');
 Route::get('page/{slug}', [WebsiteController::class, 'page']);
 Route::get('/calendarDashboard', [DashboardController::class, 'calendarDashboard'])->name('calendarDashboard');
-    Route::get('/calendarDashboard/{type}', [DashboardController::class, 'calendarDashboardType'])->name('calendarDashboardType');
-    Route::get('/academyDashboard', [DashboardController::class, 'academyDashboard'])->name('academyDashboard');
-    Route::get('/sylabusDashboard', [DashboardController::class, 'sylabusDashboard'])->name('sylabusDashboard');
-     Route::get('lessonPlanStudent', [LeasonPlanController::class, 'lessonPlanStudent'])->name('lessonPlanStudent');
+Route::get('/calendarDashboard/{type}', [DashboardController::class, 'calendarDashboardType'])->name('calendarDashboardType');
+Route::get('/academyDashboard', [DashboardController::class, 'academyDashboard'])->name('academyDashboard');
+Route::get('/sylabusDashboard', [DashboardController::class, 'sylabusDashboard'])->name('sylabusDashboard');
+Route::get('lessonPlanStudent', [LeasonPlanController::class, 'lessonPlanStudent'])->name('lessonPlanStudent');
 //Route::post('checkadmissionstatus', [WebsiteController::class,'checkadmissionstatus'])->name('checkadmissionstatus');
 Route::post('checkRollRegistrationNumber', [WebsiteController::class, 'checkRollRegistrationNumber'])->name('checkRollRegistrationNumber');
 Route::post('checkTemporaryId', [WebsiteController::class, 'checkTemporaryId'])->name('checkTemporaryId');
@@ -246,7 +247,7 @@ Route::post('/sslipnurl', [SslCommerzPaymentController::class, 'ipn']);
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
 
 
-Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendanceByDate'])->name('getAttendanceByDate');
+    Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendanceByDate'])->name('getAttendanceByDate');
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('/sendmail', SendMailController::class);
 
@@ -278,7 +279,7 @@ Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendance
     Route::post('/getTypeWiseClass', [ClassesController::class, 'getTypeWiseClass'])->name('getTypeWiseClass');
     Route::post('/getClass', [ClassesController::class, 'getClass'])->name('getClass');
     Route::resource('/group', AcademySectionController::class);
-    
+
     Route::resource('/degree', DegreeController::class);
     Route::resource('/house', HouseController::class);
     Route::resource('/subject', SubjectsController::class);
@@ -288,8 +289,8 @@ Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendance
     Route::get('/subjectWiseStudent', [SectionsController::class, 'subjectWiseStudent'])->name('subjectWiseStudent');
     Route::resource('/designation', DesignationController::class);
     Route::get('/admissionstatus', [DashboardController::class, 'admissionstatus'])->name('admissionstatus');
-    
-    
+
+
     Route::get('/studentsDashboard', [DashboardController::class, 'studentsDashboard'])->name('studentsDashboard');
     Route::get('/studentGetTypeStudent/{type}', [DashboardController::class, 'studentGetTypeStudent'])->name('studentGetTypeStudent');
     Route::get('/studentClassWise/{shift_id}/{type}/{version_id}', [DashboardController::class, 'studentClassWise'])->name('studentClassWise');
@@ -302,12 +303,12 @@ Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendance
     Route::resource('/fees', FeeController::class);
     Route::get('/feeClassWiseUpdate/{head_id}', [FeeController::class, 'feeClassWiseUpdate'])->name('feeClassWiseUpdate');
     Route::get('/studentXLFeeUpload', [FeeController::class, 'studentXLFeeUpload'])->name('studentXLFeeUpload');
-    
+
     //Route::post('/feeCollection', [FeeController::class,'feeCollection'])->name('feeCollection');
-   
+
     Route::resource('/readmission', ReAdmissionController::class);
-    
-   
+
+
     Route::resource('/sms', SMSController::class);
 
     Route::get('/send_password', [SMSController::class, 'sendPassword'])->name('send_password');
@@ -318,12 +319,13 @@ Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendance
     Route::post('/getAdmissionPhoneWithClass', [SMSController::class, 'getAdmissionPhoneWithClass'])->name('getAdmissionPhoneWithClass');
     Route::resource('/ssl', SSLController::class);
     Route::post('/feeHead', [FeeController::class, 'feeHead'])->name('feeHead');
-    
-    
-   
-    
-   
+
+
+
+
+
     Route::resource('/students', StudentController::class);
+    Route::get('/student/download-pdf/{id}', [StudentController::class, 'downloadPDF'])->name('student.download.pdf');
     Route::post('saveDisciplinaryIssues', [StudentController::class, 'saveDisciplinaryIssues'])->name('saveDisciplinaryIssues');
     Route::post('/student-inactive/{id}', [StudentController::class, 'studentInactive'])->name('studentInactive');
     Route::post('/student-pid/{id}', [StudentController::class, 'studentPid'])->name('studentPid');
@@ -404,14 +406,14 @@ Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendance
     Route::post('/store-attendence', [AttendanceController::class, 'storeAttendance'])->name('storeAttendance');
     Route::get('/student-attendence', [AttendanceController::class, 'studentAttendence'])->name('studentAttendence');
     // Attendace Reconciliation starts here
-    
+
     // Attendace Reconciliation ends here
     // Attendance Report for specific student starts here
-    
 
-    
 
-    
+
+
+
     Route::post('/get-class-wise-sections', [StudentController::class, 'getClassWiseSections'])->name('class-wise-sections');
     Route::post('/get-class-wise-session', [StudentController::class, 'getClassWiseSessions'])->name('class-wise-session');
     Route::post('/getLastRollAdmission', [StudentController::class, 'getLastRollAdmission'])->name('getLastRollAdmission');
@@ -431,12 +433,12 @@ Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendance
     Route::get('/teacherAttendanceReport', [AttendanceController::class, 'teacherAttendanceReport'])->name('teacherAttendanceReport');
     Route::get('/staffAttendance', [AttendanceController::class, 'staffAttendance'])->name('staffAttendance');
     Route::get('/staffAttendanceReport', [AttendanceController::class, 'staffAttendanceReport'])->name('staffAttendanceReport');
-    
+
     // Attendance of a specific student report
 
-    
 
-   
+
+
     // Student Academic Reports
     Route::get('/student/academicTranscript', [AcademyInfoController::class, 'index'])->name('student.academicTranscript');
     Route::post('/student/get/academicTranscript', [AcademyInfoController::class, 'getAcademicTranscript'])->name('student.getAcademicTranscript');
@@ -485,9 +487,6 @@ Route::post('/getAttendanceByDate', [AttendanceController::class, 'getAttendance
     Route::post('/admission/store', [AdmissionController::class, 'storeKgAdmit'])->name('admission.store');
 
     Route::get('/sectionupdate/{class_code}', [AdmissionController::class, 'sectionupdate'])->name('sectionupdate');
-  
-
- 
 });
 
 
